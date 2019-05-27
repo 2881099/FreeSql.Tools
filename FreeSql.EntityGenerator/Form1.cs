@@ -115,6 +115,7 @@ namespace FreeSql.EntityGenerator {
 		}
 
 		private void checkBoxNameOptionsEntity01_CheckedChanged(object sender, EventArgs e) {
+			if (_tables == null) return;
 			foreach (var table in _tables) table.CsName = GetCsEntityName(table.FullName);
 			BindGridView();
 		}
@@ -201,7 +202,6 @@ namespace FreeSql.EntityGenerator {
 		}
 
 		private void FrmMain_FormClosing(object sender, FormClosingEventArgs e) {
-			Properties.Settings.Default.Save();
 		}
 
 		private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e) {

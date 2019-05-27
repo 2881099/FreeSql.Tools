@@ -43,7 +43,9 @@
 			this.panel5 = new System.Windows.Forms.Panel();
 			this.groupBoxTemplateStyle = new System.Windows.Forms.GroupBox();
 			this.panel12 = new System.Windows.Forms.Panel();
-			this.radioButtonTemplateStyleClean03 = new System.Windows.Forms.RadioButton();
+			this.radioButtonTemplateStyle05 = new System.Windows.Forms.RadioButton();
+			this.radioButtonTemplateStyle04 = new System.Windows.Forms.RadioButton();
+			this.radioButtonTemplateStyle03 = new System.Windows.Forms.RadioButton();
 			this.radioButtonTemplateStyle02 = new System.Windows.Forms.RadioButton();
 			this.radioButtonTemplateStyle01 = new System.Windows.Forms.RadioButton();
 			this.panel7 = new System.Windows.Forms.Panel();
@@ -204,7 +206,7 @@
 			this.panel3.Location = new System.Drawing.Point(0, 65);
 			this.panel3.Name = "panel3";
 			this.panel3.Padding = new System.Windows.Forms.Padding(18);
-			this.panel3.Size = new System.Drawing.Size(989, 765);
+			this.panel3.Size = new System.Drawing.Size(989, 709);
 			this.panel3.TabIndex = 2;
 			// 
 			// panel4
@@ -215,7 +217,7 @@
 			this.panel4.Location = new System.Drawing.Point(18, 77);
 			this.panel4.Name = "panel4";
 			this.panel4.Padding = new System.Windows.Forms.Padding(0, 18, 0, 18);
-			this.panel4.Size = new System.Drawing.Size(953, 611);
+			this.panel4.Size = new System.Drawing.Size(953, 555);
 			this.panel4.TabIndex = 75;
 			// 
 			// panel9
@@ -226,7 +228,7 @@
 			this.panel9.Location = new System.Drawing.Point(236, 18);
 			this.panel9.Name = "panel9";
 			this.panel9.Padding = new System.Windows.Forms.Padding(18, 0, 0, 0);
-			this.panel9.Size = new System.Drawing.Size(717, 575);
+			this.panel9.Size = new System.Drawing.Size(717, 519);
 			this.panel9.TabIndex = 78;
 			// 
 			// dataGridView1
@@ -241,7 +243,7 @@
 			this.dataGridView1.RowHeadersVisible = false;
 			this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.dataGridView1.RowTemplate.Height = 23;
-			this.dataGridView1.Size = new System.Drawing.Size(699, 575);
+			this.dataGridView1.Size = new System.Drawing.Size(699, 519);
 			this.dataGridView1.TabIndex = 79;
 			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
 			this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -257,7 +259,7 @@
 			this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
 			this.panel5.Location = new System.Drawing.Point(0, 18);
 			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(236, 575);
+			this.panel5.Size = new System.Drawing.Size(236, 519);
 			this.panel5.TabIndex = 77;
 			// 
 			// groupBoxTemplateStyle
@@ -269,14 +271,16 @@
 			this.groupBoxTemplateStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
 			this.groupBoxTemplateStyle.Location = new System.Drawing.Point(0, 371);
 			this.groupBoxTemplateStyle.Name = "groupBoxTemplateStyle";
-			this.groupBoxTemplateStyle.Size = new System.Drawing.Size(236, 204);
+			this.groupBoxTemplateStyle.Size = new System.Drawing.Size(236, 148);
 			this.groupBoxTemplateStyle.TabIndex = 77;
 			this.groupBoxTemplateStyle.TabStop = false;
 			this.groupBoxTemplateStyle.Text = "Template Style:";
 			// 
 			// panel12
 			// 
-			this.panel12.Controls.Add(this.radioButtonTemplateStyleClean03);
+			this.panel12.Controls.Add(this.radioButtonTemplateStyle05);
+			this.panel12.Controls.Add(this.radioButtonTemplateStyle04);
+			this.panel12.Controls.Add(this.radioButtonTemplateStyle03);
 			this.panel12.Controls.Add(this.radioButtonTemplateStyle02);
 			this.panel12.Controls.Add(this.radioButtonTemplateStyle01);
 			this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -284,27 +288,43 @@
 			this.panel12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.panel12.Location = new System.Drawing.Point(3, 25);
 			this.panel12.Name = "panel12";
-			this.panel12.Size = new System.Drawing.Size(230, 176);
+			this.panel12.Size = new System.Drawing.Size(230, 120);
 			this.panel12.TabIndex = 66;
 			// 
-			// radioButtonTemplateStyleClean03
+			// radioButtonTemplateStyle05
 			// 
-			this.radioButtonTemplateStyleClean03.AutoSize = true;
-			this.radioButtonTemplateStyleClean03.Checked = global::FreeSql.EntityGenerator.Properties.Settings.Default.radioButtonTemplateStyle03_Checked;
-			this.radioButtonTemplateStyleClean03.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FreeSql.EntityGenerator.Properties.Settings.Default, "radioButtonTemplateStyle03_Checked", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.radioButtonTemplateStyleClean03.Location = new System.Drawing.Point(7, 57);
-			this.radioButtonTemplateStyleClean03.Name = "radioButtonTemplateStyleClean03";
-			this.radioButtonTemplateStyleClean03.Size = new System.Drawing.Size(143, 16);
-			this.radioButtonTemplateStyleClean03.TabIndex = 2;
-			this.radioButtonTemplateStyleClean03.TabStop = true;
-			this.radioButtonTemplateStyleClean03.Text = "纯净实体 + FluentApi";
-			this.radioButtonTemplateStyleClean03.UseVisualStyleBackColor = true;
+			this.radioButtonTemplateStyle05.AutoSize = true;
+			this.radioButtonTemplateStyle05.Location = new System.Drawing.Point(7, 101);
+			this.radioButtonTemplateStyle05.Name = "radioButtonTemplateStyle05";
+			this.radioButtonTemplateStyle05.Size = new System.Drawing.Size(185, 16);
+			this.radioButtonTemplateStyle05.TabIndex = 4;
+			this.radioButtonTemplateStyle05.Text = "纯净实体 + 导航 + FluentApi";
+			this.radioButtonTemplateStyle05.UseVisualStyleBackColor = true;
+			// 
+			// radioButtonTemplateStyle04
+			// 
+			this.radioButtonTemplateStyle04.AutoSize = true;
+			this.radioButtonTemplateStyle04.Location = new System.Drawing.Point(7, 79);
+			this.radioButtonTemplateStyle04.Name = "radioButtonTemplateStyle04";
+			this.radioButtonTemplateStyle04.Size = new System.Drawing.Size(155, 16);
+			this.radioButtonTemplateStyle04.TabIndex = 3;
+			this.radioButtonTemplateStyle04.Text = "纯净实体 + 导航 + 特性";
+			this.radioButtonTemplateStyle04.UseVisualStyleBackColor = true;
+			// 
+			// radioButtonTemplateStyle03
+			// 
+			this.radioButtonTemplateStyle03.AutoSize = true;
+			this.radioButtonTemplateStyle03.Location = new System.Drawing.Point(7, 57);
+			this.radioButtonTemplateStyle03.Name = "radioButtonTemplateStyle03";
+			this.radioButtonTemplateStyle03.Size = new System.Drawing.Size(143, 16);
+			this.radioButtonTemplateStyle03.TabIndex = 2;
+			this.radioButtonTemplateStyle03.Text = "纯净实体 + FluentApi";
+			this.radioButtonTemplateStyle03.UseVisualStyleBackColor = true;
 			// 
 			// radioButtonTemplateStyle02
 			// 
 			this.radioButtonTemplateStyle02.AutoSize = true;
-			this.radioButtonTemplateStyle02.Checked = global::FreeSql.EntityGenerator.Properties.Settings.Default.radioButtonTemplateStyle02_Checked;
-			this.radioButtonTemplateStyle02.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FreeSql.EntityGenerator.Properties.Settings.Default, "radioButtonTemplateStyle02_Checked", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.radioButtonTemplateStyle02.Checked = true;
 			this.radioButtonTemplateStyle02.Location = new System.Drawing.Point(7, 35);
 			this.radioButtonTemplateStyle02.Name = "radioButtonTemplateStyle02";
 			this.radioButtonTemplateStyle02.Size = new System.Drawing.Size(113, 16);
@@ -316,13 +336,10 @@
 			// radioButtonTemplateStyle01
 			// 
 			this.radioButtonTemplateStyle01.AutoSize = true;
-			this.radioButtonTemplateStyle01.Checked = global::FreeSql.EntityGenerator.Properties.Settings.Default.radioButtonTemplateStyle01_Checked;
-			this.radioButtonTemplateStyle01.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FreeSql.EntityGenerator.Properties.Settings.Default, "radioButtonTemplateStyle01_Checked", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.radioButtonTemplateStyle01.Location = new System.Drawing.Point(7, 13);
 			this.radioButtonTemplateStyle01.Name = "radioButtonTemplateStyle01";
 			this.radioButtonTemplateStyle01.Size = new System.Drawing.Size(71, 16);
 			this.radioButtonTemplateStyle01.TabIndex = 0;
-			this.radioButtonTemplateStyle01.TabStop = true;
 			this.radioButtonTemplateStyle01.Text = "纯净实体";
 			this.radioButtonTemplateStyle01.UseVisualStyleBackColor = true;
 			// 
@@ -372,8 +389,6 @@
 			// checkBoxNameOptionsProperty04
 			// 
 			this.checkBoxNameOptionsProperty04.AutoSize = true;
-			this.checkBoxNameOptionsProperty04.Checked = global::FreeSql.EntityGenerator.Properties.Settings.Default.checkBoxNameOptionsProperty04_Checked;
-			this.checkBoxNameOptionsProperty04.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FreeSql.EntityGenerator.Properties.Settings.Default, "checkBoxNameOptionsProperty04_Checked", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.checkBoxNameOptionsProperty04.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.checkBoxNameOptionsProperty04.Location = new System.Drawing.Point(3, 174);
 			this.checkBoxNameOptionsProperty04.Name = "checkBoxNameOptionsProperty04";
@@ -385,8 +400,6 @@
 			// checkBoxNameOptionsEntity04
 			// 
 			this.checkBoxNameOptionsEntity04.AutoSize = true;
-			this.checkBoxNameOptionsEntity04.Checked = global::FreeSql.EntityGenerator.Properties.Settings.Default.checkBoxNameOptionsEntity04_Checked;
-			this.checkBoxNameOptionsEntity04.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FreeSql.EntityGenerator.Properties.Settings.Default, "checkBoxNameOptionsEntity04_Checked", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.checkBoxNameOptionsEntity04.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.checkBoxNameOptionsEntity04.Location = new System.Drawing.Point(4, 70);
 			this.checkBoxNameOptionsEntity04.Name = "checkBoxNameOptionsEntity04";
@@ -407,8 +420,6 @@
 			// checkBoxNameOptionsProperty03
 			// 
 			this.checkBoxNameOptionsProperty03.AutoSize = true;
-			this.checkBoxNameOptionsProperty03.Checked = global::FreeSql.EntityGenerator.Properties.Settings.Default.checkBoxNameOptionsProperty03_Checked;
-			this.checkBoxNameOptionsProperty03.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FreeSql.EntityGenerator.Properties.Settings.Default, "checkBoxNameOptionsProperty03_Checked", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.checkBoxNameOptionsProperty03.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.checkBoxNameOptionsProperty03.Location = new System.Drawing.Point(3, 152);
 			this.checkBoxNameOptionsProperty03.Name = "checkBoxNameOptionsProperty03";
@@ -420,8 +431,6 @@
 			// checkBoxNameOptionsEntity03
 			// 
 			this.checkBoxNameOptionsEntity03.AutoSize = true;
-			this.checkBoxNameOptionsEntity03.Checked = global::FreeSql.EntityGenerator.Properties.Settings.Default.checkBoxNameOptionsEntity03_Checked;
-			this.checkBoxNameOptionsEntity03.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FreeSql.EntityGenerator.Properties.Settings.Default, "checkBoxNameOptionsEntity03_Checked", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.checkBoxNameOptionsEntity03.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.checkBoxNameOptionsEntity03.Location = new System.Drawing.Point(4, 48);
 			this.checkBoxNameOptionsEntity03.Name = "checkBoxNameOptionsEntity03";
@@ -434,8 +443,6 @@
 			// checkBoxNameOptionsProperty02
 			// 
 			this.checkBoxNameOptionsProperty02.AutoSize = true;
-			this.checkBoxNameOptionsProperty02.Checked = global::FreeSql.EntityGenerator.Properties.Settings.Default.checkBoxNameOptionsProperty02_Checked;
-			this.checkBoxNameOptionsProperty02.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FreeSql.EntityGenerator.Properties.Settings.Default, "checkBoxNameOptionsProperty02_Checked", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.checkBoxNameOptionsProperty02.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.checkBoxNameOptionsProperty02.Location = new System.Drawing.Point(3, 130);
 			this.checkBoxNameOptionsProperty02.Name = "checkBoxNameOptionsProperty02";
@@ -447,8 +454,6 @@
 			// checkBoxNameOptionsProperty01
 			// 
 			this.checkBoxNameOptionsProperty01.AutoSize = true;
-			this.checkBoxNameOptionsProperty01.Checked = global::FreeSql.EntityGenerator.Properties.Settings.Default.checkBoxNameOptionsProperty01_Checked;
-			this.checkBoxNameOptionsProperty01.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FreeSql.EntityGenerator.Properties.Settings.Default, "checkBoxNameOptionsProperty01_Checked", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.checkBoxNameOptionsProperty01.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.checkBoxNameOptionsProperty01.Location = new System.Drawing.Point(3, 108);
 			this.checkBoxNameOptionsProperty01.Name = "checkBoxNameOptionsProperty01";
@@ -460,8 +465,6 @@
 			// checkBoxNameOptionsEntity02
 			// 
 			this.checkBoxNameOptionsEntity02.AutoSize = true;
-			this.checkBoxNameOptionsEntity02.Checked = global::FreeSql.EntityGenerator.Properties.Settings.Default.checkBoxNameOptionsEntity02_Checked;
-			this.checkBoxNameOptionsEntity02.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FreeSql.EntityGenerator.Properties.Settings.Default, "checkBoxNameOptionsEntity02_Checked", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.checkBoxNameOptionsEntity02.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.checkBoxNameOptionsEntity02.Location = new System.Drawing.Point(4, 26);
 			this.checkBoxNameOptionsEntity02.Name = "checkBoxNameOptionsEntity02";
@@ -474,8 +477,6 @@
 			// checkBoxNameOptionsEntity01
 			// 
 			this.checkBoxNameOptionsEntity01.AutoSize = true;
-			this.checkBoxNameOptionsEntity01.Checked = global::FreeSql.EntityGenerator.Properties.Settings.Default.checkBoxNameOptionsEntity01_Checked;
-			this.checkBoxNameOptionsEntity01.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::FreeSql.EntityGenerator.Properties.Settings.Default, "checkBoxNameOptionsEntity01_Checked", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.checkBoxNameOptionsEntity01.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.checkBoxNameOptionsEntity01.Location = new System.Drawing.Point(4, 4);
 			this.checkBoxNameOptionsEntity01.Name = "checkBoxNameOptionsEntity01";
@@ -532,7 +533,7 @@
 			this.groupBoxOutput.Enabled = false;
 			this.groupBoxOutput.Font = new System.Drawing.Font("宋体", 14F);
 			this.groupBoxOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-			this.groupBoxOutput.Location = new System.Drawing.Point(18, 688);
+			this.groupBoxOutput.Location = new System.Drawing.Point(18, 632);
 			this.groupBoxOutput.Name = "groupBoxOutput";
 			this.groupBoxOutput.Size = new System.Drawing.Size(953, 59);
 			this.groupBoxOutput.TabIndex = 74;
@@ -606,7 +607,6 @@
 			// 
 			// comboBoxConnectionString
 			// 
-			this.comboBoxConnectionString.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::FreeSql.EntityGenerator.Properties.Settings.Default, "comboBoxConnectionString_Text", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.comboBoxConnectionString.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.comboBoxConnectionString.Font = new System.Drawing.Font("宋体", 14F);
 			this.comboBoxConnectionString.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -624,7 +624,6 @@
 			this.comboBoxConnectionString.Name = "comboBoxConnectionString";
 			this.comboBoxConnectionString.Size = new System.Drawing.Size(817, 27);
 			this.comboBoxConnectionString.TabIndex = 64;
-			this.comboBoxConnectionString.Text = global::FreeSql.EntityGenerator.Properties.Settings.Default.comboBoxConnectionString_Text;
 			// 
 			// panel15
 			// 
@@ -652,7 +651,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(989, 830);
+			this.ClientSize = new System.Drawing.Size(989, 774);
 			this.Controls.Add(this.panel3);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.panel1);
@@ -732,9 +731,11 @@
 		private System.Windows.Forms.CheckBox checkBoxNameOptionsEntity04;
 		private System.Windows.Forms.RadioButton radioButtonTemplateStyle01;
 		private System.Windows.Forms.RadioButton radioButtonTemplateStyle02;
-		private System.Windows.Forms.RadioButton radioButtonTemplateStyleClean03;
+		private System.Windows.Forms.RadioButton radioButtonTemplateStyle03;
 		private System.Windows.Forms.ComboBox comboBoxOutputDirectory;
 		public System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.RadioButton radioButtonTemplateStyle05;
+		private System.Windows.Forms.RadioButton radioButtonTemplateStyle04;
 	}
 }
 
