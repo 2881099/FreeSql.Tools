@@ -14,6 +14,9 @@ namespace FreeSqlTools.Models
         public DateTime AddTime { get; set; } = DateTime.Now;
         public DateTime EditTime { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [FreeSql.DataAnnotations.Column(DbType = "text")]
         public string Code { get; set; }
     }

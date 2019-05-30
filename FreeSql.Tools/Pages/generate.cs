@@ -25,7 +25,7 @@ namespace FreeSqlTools.Pages
        
             var res = Curd.SetFsql.Select<Templates>().ToOne();
             var model = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(strjson);
-            var resHtml = Engine.Razor.RunCompile(res.Code, "templateKey", null, model);
+            var resHtml = Engine.Razor.RunCompile(res.Code,Guid.NewGuid().ToString("N"), null, model);
 
 
             if (!Directory.Exists(path))

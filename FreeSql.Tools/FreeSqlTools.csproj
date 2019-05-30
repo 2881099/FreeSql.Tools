@@ -169,12 +169,15 @@
     <EmbeddedResource Include="Views\Template.html" />
     <EmbeddedResource Include="Views\generate.html" />
     <EmbeddedResource Include="Views\noPage.html" />
+    <EmbeddedResource Include="Views\js\ztree\bootstrapStyle\bootstrapStyle.css" />
     <Content Include="Views\Historical.html" />
     <EmbeddedResource Include="Views\js\bootstrap.min.js" />
     <EmbeddedResource Include="Views\js\popper.min.js" />
     <EmbeddedResource Include="Views\TaskBuild.html" />
     <EmbeddedResource Include="Views\js\treeview\bootstrap-treeview.min.css" />
     <EmbeddedResource Include="Views\js\treeview\bootstrap-treeview.min.js" />
+    <EmbeddedResource Include="Views\js\ztree\jquery.ztree.all.min.js" />
+    <EmbeddedResource Include="Views\js\ztree\bootstrapStyle\img\bootstrap.png" />
     <Content Include="x64\SQLite.Interop.dll" />
     <EmbeddedResource Include="Views\js\noconflict\ace.js" />
     <EmbeddedResource Include="Views\js\noconflict\ext-beautify.js" />
