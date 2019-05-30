@@ -37,9 +37,7 @@ namespace FreeSqlTools.Pages
                         var RazorModel = new RazorModel(fsql)
                         {
                             TableName = GetCsEntityName(table.Name)
-                        };
-
-
+                        };                      
                         var resHtml = Engine.Razor.RunCompile(res.Code, Guid.NewGuid().ToString("N"), null, new { fsql, table });
                         if (!Directory.Exists(path))
                         {
