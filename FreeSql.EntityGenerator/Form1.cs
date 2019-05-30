@@ -1,4 +1,8 @@
 ﻿using FreeSql.DatabaseModel;
+using RazorEngine;
+using RazorEngine.Configuration;
+using RazorEngine.Templating;
+using RazorEngine.Text;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,7 +65,7 @@ namespace FreeSql.EntityGenerator {
 				var dbs = fsql.DbFirst.GetDatabases();
 				this.checkedListBoxDatabases.Items.AddRange(dbs.ToArray());
 
-				this.groupBoxDatabase.Enabled = 
+				this.groupBoxDatabase.Enabled =
 				this.groupBoxNameOptions.Enabled =
 				this.groupBoxTemplateStyle.Enabled =
 				this.groupBoxOutput.Enabled = true;
@@ -71,7 +75,7 @@ namespace FreeSql.EntityGenerator {
 			} else {
 				fsql?.Dispose();
 
-				this.groupBoxDatabase.Enabled = 
+				this.groupBoxDatabase.Enabled =
 				this.groupBoxNameOptions.Enabled =
 				this.groupBoxTemplateStyle.Enabled =
 				this.groupBoxOutput.Enabled = false;
@@ -281,5 +285,159 @@ namespace FreeSql.EntityGenerator {
 				}
 			}
 		}
+
+		private void buttonBuild_Click(object sender, EventArgs e) {
+
+			var config = new TemplateServiceConfiguration();
+			config.EncodedStringFactory = new RawStringFactory();
+			var service = RazorEngineService.Create(config);
+
+			Engine.Razor = service;
+
+			foreach (var table in _tables) {
+				var content = Engine.Razor.RunCompile(@"@using FreeSql.DatabaseModel;@{
+
+	var model = Model as RazorModel;
+
+	IFreeSql fsql = model.fsql;
+	List<DbTableInfo> tables = model.tables;
+	DbTableInfo table = model.table;
+	Func<string, string> GetEntityName = model.GetEntityName;
+	Func<string, string> GetPropertyName = model.GetPropertyName;
+
+	Func<DbColumnInfo, string> GetCsType = cola3 => {
+		return fsql.DbFirst.GetCsType(cola3);
+	};
+
+	var tableName = string.IsNullOrEmpty(table.Schema) ? table.Schema + ""."" : """";
+	tableName += table.Name;
+
+	Func<string> GetTableAttribute = () => {
+		var sb = new List<string>();
+
+		if (GetEntityName(tableName) != tableName)
+			sb.Add(""Name = \"""" + tableName + ""\"""");
+
+		if (sb.Any() == false) return null;
+		return "", Table("" + string.Join("", "", sb) + "")"";
+	};
+	Func<DbColumnInfo, string> GetColumnAttribute = col => {
+		var sb = new List<string>();
+
+		if (GetPropertyName(col.Name) != col.Name)
+			sb.Add(""Name = \"""" + col.Name + ""\"""");
+
+		var dbinfo = model.GetDbInfo(col);
+		if (dbinfo != null && dbinfo.dbtypeFull != col.DbTypeTextFull)
+			sb.Add(""DbType = \"""" + col.DbTypeTextFull + ""\"""");
+
+		if (col.IsPrimary && string.Compare(col.Name, ""id"", true) != 0 && col.IsIdentity == false)
+			sb.Add(""IsPrimary = true"");
+
+		if (col.IsIdentity)
+			sb.Add(""IsPrimary = true"");
+
+		if (dbinfo != null && dbinfo.isnullable != col.IsNullable) {
+			if (col.IsNullable && GetCsType(col).Contains(""?"") == false && col.CsType.IsValueType)
+				sb.Add(""IsNullable = true"");
+			if (col.IsNullable == false && GetCsType(col).Contains(""?"") == true)
+				sb.Add(""IsNullable = false"");
+		}
+
+		if (sb.Any() == false) return null;
+		return "", Column("" + string.Join("", "", sb) + "")"";
+	};
+
+}@{
+switch (fsql.Ado.DataType) {
+	case FreeSql.DataType.PostgreSQL:
+@:using System;
+@:using System.Collections;
+@:using System.Collections.Generic;
+@:using System.Linq;
+@:using System.Reflection;
+@:using System.Threading.Tasks;
+@:using Newtonsoft.Json;
+@:using FreeSql.DataAnnotations;
+@:using System.Net;
+@:using Newtonsoft.Json.Linq;
+@:using System.Net.NetworkInformation;
+@:using NpgsqlTypes;
+@:using Npgsql.LegacyPostgis;
+		break;
+	case FreeSql.DataType.SqlServer:
+	case FreeSql.DataType.MySql:
+	default:
+@:using System;
+@:using System.Collections;
+@:using System.Collections.Generic;
+@:using System.Linq;
+@:using System.Reflection;
+@:using System.Threading.Tasks;
+@:using Newtonsoft.Json;
+@:using FreeSql.DataAnnotations;
+		break;
+}
+}
+
+namespace test.Model {
+
+@if (string.IsNullOrEmpty(table.Comment) == false) {
+	@:/// <summary>
+	@:/// @table.Comment.Replace(""\r\n"", ""\n"").Replace(""\n"", ""\r\n		/// "")
+	@:/// </summary>
+}
+	[JsonObject(MemberSerialization.OptIn)@GetTableAttribute()]
+	public class @GetEntityName(tableName) {
+
+	@foreach (var col in table.Columns) {
+
+		if (string.IsNullOrEmpty(col.Coment) == false) {
+		@:/// <summary>
+		@:/// @col.Coment.Replace(""\r\n"", ""\n"").Replace(""\n"", ""\r\n		/// "")
+		@:/// </summary>
+		}
+		@:@(""[JsonProperty"" + GetColumnAttribute(col) + ""]"")
+		@:public @GetCsType(col) @GetPropertyName(col.Name) { get; set; }
+@:
 	}
+	}
+}", Guid.NewGuid().ToString("N"), null, new RazorModel {
+					fsql = fsql,
+					tables = _tables.Select(a => a.Schema).ToList(),
+					GetEntityName = GetCsEntityName,
+					GetPropertyName = GetCsPropertyName,
+					table = table.Schema
+				});
+			}
+		}
+	}
+}
+
+public class RazorModel {
+	public IFreeSql fsql { get; set; }
+	public List<DbTableInfo> tables { get; set; }
+	public DbTableInfo table { get; set; }
+	public Func<string, string> GetEntityName { get; set; }
+	public Func<string, string> GetPropertyName { get; set; }
+
+	public Func<DbColumnInfo, GetDbInfoModel> GetDbInfo => col => {
+		var info = fsql.CodeFirst.GetDbInfo(col.CsType);
+		if (info == null) return null;
+		return new GetDbInfoModel {
+			type = info.Value.type,
+			dbtype = info.Value.dbtype,
+			dbtypeFull = info.Value.dbtypeFull.Replace(" NOT NULL", ""),
+			isnullable = info.Value.isnullable,
+			defaultValue = info.Value.defaultValue
+		};
+	};
+}
+
+public class GetDbInfoModel {
+	public int type { get; set; }
+	public string dbtype { get; set; }
+	public string dbtypeFull { get; set; }
+	public bool? isnullable { get; set; }
+	public object defaultValue { get; set; }
 }

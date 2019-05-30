@@ -581,6 +581,7 @@
 			this.buttonBuild.TabIndex = 63;
 			this.buttonBuild.Text = "Build";
 			this.buttonBuild.UseVisualStyleBackColor = true;
+			this.buttonBuild.Click += new System.EventHandler(this.buttonBuild_Click);
 			// 
 			// groupBox1
 			// 

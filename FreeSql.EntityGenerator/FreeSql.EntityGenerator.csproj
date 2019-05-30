@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,16 +70,19 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FreeSql.Provider.MySql">
-      <Version>0.6.2</Version>
+      <Version>0.6.3</Version>
     </PackageReference>
     <PackageReference Include="FreeSql.Provider.Oracle">
-      <Version>0.6.2</Version>
+      <Version>0.6.3</Version>
     </PackageReference>
     <PackageReference Include="FreeSql.Provider.PostgreSQL">
-      <Version>0.6.2</Version>
+      <Version>0.6.3</Version>
     </PackageReference>
     <PackageReference Include="FreeSql.Provider.SqlServer">
-      <Version>0.6.2</Version>
+      <Version>0.6.3</Version>
+    </PackageReference>
+    <PackageReference Include="RazorEngine">
+      <Version>3.10.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
