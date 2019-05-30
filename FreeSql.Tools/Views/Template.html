@@ -88,7 +88,7 @@
                     title: '操作',
                     formatter: btnGroup,  // 自定义方法
                     events: {
-                        'click .edit-btn': function (event, value, row, index) {
+                        'click .temp-add': function (event, value, row, index) {
                             parent.$(parent.document).data('multitabs').create({
                                 iframe: true,
                                 title: '编辑内容',
@@ -108,9 +108,9 @@
         // 操作按钮
         function btnGroup() {
             return [
-                '<a type="button" class="role-add btn btn-xs btn-default m-r-5" title="编辑代码" data-toggle="tooltip"><i class="mdi mdi-plus"></i></a>',
-                '<a type="button" class="role-edit btn btn-xs btn-default m-r-5" title="修改" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>',
-                '<a type="button" class="role-delete btn btn-xs btn-default" title="上传到云端" data-toggle="tooltip"><i class="mdi mdi-cloud-upload"></i></a>'
+                '<a type="button" class="temp-add btn btn-xs btn-default m-r-5" title="编辑代码" data-toggle="tooltip"><i class="mdi mdi-plus"></i></a>',
+                '<a type="button" class="temp-edit btn btn-xs btn-default m-r-5" title="修改" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>',
+                '<a type="button" class="temp-delete btn btn-xs btn-default" title="上传到云端" data-toggle="tooltip"><i class="mdi mdi-cloud-upload"></i></a>'
             ].join('');
         }
     </script>

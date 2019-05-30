@@ -21,7 +21,74 @@
                 <button info>添加</button>
             </div>
             <div class="card-body">
- 
+                <form class="form-horizontal" action="lyear_forms_elements.html" method="post" onsubmit="return false;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">数据库选择</div>
+                                <div class="card-body" style="padding:0">
+                                    <div id="treeview"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">模板选择</div>
+                                <div class="card-body">
+                                    <label class="lyear-radio radio-primary m-t-10">
+                                        <input type="radio" checked name="r1"><span>实体模板</span>
+                                    </label>
+                                    <label class="lyear-radio radio-primary m-t-10">
+                                        <input type="radio" name="r1"><span>仓储模板</span>
+                                    </label>
+                                    <label class="lyear-radio radio-primary m-t-10">
+                                        <input type="radio" name="r1"><span>其他模板</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">实体配置</div>
+                                        <div class="card-body">
+                                            <label class="lyear-checkbox checkbox-info m-t-10">
+                                                <input type="checkbox"><span>首字母大写</span>
+                                            </label>
+                                            <label class="lyear-checkbox checkbox-info m-t-10">
+                                                <input type="checkbox"><span>首字母大写,其他小写</span>
+                                            </label>
+                                            <label class="lyear-checkbox checkbox-info m-t-10">
+                                                <input type="checkbox"><span>全部小写</span>
+                                            </label>
+                                            <label class="lyear-checkbox checkbox-info m-t-10">
+                                                <input type="checkbox"><span>下划线转驼峰</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">仓促配置</div>
+                                        <div class="card-body">
+                                            <label class="lyear-checkbox checkbox-info m-t-10">
+                                                <input type="checkbox"><span>首字母大写</span>
+                                            </label>
+                                            <label class="lyear-checkbox checkbox-info m-t-10">
+                                                <input type="checkbox"><span>首字母大写,其他小写</span>
+                                            </label>
+                                            <label class="lyear-checkbox checkbox-info m-t-10">
+                                                <input type="checkbox"><span>全部小写</span>
+                                            </label>
+                                            <label class="lyear-checkbox checkbox-info m-t-10">
+                                                <input type="checkbox"><span>下划线转驼峰</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -115,7 +182,7 @@
                     }
                 });
             });
-        
+        $('#treeview').treeview(options);
         });
     </script>
 
