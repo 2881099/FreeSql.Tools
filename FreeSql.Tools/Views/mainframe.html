@@ -8,8 +8,10 @@
     <link href="css/materialdesignicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="js/multitabs/multitabs.min.css">
     <link href="css/style.min.css" rel="stylesheet">
-    <script src="js/jquery.min.js"></script>
+    <script src="js/vue.min.js"></script>
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
     <style>
         .window-action li {
             width: 64px;
@@ -72,7 +74,7 @@
                     <div style="height:68px;display:block;color:#ffffff;text-align:center;line-height:68px;font-size:30px">
                         <label style="font-size:22px">Free</label>
                         <label>
-                            SQL<span class="badge badge-info">0.61</span>
+                            SQL<span class="badge badge-info">0.0.1</span>
                         </label>
                     </div>
                 </div>
@@ -83,7 +85,7 @@
                                 <a href="javascript:void(0)"><i class="mdi mdi-settings"></i>基础设施</a>
                                 <ul class="nav nav-subnav">
                                     <li> <a class="multitabs" href="DbList.html"> <i class="mdi mdi-database"></i>  数据库配置</a> </li>
-                                     <li> <a class="multitabs" href="Template.html"><i class="mdi mdi-polymer"></i> 本地模板</a> </li>
+                                    <li> <a class="multitabs" href="Template.html"><i class="mdi mdi-polymer"></i> 本地模板</a> </li>
                                     <li> <a class="multitabs" href="noPage.html"><i class="mdi mdi-cloud-tags"></i> 在线模板</a> </li>
                                 </ul>
                             </li>
@@ -149,11 +151,12 @@
         </div>
     </div>
 
+
+
+    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
     <script type="text/javascript" src="js/multitabs/multitabs.js"></script>
-    <script src="js/vue.min.js"></script>
     <script type="text/javascript" src="js/index.min.js"></script>
-
     <script>
         onwindowstatechanged = function () {
             var state = page.WindowState;
@@ -228,12 +231,12 @@
         }
 
 
-    $(function () {
-        $.get('https://www.nuget.org/packages/FreeSql', function (html) {
-            var rex = /\d+\.\d+\.\d+(.\d+)?/.exec(html)[0];
-            $('.badge-info').text(rex);
+        $(function () {
+            $.get('https://www.nuget.org/packages/FreeSql', function (html) {
+                var rex = /\d+\.\d+\.\d+(.\d+)?/.exec(html)[0];
+                $('.badge-info').text(rex);
+            });
         });
-    });
     </script>
 
 </body>

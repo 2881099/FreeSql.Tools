@@ -6,21 +6,119 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/materialdesignicons.min.css" rel="stylesheet">
     <link href="css/style.min.css" rel="stylesheet">
+    <link href="js/easyhelper/easyhelper.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
-    <div class="container-fluid p-t-15" id="page">      
-            <div class="card">
-                <div class="card-header">
-                    管理我的任务
-                </div>
-                <div class="card-body">
-                    FreeSQl 最好用的 .Net Orm 库
-                </div>
+    <div class="container-fluid p-t-15" id="page">
+        <div class="card">
+            <div class="card-header">
+                <button info>添加</button>
             </div>
+            <div class="card-body">
+ 
+            </div>
+        </div>
     </div>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+
+    <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
+    <script src="js/treeview/bootstrap-treeview.min.js"></script>
+    <script src="js/easyhelper/easyhelper.min.js"></script>
     <script type="text/javascript" src="js/main.min.js"></script>
+
+    <script type="text/javascript">
+
+        var defaultData = [
+            {
+                text: 'Parent 1',
+                href: '#parent1',
+                tags: ['4'],
+                nodes: [
+                    {
+                        text: 'Child 1',
+                        href: '#child1',
+                        tags: ['2'],
+                        nodes: [
+                            {
+                                text: 'Grandchild 1',
+                                href: '#grandchild1',
+                                tags: ['0']
+                            },
+                            {
+                                text: 'Grandchild 2',
+                                href: '#grandchild2',
+                                tags: ['0']
+                            }
+                        ]
+                    },
+                    {
+                        text: 'Child 2',
+                        href: '#child2',
+                        tags: ['0']
+                    }
+                ]
+            },
+            {
+                text: 'Parent 2',
+                href: '#parent2',
+                tags: ['0']
+            },
+            {
+                text: 'Parent 3',
+                href: '#parent3',
+                tags: ['0']
+            },
+            {
+                text: 'Parent 4',
+                href: '#parent4',
+                tags: ['0']
+            },
+            {
+                text: 'Parent 5',
+                href: '#parent5',
+                tags: ['0']
+            }
+        ];
+        $(function () {
+
+            var options = {
+                bootstrap2: true,
+                showTags: true,
+                levels: 5,
+                data: defaultData
+            };
+            $('button[info]').on('click', function () {
+                Helper.ui.dialog({
+                    title: "构建任务", buttonNoClose: [true, false],
+                    content: `<form class="form-horizontal" action="lyear_forms_elements.html" method="post" onsubmit="return false;"><div class="row"><div class="col-md-4"><div class="card"><div class="card-header">数据库选择</div><div class="card-body"><div id="treeview"></div></div></div></div><div class="col-md-8"><div class="card"><div class="card-header">模板选择</div><div class="card-body"><label class="lyear-radio radio-primary m-t-10"><input type="radio" checked name="r1"><span>实体模板</span></label><label class="lyear-radio radio-primary m-t-10"><input type="radio" name="r1"><span>仓储模板</span></label><label class="lyear-radio radio-primary m-t-10"><input type="radio" name="r1"><span>其他模板</span></label></div></div><div class="row"><div class="col-md-6"><div class="card"><div class="card-header">实体配置</div><div class="card-body"><label class="lyear-checkbox checkbox-info m-t-10"><input type="checkbox"><span>首字母大写</span></label><label class="lyear-checkbox checkbox-info m-t-10"><input type="checkbox"><span>首字母大写,其他小写</span></label><label class="lyear-checkbox checkbox-info m-t-10"><input type="checkbox"><span>全部小写</span></label><label class="lyear-checkbox checkbox-info m-t-10"><input type="checkbox"><span>下划线转驼峰</span></label></div></div></div><div class="col-md-6"><div class="card"><div class="card-header">仓促配置</div><div class="card-body"><label class="lyear-checkbox checkbox-info m-t-10"><input type="checkbox"><span>首字母大写</span></label><label class="lyear-checkbox checkbox-info m-t-10"><input type="checkbox"><span>首字母大写,其他小写</span></label><label class="lyear-checkbox checkbox-info m-t-10"><input type="checkbox"><span>全部小写</span></label><label class="lyear-checkbox checkbox-info m-t-10"><input type="checkbox"><span>下划线转驼峰</span></label></div></div></div></div></div></div></form>`,
+                    afterOpen: function () {
+                        $('#treeview').treeview(options);
+                    },
+                    contentstyle: {
+                        backgroundColor: '#000',
+                    },
+                    contentStyle: {
+                        height: '550px'                     
+                    },
+                    width:'780px',
+                    yes: {
+                        loading: true,
+                        callback: function () {
+
+                        }
+                    }
+                });
+            });
+        
+        });
+    </script>
+
 
 
 

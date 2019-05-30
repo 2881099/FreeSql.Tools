@@ -133,6 +133,7 @@
     <Compile Include="Pages\generate.cs" />
     <Compile Include="Pages\lyear_main.cs" />
     <Compile Include="Pages\mainframe.cs" />
+    <Compile Include="Pages\TaskBuild.cs" />
     <Compile Include="Pages\Template.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -168,6 +169,12 @@
     <EmbeddedResource Include="Views\Template.html" />
     <EmbeddedResource Include="Views\generate.html" />
     <EmbeddedResource Include="Views\noPage.html" />
+    <Content Include="Views\Historical.html" />
+    <EmbeddedResource Include="Views\js\bootstrap.min.js" />
+    <EmbeddedResource Include="Views\js\popper.min.js" />
+    <EmbeddedResource Include="Views\TaskBuild.html" />
+    <EmbeddedResource Include="Views\js\treeview\bootstrap-treeview.min.css" />
+    <EmbeddedResource Include="Views\js\treeview\bootstrap-treeview.min.js" />
     <Content Include="x64\SQLite.Interop.dll" />
     <EmbeddedResource Include="Views\js\noconflict\ace.js" />
     <EmbeddedResource Include="Views\js\noconflict\ext-beautify.js" />
@@ -570,7 +577,6 @@
     <EmbeddedResource Include="Views\js\noconflict\worker-xml.js" />
     <EmbeddedResource Include="Views\js\noconflict\worker-xquery.js" />
     <EmbeddedResource Include="Views\editCode.html" />
-    <EmbeddedResource Include="Views\js\jquery.1.9.js" />
     <EmbeddedResource Include="Views\js\easyhelper\easyhelper.min.css" />
     <EmbeddedResource Include="Views\js\easyhelper\easyhelper.min.js" />
     <EmbeddedResource Include="Views\DbList.html" />
@@ -624,7 +630,6 @@
     <Content Include="Views\js\bootstraptable\extensions\tree-column\bootstrap-table-tree-column.min.css" />
     <Content Include="Views\js\bootstraptable\extensions\tree-column\bootstrap-table-tree-column.min.js" />
     <Content Include="Views\js\bootstraptable\extensions\treegrid\bootstrap-table-treegrid.min.js" />
-    <Content Include="Views\js\bootstrap.js" />
     <EmbeddedResource Include="Views\js\jquery.min.js" />
     <EmbeddedResource Include="Views\js\perfect-scrollbar.min.js" />
     <EmbeddedResource Include="Views\js\main.min.js" />
