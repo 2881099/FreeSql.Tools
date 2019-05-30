@@ -17,7 +17,7 @@
             margin: 0;
             position: absolute;
             top: 55px;
-            bottom: 0;
+            bottom: 10px;
             left: 0;
             right: 0;
         }
@@ -66,7 +66,7 @@
             editor.setOptions({
                 enableLiveAutocompletion: true,
             });
-
+            editor.setOption("wrap", "free");
             editor.setValue(GetCode());
             $('.card-header h4').text(GetTitle());
             $('button[info]').on('click', function () {

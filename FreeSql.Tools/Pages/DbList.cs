@@ -12,14 +12,14 @@ namespace FreeSqlTools.Pages
 {
     public class DbList : DSkin.Forms.MiniBlinkPage
     {
-        MiniBlinkCollection<DbConfig> data;
-        public MiniBlinkCollection<DbConfig> Data
+        MiniBlinkCollection<DataBaseConfig> data;
+        public MiniBlinkCollection<DataBaseConfig> Data
         {
             get
             {
                 if (data == null)
                 {
-                    data = new MiniBlinkCollection<DbConfig>(this);
+                    data = new MiniBlinkCollection<DataBaseConfig>(this);
                 }
                 return data;
             }
@@ -27,7 +27,7 @@ namespace FreeSqlTools.Pages
 
         public DbList()
         {
-            var _list = Curd.SetFsql.Select<DbConfig>().ToList();
+            var _list = Curd.DataBase.Select.ToList();
             Data.AddRange(_list);
         }
 
@@ -42,7 +42,7 @@ namespace FreeSqlTools.Pages
         {
             Data.Clear();
 
-            var entity = new DbConfig
+            var entity = new DataBaseConfig
             {
                 DataBaseName = jsValue.Get("dataBaseName").ToString(),
                 Name = jsValue.Get("name").ToString(),
@@ -75,13 +75,10 @@ namespace FreeSqlTools.Pages
             if (Guid.TryParse(id, out Guid vid) && vid != Guid.Empty)
             {
                 entity.Id = vid;
-                Curd.SetFsql.Update<DbConfig>(id).SetSource(entity).ExecuteUpdated();
             }
-            else
-            {
-                Curd.SetFsql.Insert(entity).ExecuteInserted();
-            }
-            var _list = Curd.SetFsql.Select<DbConfig>().ToList();
+
+            Curd.DataBase.InsertOrUpdate(entity);
+            var _list = Curd.DataBase.Select.ToList();
             Data.AddRange(_list);
             Data.SaveChanges();
 

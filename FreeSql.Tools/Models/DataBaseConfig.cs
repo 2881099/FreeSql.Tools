@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreeSqlTools.Models
 {
-    public class DbConfig
+    public class DataBaseConfig
     {
 
         [FreeSql.DataAnnotations.Column(IsPrimary = true)]

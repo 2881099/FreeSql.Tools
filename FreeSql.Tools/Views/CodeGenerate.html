@@ -30,8 +30,8 @@
 
             $('button[info]').on('click', function () {
 
-                GenerateCode();
-                Helper.ui.message.success("全部代码生成完成", {});
+                var str = GenerateCode();
+                Helper.ui.message.success(str);
             });
         });
     </script>

@@ -44,23 +44,29 @@
     <Reference Include="DSkin.Design">
       <HintPath>..\dll.ref\DSkin.Design.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.0.6.2\lib\net45\FreeSql.dll</HintPath>
+    <Reference Include="FreeSql, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.0.6.3\lib\net45\FreeSql.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.MySql, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.MySql.0.6.2\lib\net452\FreeSql.Provider.MySql.dll</HintPath>
+    <Reference Include="FreeSql.DbContext, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.DbContext.0.6.3\lib\net45\FreeSql.DbContext.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Oracle, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Oracle.0.6.2\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
+    <Reference Include="FreeSql.Provider.MySql, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.MySql.0.6.3\lib\net452\FreeSql.Provider.MySql.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.PostgreSQL, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.0.6.2\lib\net45\FreeSql.Provider.PostgreSQL.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Oracle, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Oracle.0.6.3\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Sqlite, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Sqlite.0.6.2\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
+    <Reference Include="FreeSql.Provider.PostgreSQL, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.0.6.3\lib\net45\FreeSql.Provider.PostgreSQL.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.SqlServer, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.SqlServer.0.6.2\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Sqlite, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Sqlite.0.6.3\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeSql.Provider.SqlServer, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.SqlServer.0.6.3\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeSql.Repository, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Repository.0.6.3\lib\net45\FreeSql.Repository.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.8.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.8.0\lib\net45\Google.Protobuf.dll</HintPath>
@@ -125,12 +131,14 @@
     <Compile Include="FrWebMain.Designer.cs">
       <DependentUpon>FrWebMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbConfig.cs" />
+    <Compile Include="Models\DataBaseConfig.cs" />
+    <Compile Include="Models\RazorModel.cs" />
+    <Compile Include="Models\TaskBuild.cs" />
     <Compile Include="Models\Templates.cs" />
     <Compile Include="Pages\Curd.cs" />
     <Compile Include="Pages\DbList.cs" />
     <Compile Include="Pages\editCode.cs" />
-    <Compile Include="Pages\generate.cs" />
+    <Compile Include="Pages\CodeGenerate.cs" />
     <Compile Include="Pages\lyear_main.cs" />
     <Compile Include="Pages\mainframe.cs" />
     <Compile Include="Pages\TaskBuild.cs" />
@@ -167,7 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Template.html" />
-    <EmbeddedResource Include="Views\generate.html" />
+    <EmbeddedResource Include="Views\CodeGenerate.html" />
     <EmbeddedResource Include="Views\noPage.html" />
     <EmbeddedResource Include="Views\js\ztree\bootstrapStyle\bootstrapStyle.css" />
     <Content Include="Views\Historical.html" />
