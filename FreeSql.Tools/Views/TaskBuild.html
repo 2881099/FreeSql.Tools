@@ -7,13 +7,10 @@
     <link href="css/materialdesignicons.min.css" rel="stylesheet">
     <link href="css/style.min.css" rel="stylesheet">
     <link href="js/easyhelper/easyhelper.min.css" rel="stylesheet" />
-
     <link href="js/ztree/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
-
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
 </head>
 
 <body>
@@ -21,14 +18,15 @@
         <div class="card">
             <div class="card-header">
                 <button info>添加</button>
+                <button success>添加</button>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="background-color:#f5f6fa">
                 <form class="form-horizontal" action="lyear_forms_elements.html" method="post" onsubmit="return false;">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card">
                                 <div class="card-header">数据库选择</div>
-                                <div class="card-body" style="padding:0">
+                                <div class="card-body ztree-load" style="padding:0;height:500px;overflow-y: auto">
                                     <div id="treeview" class="ztree"></div>
                                 </div>
                             </div>
@@ -94,98 +92,46 @@
 
     <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
     <script src="js/ztree/jquery.ztree.all.min.js"></script>
-
-
-
     <script src="js/easyhelper/easyhelper.min.js"></script>
     <script type="text/javascript" src="js/main.min.js"></script>
 
     <script type="text/javascript">
-        var setting = {
+        var ztree, setting = {
             view: {
                 selectedMulti: true
             },
             check: {
-                enable: true
+                enable: true,
+                chkStyle: "checkbox",
+		        chkboxType: { "Y": "p", "N": "ps" }
             },
-            data: {
-                simpleData: {
-                    enable: true
+            callback: {
+                beforeExpand: function (treeId, treeNode) {
+                    //Helper.ui.loading(".card-body.ztree-load", { text: "加载中...." });
+                    if (!treeNode.children || treeNode.children.length <= 0) {              
+                        var res = JSON.parse(GetDataBase(treeNode.id, treeNode.name, treeNode.level));
+                        if (res.code == 0) {
+                            treeNode.children = res.data;
+                            ztree.refresh();
+                        } else {
+                            Helper.ui.dialogError("加载数据库失败", res.msg);
+                        }
+                        //Helper.ui.removeLoading(".card-body.ztree-load");
+                    }
                 }
-            },
+            }
         };
-
-
-
-        var zNodes = [
-            { id: 1, pId: 0, name: "[core] 基本功能 演示", open: true },
-            { id: 101, pId: 1, name: "最简单的树 --  标准 JSON 数据" },
-            { id: 102, pId: 1, name: "最简单的树 --  简单 JSON 数据" },
-            { id: 103, pId: 1, name: "不显示 连接线" },
-            { id: 104, pId: 1, name: "不显示 节点 图标" },
-            { id: 108, pId: 1, name: "异步加载 节点数据" },
-            { id: 109, pId: 1, name: "用 zTree 方法 异步加载 节点数据" },
-            { id: 110, pId: 1, name: "用 zTree 方法 更新 节点数据" },
-            { id: 111, pId: 1, name: "单击 节点 控制" },
-            { id: 112, pId: 1, name: "展开 / 折叠 父节点 控制" },
-            { id: 113, pId: 1, name: "根据 参数 查找 节点" },
-            { id: 114, pId: 1, name: "其他 鼠标 事件监听" },
-
-            { id: 2, pId: 0, name: "[excheck] 复/单选框功能 演示", open: false },
-            { id: 201, pId: 2, name: "Checkbox 勾选操作" },
-            { id: 206, pId: 2, name: "Checkbox nocheck 演示" },
-            { id: 207, pId: 2, name: "Checkbox chkDisabled 演示" },
-            { id: 208, pId: 2, name: "Checkbox halfCheck 演示" },
-            { id: 202, pId: 2, name: "Checkbox 勾选统计" },
-            { id: 203, pId: 2, name: "用 zTree 方法 勾选 Checkbox" },
-            { id: 204, pId: 2, name: "Radio 勾选操作" },
-            { id: 209, pId: 2, name: "Radio nocheck 演示" },
-            { id: 210, pId: 2, name: "Radio chkDisabled 演示" },
-            { id: 211, pId: 2, name: "Radio halfCheck 演示" },
-            { id: 205, pId: 2, name: "用 zTree 方法 勾选 Radio" },
-
-            { id: 3, pId: 0, name: "[exedit] 编辑功能 演示", open: false },
-            { id: 301, pId: 3, name: "拖拽 节点 基本控制" },
-            { id: 302, pId: 3, name: "拖拽 节点 高级控制" },
-            { id: 303, pId: 3, name: "用 zTree 方法 移动 / 复制 节点" },
-            { id: 304, pId: 3, name: "基本 增 / 删 / 改 节点" },
-            { id: 305, pId: 3, name: "高级 增 / 删 / 改 节点" },
-            { id: 306, pId: 3, name: "用 zTree 方法 增 / 删 / 改 节点" },
-            { id: 307, pId: 3, name: "异步加载 & 编辑功能 共存" },
-            { id: 308, pId: 3, name: "多棵树之间 的 数据交互" },
-
-            { id: 4, pId: 0, name: "大数据量 演示", open: false },
-            { id: 401, pId: 4, name: "一次性加载大数据量" },
-            { id: 402, pId: 4, name: "分批异步加载大数据量" },
-            { id: 403, pId: 4, name: "分批异步加载大数据量" },
-
-            { id: 5, pId: 0, name: "组合功能 演示", open: false },
-            { id: 501, pId: 5, name: "冻结根节点" },
-            { id: 502, pId: 5, name: "单击展开/折叠节点" },
-            { id: 503, pId: 5, name: "保持展开单一路径" },
-            { id: 504, pId: 5, name: "添加 自定义控件" },
-            { id: 505, pId: 5, name: "checkbox / radio 共存" },
-            { id: 506, pId: 5, name: "左侧菜单" },
-            { id: 507, pId: 5, name: "下拉菜单" },
-            { id: 509, pId: 5, name: "带 checkbox 的多选下拉菜单" },
-            { id: 510, pId: 5, name: "带 radio 的单选下拉菜单" },
-            { id: 508, pId: 5, name: "右键菜单 的 实现" },
-            { id: 511, pId: 5, name: "与其他 DOM 拖拽互动" },
-            { id: 512, pId: 5, name: "异步加载模式下全部展开" },
-
-            { id: 6, pId: 0, name: "其他扩展功能 演示", open: false },
-            { id: 601, pId: 6, name: "隐藏普通节点" },
-            { id: 602, pId: 6, name: "配合 checkbox 的隐藏" },
-            { id: 603, pId: 6, name: "配合 radio 的隐藏" }
-        ];
-
-
-
+ 
 
         $(function () {
 
-            $.fn.zTree.init($("#treeview"), setting, zNodes);
+            var res = JSON.parse(GetDataBaseAll());
+            ztree = $.fn.zTree.init($("#treeview"), setting, res.data);
+            $('button[success]').on('click', function () {
 
+                var ck = ztree.getChangeCheckedNodes();
+                console.log(ck);
+            });
             $('button[info]').on('click', function () {
                 Helper.ui.dialog({
                     title: "构建任务", buttonNoClose: [true, false],

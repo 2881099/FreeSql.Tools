@@ -17,7 +17,7 @@ namespace FreeSqlTools
            
             InitializeComponent();
             Width = (int) (1366 * ZoomFactor);
-            Height = (int) (700 * ZoomFactor);
+            Height = (int) (768 * ZoomFactor);
 
             InnerDuiControl.Borders.AllWidth = 5;
 

@@ -13,233 +13,194 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <style>
-        .window-action li {
-            width: 64px;
-        }
+        .window-action li { width: 64px; }
+        .window-action li:hover {background-color: rgba(0,0,0,0.3);}
+        .badge {margin-top: -20px;margin-left: 10px;background-color: #ff6a00}
+        #page {overflow: hidden;background-color: white;position: absolute;left: 0;top: 0; right: 0;bottom: 0;}
+        .shadow {left: 0px !important;top: 0px !important;right: 0px !important;bottom: 0px !important;border:3px solid #1e9fff;}
 
-            .window-action li:hover {
-                background-color: rgba(0,0,0,0.3);
-            }
-
-        .badge {
-            margin-top: -20px;
-            margin-left: 10px;
-            background-color: #ff6a00
-        }
-
-        #page {
-            overflow: hidden;
-            -webkit-box-shadow: 0px 2px 10px #333333;
-            width: 100%;
-            height: 100%;
-            background-color: #FFFFFF;
-            position: relative;
-        }
-        /*滚动条样式*/
-        ::-webkit-scrollbar-track-piece {
-            background-color: #fff;
-            -webkit-border-radius: 0;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            height: 50px;
-            background-color: #999;
-            -webkit-border-radius: 4px;
-            outline: 2px solid #fff;
-            outline-offset: -2px;
-            border: 2px solid #fff;
-        }
-
-            ::-webkit-scrollbar-thumb:hover {
-                height: 50px;
-                background-color: #9f9f9f;
-                -webkit-border-radius: 4px;
-            }
     </style>
 </head>
 <body class="full-height-layout"
       data-logobg="color_3" data-headerbg="color_3" data-sidebarbg="color_8"
       onmousedown="resizeWindow(event)" onmousemove="setCursor(event)">
-    <div class="lyear-layout-web shadow" id="page">
-        <div class="lyear-layout-container">
-            <!--左侧导航-->
-            <aside class="lyear-layout-sidebar">
-                <!-- logo -->
-                <div id="logo" class="sidebar-header">
-                    <div style="height:68px;display:block;color:#ffffff;text-align:center;line-height:68px;font-size:30px">
-                        <label style="font-size:22px">Free</label>
-                        <label>
-                            SQL<span class="badge badge-info">0.0.1</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="lyear-layout-sidebar-scroll">
-                    <nav class="sidebar-main">
-                        <ul class="nav nav-drawer">
-                            <li class="nav-item nav-item-has-subnav active open">
-                                <a href="javascript:void(0)"><i class="mdi mdi-settings"></i>基础设施</a>
-                                <ul class="nav nav-subnav">
-                                    <li> <a class="multitabs" href="DbList.html"> <i class="mdi mdi-database"></i>  数据库配置</a> </li>
-                                    <li> <a class="multitabs" href="Template.html"><i class="mdi mdi-polymer"></i> 本地模板</a> </li>
-                                    <li> <a class="multitabs" href="noPage.html"><i class="mdi mdi-cloud-tags"></i> 在线模板</a> </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item nav-item-has-subnav open">
-                                <a href="javascript:void(0)"><i class="mdi mdi-application"></i>任务构建</a>
-                                <ul class="nav nav-subnav">
-                                    <li> <a class="multitabs" href="TaskBuild.html"><i class="mdi mdi-calendar-check"> </i> 任务管理</a> </li>
-                                    <li> <a class="multitabs" href="Historical.html"><i class="mdi mdi-av-timer"> </i> 历史记录</a> </li>
-                                    <li> <a class="multitabs" href="CodeGenerate.html"><i class="mdi mdi-av-timer"> </i> 生成</a> </li>
-                                    
-                                </ul>
-                            </li>
-                            <li class="nav-item nav-item-has-subnav open">
-                                <a href="javascript:void(0)"><i class="mdi mdi-fingerprint"></i>技术支持</a>
-                                <ul class="nav nav-subnav">
-                                    <li> <a target="_blank" href="https://github.com/2881099/FreeSql/issues/new"><i class="mdi mdi-comment-alert-outline"></i> 问题反馈(issues)</a> </li>
-                                    <li> <a class="multitabs" href="https://github.com/2881099/FreeSql"><i class="mdi mdi-code-tags"></i> 源码下载</a> </li>
-                                    <li> <a class="multitabs" href="https://github.com/2881099/FreeSql/wiki"><i class="mdi mdi-window-restore"></i> 文档中心</a> </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="sidebar-footer">
+        <div class="shadow" id="page">
+            <div class="lyear-layout-container">
+                <div class="lyear-layout-container">
+                    <!--左侧导航-->
+                    <aside class="lyear-layout-sidebar">
+                        <!-- logo -->
+                        <div id="logo" class="sidebar-header">
+                            <div style="height:68px;display:block;color:#ffffff;text-align:center;line-height:68px;font-size:30px">
+                                <label style="font-size:22px">Free</label>
+                                <label>
+                                    SQL<span class="badge badge-info">0.0.1</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="lyear-layout-sidebar-scroll">
+                            <nav class="sidebar-main">
+                                <ul class="nav nav-drawer">
+                                    <li class="nav-item nav-item-has-subnav active open">
+                                        <a href="javascript:void(0)"><i class="mdi mdi-settings"></i>基础设施</a>
+                                        <ul class="nav nav-subnav">
+                                            <li> <a class="multitabs" href="DbList.html"> <i class="mdi mdi-database"></i>  数据库配置</a> </li>
+                                            <li> <a class="multitabs" href="Template.html"><i class="mdi mdi-polymer"></i> 本地模板</a> </li>
+                                            <li> <a class="multitabs" href="noPage.html"><i class="mdi mdi-cloud-tags"></i> 在线模板</a> </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item nav-item-has-subnav open">
+                                        <a href="javascript:void(0)"><i class="mdi mdi-application"></i>任务构建</a>
+                                        <ul class="nav nav-subnav">
+                                            <li> <a class="multitabs" href="TaskBuild.html"><i class="mdi mdi-calendar-check"> </i> 任务管理</a> </li>
+                                            <li> <a class="multitabs" href="Historical.html"><i class="mdi mdi-av-timer"> </i> 历史记录</a> </li>
+                                            <li> <a class="multitabs" href="CodeGenerate.html"><i class="mdi mdi-av-timer"> </i> 生成</a> </li>
 
-                    </div>
-                </div>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item nav-item-has-subnav open">
+                                        <a href="javascript:void(0)"><i class="mdi mdi-fingerprint"></i>技术支持</a>
+                                        <ul class="nav nav-subnav">
+                                            <li> <a target="_blank" href="https://github.com/2881099/FreeSql/issues/new"><i class="mdi mdi-comment-alert-outline"></i> 问题反馈(issues)</a> </li>
+                                            <li> <a class="multitabs" href="https://github.com/2881099/FreeSql"><i class="mdi mdi-code-tags"></i> 源码下载</a> </li>
+                                            <li> <a class="multitabs" href="https://github.com/2881099/FreeSql/wiki"><i class="mdi mdi-window-restore"></i> 文档中心</a> </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <div class="sidebar-footer">
 
-            </aside>
-            <!--End 左侧导航-->
-            <!--头部信息-->
-            <header class="lyear-layout-header" onmousemove="if(event.button == 0){ MoveWindow(); }" ondblclick="Command_MaxOrNor()">
-                <nav class="navbar navbar-default">
-                    <div class="topbar">
-
-                        <div class="topbar-left">
-                            <div class="lyear-aside-toggler">
-                                <span class="lyear-toggler-bar"></span>
-                                <span class="lyear-toggler-bar"></span>
-                                <span class="lyear-toggler-bar"></span>
                             </div>
                         </div>
 
-                        <ul class="topbar-right window-action">
-                            <li class="dropdown dropdown-skin window-close" onclick="Command_Close()">
-                                <span class="icon-palette"><i class="mdi mdi-window-close"></i></span>
-                            </li>
-                            <li class="dropdown dropdown-skin window-maximize" onclick="Command_MaxOrNor()">
-                                <span class="icon-palette"><i class="mdi mdi-window-maximize"></i></span>
-                            </li>
-                            <li class="dropdown dropdown-profile window-minimize" onclick="Command_Min();">
-                                <span class="icon-palette"><i class="mdi mdi-window-minimize"></i></span>
-                            </li>
-                        </ul>
+                    </aside>
+                    <!--End 左侧导航-->
+                    <!--头部信息-->
+                    <header class="lyear-layout-header" onmousemove="if(event.button == 0){ MoveWindow(); }" ondblclick="Command_MaxOrNor()">
+                        <nav class="navbar navbar-default">
+                            <div class="topbar">
 
-                    </div>
-                </nav>
+                                <div class="topbar-left">
+                                    <div class="lyear-aside-toggler">
+                                        <span class="lyear-toggler-bar"></span>
+                                        <span class="lyear-toggler-bar"></span>
+                                        <span class="lyear-toggler-bar"></span>
+                                    </div>
+                                </div>
 
-            </header>
-            <!--End 头部信息-->
-            <!--页面主要内容-->
-            <main class="lyear-layout-content">
-                <div id="iframe-content"></div>
-            </main>
-            <!--End 页面主要内容-->
+                                <ul class="topbar-right window-action">
+                                    <li class="dropdown dropdown-skin window-close" onclick="Command_Close()">
+                                        <span class="icon-palette"><i class="mdi mdi-window-close"></i></span>
+                                    </li>
+                                    <li class="dropdown dropdown-skin window-maximize" onclick="Command_MaxOrNor()">
+                                        <span class="icon-palette"><i class="mdi mdi-window-maximize"></i></span>
+                                    </li>
+                                    <li class="dropdown dropdown-profile window-minimize" onclick="Command_Min();">
+                                        <span class="icon-palette"><i class="mdi mdi-window-minimize"></i></span>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </nav>
+
+                    </header>
+                    <!--End 头部信息-->
+                    <!--页面主要内容-->
+                    <main class="lyear-layout-content">
+                        <div id="iframe-content"></div>
+                    </main>
+                    <!--End 页面主要内容-->
+                </div>
+            </div>
         </div>
-    </div>
 
 
+        <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
+        <script type="text/javascript" src="js/multitabs/multitabs.js"></script>
+        <script type="text/javascript" src="js/index.min.js"></script>
+        <script>
+            onwindowstatechanged = function () {
+                var state = page.WindowState;
+                if (state == "min") {
+                } else if (state == "max") {//设置最大化和还原按钮状态和阴影显示
+                    $("#page").removeClass("shadow");
+                    document.getElementById("maximize").textContent = "\u0032";
+                } else if (state == "nor") {
+                    $("#page").addClass("shadow");
+                    document.getElementById("maximize").textContent = "\u0031";
+                }
 
-    <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
-    <script type="text/javascript" src="js/multitabs/multitabs.js"></script>
-    <script type="text/javascript" src="js/index.min.js"></script>
-    <script>
-        onwindowstatechanged = function () {
-            var state = page.WindowState;
-            if (state == "min") {
-            } else if (state == "max") {//设置最大化和还原按钮状态和阴影显示
-                $("#page").removeClass("shadow");
-                document.getElementById("maximize").textContent = "\u0032";
-            } else if (state == "nor") {
-                $("#page").addClass("shadow");
-                document.getElementById("maximize").textContent = "\u0031";
             }
-        }
-        function resizeWindow(e) {//调整窗体大小的方法
-            //if (!isMouseEnter) {
-            //    return;
-            //}
-            var body = getComputedStyle(document.getElementById("page"), null);
-            if (body.top.replace("px", "") > e.y && (Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
-                ResizeWindow("righttop");
+            function resizeWindow(e) {//调整窗体大小的方法
+                //if (!isMouseEnter) {
+                //    return;
+                //}
+                var body = getComputedStyle(document.getElementById("page"), null);
+                if (body.top.replace("px", "") > e.y && (Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
+                    ResizeWindow("righttop");
+                }
+                else if (body.top.replace("px", "") > e.y && body.left.replace("px", "") > e.x) {
+                    ResizeWindow("lefttop");
+                }
+                else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y && body.left.replace("px", "") > e.x) {
+                    ResizeWindow("leftbottom");
+                }
+                else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y && (Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
+                    ResizeWindow("rightbottom");
+                }
+                else if (body.top.replace("px", "") > e.y) {
+                    ResizeWindow("top");
+                }
+                else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y) {
+                    ResizeWindow("bottom");
+                }
+                else if (body.left.replace("px", "") > e.x) {
+                    ResizeWindow("left");
+                }
+                else if ((Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
+                    ResizeWindow("right");
+                }
             }
-            else if (body.top.replace("px", "") > e.y && body.left.replace("px", "") > e.x) {
-                ResizeWindow("lefttop");
+            //设置四周的鼠标样式
+            function setCursor(e) {
+                var body = getComputedStyle(document.getElementById("page"), null);
+                if (body.top.replace("px", "") > e.y && (Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
+                    document.getElementsByTagName("html")[0].style.cursor = "ne-resize";
+                }
+                else if (body.top.replace("px", "") > e.y && body.left.replace("px", "") > e.x) {
+                    document.getElementsByTagName("html")[0].style.cursor = "nw-resize";
+                }
+                else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y && body.left.replace("px", "") > e.x) {
+                    document.getElementsByTagName("html")[0].style.cursor = "sw-resize";
+                }
+                else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y && (Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
+                    document.getElementsByTagName("html")[0].style.cursor = "se-resize";
+                }
+                else if (body.top.replace("px", "") > e.y) {
+                    document.getElementsByTagName("html")[0].style.cursor = "n-resize";
+                }
+                else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y) {
+                    document.getElementsByTagName("html")[0].style.cursor = "s-resize";
+                }
+                else if (body.left.replace("px", "") > e.x) {
+                    document.getElementsByTagName("html")[0].style.cursor = "w-resize";
+                }
+                else if ((Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
+                    document.getElementsByTagName("html")[0].style.cursor = "e-resize";
+                } else {
+                    document.getElementsByTagName("html")[0].style.cursor = "auto";
+                }
             }
-            else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y && body.left.replace("px", "") > e.x) {
-                ResizeWindow("leftbottom");
-            }
-            else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y && (Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
-                ResizeWindow("rightbottom");
-            }
-            else if (body.top.replace("px", "") > e.y) {
-                ResizeWindow("top");
-            }
-            else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y) {
-                ResizeWindow("bottom");
-            }
-            else if (body.left.replace("px", "") > e.x) {
-                ResizeWindow("left");
-            }
-            else if ((Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
-                ResizeWindow("right");
-            }
-        }
-        //设置四周的鼠标样式
-        function setCursor(e) {
-            var body = getComputedStyle(document.getElementById("page"), null);
-            if (body.top.replace("px", "") > e.y && (Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
-                document.getElementsByTagName("html")[0].style.cursor = "ne-resize";
-            }
-            else if (body.top.replace("px", "") > e.y && body.left.replace("px", "") > e.x) {
-                document.getElementsByTagName("html")[0].style.cursor = "nw-resize";
-            }
-            else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y && body.left.replace("px", "") > e.x) {
-                document.getElementsByTagName("html")[0].style.cursor = "sw-resize";
-            }
-            else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y && (Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
-                document.getElementsByTagName("html")[0].style.cursor = "se-resize";
-            }
-            else if (body.top.replace("px", "") > e.y) {
-                document.getElementsByTagName("html")[0].style.cursor = "n-resize";
-            }
-            else if ((Number(body.top.replace("px", "")) + Number(body.height.replace("px", ""))) < e.y) {
-                document.getElementsByTagName("html")[0].style.cursor = "s-resize";
-            }
-            else if (body.left.replace("px", "") > e.x) {
-                document.getElementsByTagName("html")[0].style.cursor = "w-resize";
-            }
-            else if ((Number(body.left.replace("px", "")) + Number(body.width.replace("px", ""))) < e.x) {
-                document.getElementsByTagName("html")[0].style.cursor = "e-resize";
-            } else {
-                document.getElementsByTagName("html")[0].style.cursor = "auto";
-            }
-        }
 
 
-        $(function () {
-            $.get('https://www.nuget.org/packages/FreeSql', function (html) {
-                var rex = /\d+\.\d+\.\d+(.\d+)?/.exec(html)[0];
-                $('.badge-info').text(rex);
+            $(function () {
+                $.get('https://www.nuget.org/packages/FreeSql', function (html) {
+                    var rex = /\d+\.\d+\.\d+(.\d+)?/.exec(html)[0];
+                    $('.badge-info').text(rex);
+                });
             });
-        });
-    </script>
+        </script>
 
 </body>
 </html>

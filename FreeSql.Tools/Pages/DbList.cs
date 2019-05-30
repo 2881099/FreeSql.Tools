@@ -49,7 +49,7 @@ namespace FreeSqlTools.Pages
                 ServerIP = jsValue.Get("serverIP").ToString(),
                 UserName = jsValue.Get("userName").ToString(),
                 UserPass = jsValue.Get("userPass").ToString(),
-                Port = jsValue.Get("prot").ToInt(),
+                Port = jsValue.Get("port").ToInt(),
                 DataType = (FreeSql.DataType)jsValue.Get("dataType").ToInt()
             };
 

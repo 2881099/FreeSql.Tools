@@ -4,6 +4,13 @@
  * http://www.itshubao.com
  * yinqi<3331653644@qq.com>
  -------------------------------------- */
+
+
+        ::-webkit-scrollbar-track-piece {background-color: #fff;-webkit-border-radius: 0; }
+        ::-webkit-scrollbar { width: 15px;height: 15px;}
+        ::-webkit-scrollbar-thumb {height: 50px;background-color: #999;-webkit-border-radius: 4px;outline: 2px solid #fff; outline-offset: -2px;border: 2px solid #fff;}
+        ::-webkit-scrollbar-thumb:hover {height: 50px; background-color: #9f9f9f;-webkit-border-radius: 4px;}
+
 body {
 	font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 	color: #4d5259;
@@ -2495,7 +2502,7 @@ dd, dt {
 .lyear-layout-sidebar {
     position: fixed;
     top: 0;
-    bottom: 0;
+    bottom: 3px;
     z-index: 5;
     display: block;
     width: 240px;

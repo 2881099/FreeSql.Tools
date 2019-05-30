@@ -127,7 +127,6 @@
                             UpdateRow(obj);
                             Helper.ui.removeLoading(".helper-dialog-wrapper");
                             Helper.ui.message.success("增加成功", {});
-                            console.log(page.Data);
                             departments.bootstrapTable('load', page.Data);
                             Helper.ui.removeDialog();
 
