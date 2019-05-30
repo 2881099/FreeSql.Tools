@@ -17,7 +17,7 @@
             margin: 0;
             position: absolute;
             top: 55px;
-            bottom: 0;
+            bottom: 10px;
             left: 0;
             right: 0;
         }
@@ -26,6 +26,9 @@
             position: relative;
         }
     </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 </head>
 
@@ -46,8 +49,7 @@
         </div>
 
     </div>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="js/vue.min.js"></script>
+
     <script src="js/noconflict/ace.js"></script>
     <script src="js/easyhelper/easyhelper.min.js"></script>
     <script type="text/javascript" src="js/main.min.js"></script>
@@ -64,7 +66,7 @@
             editor.setOptions({
                 enableLiveAutocompletion: true,
             });
-
+            editor.setOption("wrap", "free");
             editor.setValue(GetCode());
             $('.card-header h4').text(GetTitle());
             $('button[info]').on('click', function () {

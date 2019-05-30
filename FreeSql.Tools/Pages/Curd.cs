@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FreeSql;
+using FreeSqlTools.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,12 +11,11 @@ namespace FreeSqlTools.Pages
 {
     public static class Curd
     {
-        public static  IFreeSql SetFsql { get; private set; } 
-        public static IFreeSql FSql { get; set; }
+        public static  IFreeSql fsql { get; private set; }   
 
         public static void InitFreeSql()
         {
-            SetFsql = new FreeSql.FreeSqlBuilder()
+            fsql = new FreeSql.FreeSqlBuilder()
                     .UseConnectionString(FreeSql.DataType.Sqlite,
                         @"Data Source=|DataDirectory|\freesql.db;Pooling=true;Max Pool Size=10")
                     .UseAutoSyncStructure(true) //自动同步实体结构到数据库
@@ -24,7 +25,13 @@ namespace FreeSqlTools.Pages
                  //监听SQL命令对象，在执行后
                  (cmd, traceLog) => Trace.WriteLine(traceLog))
                     .Build();
+
         }
+
+        public static GuidRepository<Templates> Templates => fsql.GetGuidRepository<Templates>();
+        public static GuidRepository<DataBaseConfig> DataBase  => fsql.GetGuidRepository<DataBaseConfig>();
+        public static GuidRepository<TaskBuild> TaskBuild => fsql.GetGuidRepository<TaskBuild>();
+   
 
     }
 }

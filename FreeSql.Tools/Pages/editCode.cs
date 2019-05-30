@@ -19,7 +19,7 @@ namespace FreeSqlTools.Pages
             base.OnLoad();
             var a= this.Url.IndexOf("=")+1;
             Guid.TryParse(this.Url.Substring(a, 36), out id);
-            templates = Curd.SetFsql.Select<Templates>(id).ToOne();
+            templates = Curd.Templates.Select.WhereDynamic(id).ToOne();
          
         }
 
@@ -41,7 +41,7 @@ namespace FreeSqlTools.Pages
         public void UpdateTemplates(string text)
         {
        
-          var res=  Curd.SetFsql.Update<Templates>(id).Set(a => a.Code, text)
+          var res= Curd.Templates.UpdateDiy.WhereDynamic(id).Set(a => a.Code, text)
                 .Set(a => a.EditTime, DateTime.Now).ExecuteAffrows();
 
 

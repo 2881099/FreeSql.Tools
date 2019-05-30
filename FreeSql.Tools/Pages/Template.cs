@@ -14,7 +14,7 @@ namespace FreeSqlTools.Pages
 
         public Template()
         {
-           var res= Curd.SetFsql.Select<Templates>().ToList<TemplatesOut>();
+           var res= Curd.Templates.Select.ToList<TemplatesOut>();
             Data.AddRange(res);
             
         }
@@ -35,11 +35,11 @@ namespace FreeSqlTools.Pages
         [JSFunction]
         public void AddTemplates(string name)
         {
-            Curd.SetFsql.Insert<Templates>(new Templates {
+            Curd.Templates.Insert(new Templates {
                  Title = name
-            }).ExecuteInserted();
+            });
             Data.Clear();
-            var res = Curd.SetFsql.Select<Templates>().ToList<TemplatesOut>();
+            var res = Curd.Templates.Select.ToList<TemplatesOut>();
             Data.AddRange(res);
             Data.SaveChanges();
         }

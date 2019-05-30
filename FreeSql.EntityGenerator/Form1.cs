@@ -118,6 +118,8 @@ namespace FreeSql.EntityGenerator {
 			return name;
 		}
 
+
+
 		private void checkBoxNameOptionsEntity01_CheckedChanged(object sender, EventArgs e) {
 			if (_tables == null) return;
 			foreach (var table in _tables) table.CsName = GetCsEntityName(table.FullName);
