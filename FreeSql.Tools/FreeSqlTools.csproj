@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1F2D5708-0C4C-4C8F-94D4-455C5A81031B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>FreeSqlTools</RootNamespace>
+    <AssemblyName>FreeSqlTools</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="DSkin">
+      <HintPath>..\dll.ref\DSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="DSkin.Design">
+      <HintPath>..\dll.ref\DSkin.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeSql, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.0.6.2\lib\net45\FreeSql.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeSql.Provider.MySql, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.MySql.0.6.2\lib\net452\FreeSql.Provider.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeSql.Provider.Oracle, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Oracle.0.6.2\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeSql.Provider.PostgreSQL, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.0.6.2\lib\net45\FreeSql.Provider.PostgreSQL.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeSql.Provider.Sqlite, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Sqlite.0.6.2\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="FreeSql.Provider.SqlServer, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.SqlServer.0.6.2\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.8.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.8.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.16.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.16\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=4.0.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.4.0.7\lib\net45\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql.LegacyPostgis, Version=4.0.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.LegacyPostgis.4.0.7\lib\net45\Npgsql.LegacyPostgis.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.19.3.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="SafeObjectPool, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SafeObjectPool.2.0.2\lib\net45\SafeObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlClient, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.6.1\lib\net451\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.110.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.110.0\lib\net45\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FrWebMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrWebMain.Designer.cs">
+      <DependentUpon>FrWebMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbConfig.cs" />
+    <Compile Include="Models\Templates.cs" />
+    <Compile Include="Pages\Curd.cs" />
+    <Compile Include="Pages\DbList.cs" />
+    <Compile Include="Pages\editCode.cs" />
+    <Compile Include="Pages\generate.cs" />
+    <Compile Include="Pages\lyear_main.cs" />
+    <Compile Include="Pages\mainframe.cs" />
+    <Compile Include="Pages\Template.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Views\fonts\materialdesignicons.eot" />
+    <EmbeddedResource Include="Views\fonts\materialdesignicons.ttf" />
+    <EmbeddedResource Include="Views\fonts\materialdesignicons.woff" />
+    <EmbeddedResource Include="Views\fonts\materialdesignicons.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Template.html" />
+    <EmbeddedResource Include="Views\generate.html" />
+    <EmbeddedResource Include="Views\noPage.html" />
+    <Content Include="x64\SQLite.Interop.dll" />
+    <EmbeddedResource Include="Views\js\noconflict\ace.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-beautify.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-elastic_tabstops_lite.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-emmet.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-error_marker.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-keybinding_menu.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-language_tools.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-linking.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-modelist.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-options.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-prompt.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-rtl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-searchbox.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-settings_menu.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-spellcheck.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-split.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-static_highlight.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-statusbar.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-textarea.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-themelist.js" />
+    <EmbeddedResource Include="Views\js\noconflict\ext-whitespace.js" />
+    <EmbeddedResource Include="Views\js\noconflict\keybinding-emacs.js" />
+    <EmbeddedResource Include="Views\js\noconflict\keybinding-sublime.js" />
+    <EmbeddedResource Include="Views\js\noconflict\keybinding-vim.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-abap.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-abc.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-actionscript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-ada.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-apache_conf.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-apex.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-applescript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-aql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-asciidoc.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-asl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-assembly_x86.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-autohotkey.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-batchfile.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-bro.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-c9search.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-cirru.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-clojure.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-cobol.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-coffee.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-coldfusion.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-crystal.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-csharp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-csound_document.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-csound_orchestra.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-csound_score.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-csp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-css.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-curly.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-c_cpp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-d.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-dart.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-diff.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-django.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-dockerfile.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-dot.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-drools.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-edifact.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-eiffel.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-ejs.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-elixir.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-elm.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-erlang.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-forth.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-fortran.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-fsharp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-fsl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-ftl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-gcode.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-gherkin.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-gitignore.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-glsl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-gobstones.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-golang.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-graphqlschema.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-groovy.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-haml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-handlebars.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-haskell.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-haskell_cabal.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-haxe.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-hjson.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-html.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-html_elixir.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-html_ruby.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-ini.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-io.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-jack.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-jade.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-java.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-javascript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-json.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-jsoniq.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-jsp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-jssm.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-jsx.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-julia.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-kotlin.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-latex.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-less.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-liquid.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-lisp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-livescript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-logiql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-logtalk.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-lsl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-lua.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-luapage.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-lucene.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-makefile.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-markdown.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-mask.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-matlab.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-maze.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-mel.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-mixal.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-mushcode.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-mysql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-nginx.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-nim.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-nix.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-nsis.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-objectivec.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-ocaml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-pascal.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-perl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-perl6.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-pgsql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-php.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-php_laravel_blade.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-pig.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-plain_text.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-powershell.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-praat.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-prolog.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-properties.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-protobuf.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-puppet.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-python.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-r.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-razor.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-rdoc.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-red.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-redshift.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-rhtml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-rst.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-ruby.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-rust.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-sass.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-scad.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-scala.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-scheme.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-scss.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-sh.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-sjs.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-slim.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-smarty.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-snippets.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-soy_template.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-space.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-sparql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-sql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-sqlserver.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-stylus.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-svg.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-swift.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-tcl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-terraform.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-tex.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-text.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-textile.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-toml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-tsx.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-turtle.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-twig.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-typescript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-vala.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-vbscript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-velocity.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-verilog.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-vhdl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-visualforce.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-wollok.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-xml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-xquery.js" />
+    <EmbeddedResource Include="Views\js\noconflict\mode-yaml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\abap.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\abc.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\actionscript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\ada.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\apache_conf.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\apex.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\applescript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\aql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\asciidoc.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\asl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\assembly_x86.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\autohotkey.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\batchfile.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\bro.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\c9search.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\cirru.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\clojure.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\cobol.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\coffee.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\coldfusion.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\crystal.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\csharp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\csound_document.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\csound_orchestra.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\csound_score.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\csp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\css.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\curly.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\c_cpp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\d.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\dart.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\diff.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\django.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\dockerfile.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\dot.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\drools.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\edifact.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\eiffel.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\ejs.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\elixir.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\elm.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\erlang.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\forth.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\fortran.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\fsharp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\fsl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\ftl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\gcode.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\gherkin.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\gitignore.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\glsl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\gobstones.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\golang.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\graphqlschema.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\groovy.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\haml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\handlebars.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\haskell.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\haskell_cabal.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\haxe.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\hjson.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\html.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\html_elixir.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\html_ruby.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\ini.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\io.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\jack.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\jade.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\java.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\javascript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\json.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\jsoniq.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\jsp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\jssm.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\jsx.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\julia.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\kotlin.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\latex.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\less.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\liquid.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\lisp.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\livescript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\logiql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\logtalk.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\lsl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\lua.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\luapage.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\lucene.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\makefile.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\markdown.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\mask.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\matlab.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\maze.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\mel.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\mixal.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\mushcode.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\mysql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\nginx.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\nim.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\nix.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\nsis.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\objectivec.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\ocaml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\pascal.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\perl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\perl6.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\pgsql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\php.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\php_laravel_blade.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\pig.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\plain_text.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\powershell.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\praat.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\prolog.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\properties.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\protobuf.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\puppet.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\python.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\r.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\razor.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\rdoc.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\red.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\redshift.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\rhtml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\rst.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\ruby.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\rust.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\sass.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\scad.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\scala.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\scheme.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\scss.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\sh.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\sjs.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\slim.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\smarty.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\snippets.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\soy_template.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\space.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\sparql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\sql.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\sqlserver.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\stylus.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\svg.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\swift.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\tcl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\terraform.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\tex.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\text.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\textile.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\toml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\tsx.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\turtle.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\twig.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\typescript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\vala.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\vbscript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\velocity.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\verilog.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\vhdl.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\visualforce.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\wollok.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\xml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\xquery.js" />
+    <EmbeddedResource Include="Views\js\noconflict\snippets\yaml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-ambiance.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-chaos.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-chrome.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-clouds.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-clouds_midnight.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-cobalt.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-crimson_editor.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-dawn.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-dracula.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-dreamweaver.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-eclipse.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-github.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-gob.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-gruvbox.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-idle_fingers.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-iplastic.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-katzenmilch.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-kr_theme.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-kuroir.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-merbivore.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-merbivore_soft.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-monokai.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-mono_industrial.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-pastel_on_dark.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-solarized_dark.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-solarized_light.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-sqlserver.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-terminal.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-textmate.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-tomorrow.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-tomorrow_night.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-tomorrow_night_blue.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-tomorrow_night_bright.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-tomorrow_night_eighties.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-twilight.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-vibrant_ink.js" />
+    <EmbeddedResource Include="Views\js\noconflict\theme-xcode.js" />
+    <EmbeddedResource Include="Views\js\noconflict\worker-coffee.js" />
+    <EmbeddedResource Include="Views\js\noconflict\worker-css.js" />
+    <EmbeddedResource Include="Views\js\noconflict\worker-html.js" />
+    <EmbeddedResource Include="Views\js\noconflict\worker-javascript.js" />
+    <EmbeddedResource Include="Views\js\noconflict\worker-json.js" />
+    <EmbeddedResource Include="Views\js\noconflict\worker-lua.js" />
+    <EmbeddedResource Include="Views\js\noconflict\worker-php.js" />
+    <EmbeddedResource Include="Views\js\noconflict\worker-xml.js" />
+    <EmbeddedResource Include="Views\js\noconflict\worker-xquery.js" />
+    <EmbeddedResource Include="Views\editCode.html" />
+    <EmbeddedResource Include="Views\js\jquery.1.9.js" />
+    <EmbeddedResource Include="Views\js\easyhelper\easyhelper.min.css" />
+    <EmbeddedResource Include="Views\js\easyhelper\easyhelper.min.js" />
+    <EmbeddedResource Include="Views\DbList.html" />
+    <EmbeddedResource Include="Views\js\vue.min.js" />
+    <EmbeddedResource Include="Views\js\Chart.js" />
+    <EmbeddedResource Include="Views\lyear_main.html" />
+    <EmbeddedResource Include="Views\js\index.min.js" />
+    <EmbeddedResource Include="Views\js\multitabs\multitabs.js" />
+    <EmbeddedResource Include="Views\js\multitabs\multitabs.min.css" />
+    <EmbeddedResource Include="Views\js\bootstraptable\bootstrap-table-zh-CN.min.js" />
+    <EmbeddedResource Include="Views\js\bootstraptable\bootstrap-table.js" />
+    <EmbeddedResource Include="Views\js\bootstraptable\bootstrap-table.min.css" />
+    <EmbeddedResource Include="Views\js\bootstraptable\bootstrap-table.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\accent-neutralise\bootstrap-table-accent-neutralise.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\addrbar\bootstrap-table-addrbar.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\auto-refresh\bootstrap-table-auto-refresh.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\cookie\bootstrap-table-cookie.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\copy-rows\bootstrap-table-copy-rows.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\defer-url\bootstrap-table-defer-url.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\editable\bootstrap-table-editable.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\export\bootstrap-table-export.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\filter-control\bootstrap-table-filter-control.min.css" />
+    <Content Include="Views\js\bootstraptable\extensions\filter-control\bootstrap-table-filter-control.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\fixed-columns\bootstrap-table-fixed-columns.min.css" />
+    <Content Include="Views\js\bootstraptable\extensions\fixed-columns\bootstrap-table-fixed-columns.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\group-by-v2\bootstrap-table-group-by.min.css" />
+    <Content Include="Views\js\bootstraptable\extensions\group-by-v2\bootstrap-table-group-by.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\group-by\bootstrap-table-group-by.min.css" />
+    <Content Include="Views\js\bootstraptable\extensions\group-by\bootstrap-table-group-by.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\i18n-enhance\bootstrap-table-i18n-enhance.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\key-events\bootstrap-table-key-events.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\mobile\bootstrap-table-mobile.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\multi-column-toggle\bootstrap-table-multi-toggle.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\multiple-search\bootstrap-table-multiple-search.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\multiple-selection-row\bootstrap-table-multiple-selection-row.min.css" />
+    <Content Include="Views\js\bootstraptable\extensions\multiple-selection-row\bootstrap-table-multiple-selection-row.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\multiple-sort\bootstrap-table-multiple-sort.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\natural-sorting\bootstrap-table-natural-sorting.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\page-jump-to\bootstrap-table-page-jump-to.min.css" />
+    <Content Include="Views\js\bootstraptable\extensions\page-jump-to\bootstrap-table-page-jump-to.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\pipeline\bootstrap-table-pipeline.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\print\bootstrap-table-print.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\reorder-columns\bootstrap-table-reorder-columns.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\reorder-rows\bootstrap-table-reorder-rows.min.css" />
+    <Content Include="Views\js\bootstraptable\extensions\reorder-rows\bootstrap-table-reorder-rows.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\resizable\bootstrap-table-resizable.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\select2-filter\bootstrap-table-select2-filter.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\sticky-header\bootstrap-table-sticky-header.min.css" />
+    <Content Include="Views\js\bootstraptable\extensions\sticky-header\bootstrap-table-sticky-header.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\toolbar\bootstrap-table-toolbar.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\tree-column\bootstrap-table-tree-column.min.css" />
+    <Content Include="Views\js\bootstraptable\extensions\tree-column\bootstrap-table-tree-column.min.js" />
+    <Content Include="Views\js\bootstraptable\extensions\treegrid\bootstrap-table-treegrid.min.js" />
+    <Content Include="Views\js\bootstrap.js" />
+    <EmbeddedResource Include="Views\js\jquery.min.js" />
+    <EmbeddedResource Include="Views\js\perfect-scrollbar.min.js" />
+    <EmbeddedResource Include="Views\js\main.min.js" />
+    <EmbeddedResource Include="Views\css\animate.css" />
+    <EmbeddedResource Include="Views\css\bootstrap.min.css" />
+    <EmbeddedResource Include="Views\css\materialdesignicons.min.css" />
+    <EmbeddedResource Include="Views\css\style.min.css" />
+    <EmbeddedResource Include="Views\fonts\materialdesignicons.svg" />
+    <EmbeddedResource Include="Views\mainframe.html" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets'))" />
+  </Target>
+</Project>

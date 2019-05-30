@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/materialdesignicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/multitabs/multitabs.min.css">
+    <link href="css/style.min.css" rel="stylesheet">
+    <link href="js/easyhelper/easyhelper.min.css" rel="stylesheet" />
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        #editor {
+            margin: 0;
+            position: absolute;
+            top: 55px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .card-body .editor {
+            position: relative;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="lyear-layout-web" id="page">
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <button info style="margin-top:-5px;float:left">
+                        <i class="mdi mdi-content-save"></i>
+                        保存
+                    </button> <h4 style="text-align:center">主色</h4>
+                </div>
+            </div>
+            <div class="card-body editor">
+                <p id="editor"></p>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/noconflict/ace.js"></script>
+    <script src="js/easyhelper/easyhelper.min.js"></script>
+    <script type="text/javascript" src="js/main.min.js"></script>
+
+
+    <script>
+        $(function () {
+
+
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/chrome");
+            editor.session.setMode("ace/mode/csharp");
+            editor.setFontSize("18px");
+            editor.setOptions({
+                enableLiveAutocompletion: true,
+            });
+
+            editor.setValue(GetCode());
+            $('.card-header h4').text(GetTitle());
+            $('button[info]').on('click', function () {
+                UpdateTemplates(editor.getValue());
+                Helper.ui.message.success("编辑成功", {});
+            });
+
+        });
+    </script>
+
+
+
+</body>
+</html>

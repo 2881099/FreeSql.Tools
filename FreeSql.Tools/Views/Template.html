@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <link href="js/bootstraptable/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="js/easyhelper/easyhelper.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container-fluid p-t-15" id="page">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <button info>添加</button>                       
+                    </div>
+                    <div class="card-body">
+                        <table id="tb_departments"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="http://lyear.itshubao.com/iframe/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="js/easyhelper/easyhelper.min.js"></script>
+    <script src="js/bootstraptable/bootstrap-table.min.js"></script>
+    <script src="js/bootstraptable/bootstrap-table-zh-CN.min.js"></script>
+
+    <script type="text/javascript" src="js/main.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('button[info]').on('click', function () {
+                Helper.ui.dialog({
+                    title: "添加模版", buttonNoClose: [true, false],
+                    content: `<div class="form-group has-info">
+                                          <label class="col-xs-12" for="example-text-input-info">模版名称</label>
+                                          <div class="col-xs-12">
+                                            <input class="form-control" type="text" name="templatesName" placeholder="模版名称..">
+                                          </div>
+                                        </div> `, yes: {
+                        callback: function () {
+                            var value = $('input[name="templatesName"]').val();
+                            if (value === '') {
+                                Helper.ui.message.error("模版名称不能为空", {});
+                                $('input[name="templatesName"]').focus(); return;
+                            }
+                            Helper.ui.loading(".helper-dialog-wrapper", { text: "请稍后...." });
+                            AddTemplates(value);
+                            Helper.ui.removeLoading(".helper-dialog-wrapper");
+                            Helper.ui.message.success("增加成功", {});
+                            departments.bootstrapTable('load', page.Data);
+                            Helper.ui.removeDialog();
+                        }
+                    }
+                });
+            })
+
+            var departments = $('#tb_departments').bootstrapTable({
+                classes: 'table table-bordered table-hover table-striped',
+                uniqueId: 'Id',
+                idField: 'Id',             // 每行的唯一标识字段
+                data: page.Data,
+                columns: [{
+                    field: 'Id',
+                    title: 'ID',
+                }, {
+                    field: 'Title',
+                    title: '模版名称'
+                }, {
+                    field: 'AddTime',
+                    title: '添加时间',
+                }, {
+                    field: 'EditTime',
+                    title: '修改时间',
+                }, {
+                    field: 'operate',
+                    title: '操作',
+                    formatter: btnGroup,  // 自定义方法
+                    events: {
+                        'click .edit-btn': function (event, value, row, index) {
+                            parent.$(parent.document).data('multitabs').create({
+                                iframe: true,     
+                                title: '编辑内容', 
+                                url: `editCode.html?id=${row.Id}&t=${new Date()}`  
+                            }, true);
+                        },
+                        'click .del-btn': function (event, value, row, index) {
+                            delUser(row.id);
+                        }
+                    }
+                }],
+                onLoadSuccess: function (data) {
+                    $("[data-toggle='tooltip']").tooltip();
+                 }
+            });
+        });
+        // 操作按钮
+        function btnGroup() {
+            let html =
+                '<a href="#!" class="btn btn-xs btn-default m-r-5 edit-btn" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a> ' +
+                '<a href="#!" class="btn btn-xs btn-default del-btn" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a> ' +
+                '<a href="#!" class="btn btn-xs btn-default del-btn" title="发布到云端" data-toggle="tooltip"><i class="mdi mdi-cloud-upload"></i></a>';
+            return html;
+        }
+    </script>
+
+</body>
+</html>
