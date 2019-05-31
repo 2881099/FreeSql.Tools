@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreeSql.DataAnnotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +9,12 @@ namespace FreeSqlTools.Models
 {
     public  class Templates
     {
-        [FreeSql.DataAnnotations.Column(IsPrimary = true)]
+        [Column(IsPrimary = true)]
         public Guid Id { get; set; }
         public string Title { get; set; }
         public DateTime AddTime { get; set; } = DateTime.Now;
         public DateTime EditTime { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [FreeSql.DataAnnotations.Column(DbType = "text")]
+        [Column(DbType = "text")]
         public string Code { get; set; }
     }
 

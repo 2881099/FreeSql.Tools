@@ -176,7 +176,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\js\ztree\bootstrapStyle\img\line_conn.png" />
     <EmbeddedResource Include="Views\Template.html" />
-    <EmbeddedResource Include="Views\CodeGenerate.html" />
     <EmbeddedResource Include="Views\noPage.html" />
     <EmbeddedResource Include="Views\js\ztree\bootstrapStyle\bootstrapStyle.css" />
     <Content Include="Views\Historical.html" />

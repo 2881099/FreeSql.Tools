@@ -1,4 +1,5 @@
 ﻿using DSkin.DirectUI;
+using DSkin.Forms;
 using FreeSqlTools.Models;
 using Newtonsoft.Json;
 using System;
@@ -16,7 +17,6 @@ namespace FreeSqlTools.Pages
         public string name { get; set; }
         public bool open { get; set; } = false;
         public bool isParent { get; set; } = true;
-
         public List<Ztree> children { get; set; } = new List<Ztree>();
 
     }
@@ -25,26 +25,75 @@ namespace FreeSqlTools.Pages
 
     public class TaskBuild : DSkin.Forms.MiniBlinkPage
     {
+        MiniBlinkCollection<Models.TaskBuild> data;
+
+        public TaskBuild()
+        {
+            var list = Curd.TaskBuild.Select.ToList();
+            Data.AddRange(list);
+        }
+
+        public MiniBlinkCollection<Models.TaskBuild> Data
+        {
+            get
+            {
+                if (data == null)
+                {
+                    data = new MiniBlinkCollection<Models.TaskBuild>(this);
+                }
+                return data;
+            }
+        }
+
+        static Dictionary<string, bool> stateKeyValues = new Dictionary<string, bool>();
+        [JSFunction]
+        public async Task CodeGenerate(string id)
+        {
+            if (stateKeyValues.ContainsKey(id))
+            {
+                InvokeJS("Helper.ui.message.error('当前任务未结束,请稍后再试.');");
+            }
+            else
+            {
+                if (Guid.TryParse(id, out Guid gid) && gid != Guid.Empty)
+                {
+                    stateKeyValues.Add(id, true);
+                    var model = Curd.TaskBuild.Select.WhereDynamic(gid)                        
+                       .LeftJoin(a => a.Templates.Id == a.TemplatesId)
+                       .IncludeMany(a=>a.TaskBuildInfos,b=>b.Include(p=>p.DataBaseConfig))
+                       .ToOne();
+                    var res = await new CodeGenerate().Setup(model);
+                    InvokeJS($"Helper.ui.message.info('[{model.TaskName}]{res}');");                   
+                    stateKeyValues.Remove(id);                    
+                }
+                else
+                {
+                    InvokeJS("Helper.ui.alert.error('生成失败','参数不是有效的.');");
+                }
+
+            }
+        }
+
 
         [JSFunction]
         public string GetDataBaseAll()
         {
             var data = Curd.DataBase.Select
-                .Select(a => new Ztree
+                .ToList(a => new Ztree
                 {
                     id = a.Id,
                     name = a.Name,
                     open = false
-                })
-                .ToList();
+                });
             return JsonConvert.SerializeObject(new { code = 0, data });
         }
+
 
 
         [JSFunction]
         public string GetDataBase(string id, string tableName, int level)
         {
-            
+
             DataBaseConfig model = null;
             try
             {
@@ -62,17 +111,16 @@ namespace FreeSqlTools.Pages
                             {
                                 res = res.Where(a => a.ToUpper() == model.DataBaseName.ToUpper()).ToList();
                             }
-                            data =
-                                res.Select(a => new
+                            data = res.Select(a => new
+                            {
+                                id = gid,
+                                name = a,
+                                children = fsql.DbFirst.GetTablesByDatabase(a).Select(b => new
                                 {
                                     id = gid,
-                                    name = a,
-                                    children = fsql.DbFirst.GetTablesByDatabase(a).Select(b => new
-                                    {
-                                        id = gid,
-                                        name = b.Name
-                                    }).ToList()
-                                }).ToList();
+                                    name = b.Name
+                                }).ToList()
+                            }).ToList();
                         }
                         else
                         {
@@ -89,6 +137,52 @@ namespace FreeSqlTools.Pages
             }
 
 
+        }
+
+        [JSFunction]
+        public string GetTemplate()
+        {
+            var data = Curd.Templates.Select
+               .ToList(a => new { a.Id, a.Title });
+            return JsonConvert.SerializeObject(new { code = 0, data });
+        }
+
+
+        [JSFunction]
+        public string saveTaskBuild(string res)
+        {
+            try
+            {
+                var model = JsonConvert.DeserializeObject<Models.TaskBuild>(res);
+                Curd.fsql.SetDbContextOptions(o => o.EnableAddOrUpdateNavigateList = false);
+                var entity = Curd.TaskBuild.Insert(model);
+                model.TaskBuildInfos.ToList().ForEach(a=>a.TaskBuildId = entity.Id);
+                Curd.TaskBuildInfo.Insert(model.TaskBuildInfos);
+                var list = Curd.TaskBuild.Select.ToList();
+                Data.Clear();
+                Data.AddRange(list);
+                Data.SaveChanges();
+                return JsonConvert.SerializeObject(new { code = 0, msg = "构建任务成功" });
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { code = 1, msg = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// 打开对话框
+        /// </summary>
+        /// <returns></returns>
+        [JSFunction]
+        public string folderBrowserDialog()
+        {
+            var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                return folderBrowserDialog.SelectedPath;
+            }
+            return string.Empty;
         }
     }
 }

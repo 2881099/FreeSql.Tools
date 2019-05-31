@@ -18,20 +18,21 @@ namespace FreeSqlTools.Pages
             fsql = new FreeSql.FreeSqlBuilder()
                     .UseConnectionString(FreeSql.DataType.Sqlite,
                         @"Data Source=|DataDirectory|\freesql.db;Pooling=true;Max Pool Size=10")
-                    .UseAutoSyncStructure(true) //自动同步实体结构到数据库
-                                     .UseMonitorCommand(
-                  //监听SQL命令对象，在执行前
-                  cmd => Trace.WriteLine(cmd.CommandText),
-                 //监听SQL命令对象，在执行后
-                 (cmd, traceLog) => Trace.WriteLine(traceLog))
+                        .UseLazyLoading(true)
+                         .UseAutoSyncStructure(true) //自动同步实体结构到数据库
+                      .UseMonitorCommand(
+                         //监听SQL命令对象，在执行前
+                      cmd => Trace.WriteLine(cmd.CommandText),
+                     //监听SQL命令对象，在执行后
+                     (cmd, traceLog) => Trace.WriteLine(traceLog))
                     .Build();
 
         }
 
         public static GuidRepository<Templates> Templates => fsql.GetGuidRepository<Templates>();
         public static GuidRepository<DataBaseConfig> DataBase  => fsql.GetGuidRepository<DataBaseConfig>();
-        public static GuidRepository<TaskBuild> TaskBuild => fsql.GetGuidRepository<TaskBuild>();
-   
+        public static GuidRepository<Models.TaskBuild> TaskBuild => fsql.GetGuidRepository<Models.TaskBuild>();
+        public static GuidRepository<Models.TaskBuildInfo> TaskBuildInfo => fsql.GetGuidRepository<Models.TaskBuildInfo>();
 
     }
 }

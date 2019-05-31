@@ -63,7 +63,7 @@ namespace FreeSqlTools.Pages
                     entity.ConnectionStrings = $"Data Source={entity.ServerIP},{entity.Port};Initial Catalog={entity.DataBaseName};User ID={entity.UserName};Password={entity.UserPass};Pooling=true;Max Pool Size=5";
                     break;
                 case FreeSql.DataType.PostgreSQL:
-                    entity.ConnectionStrings = $"Host={entity.ServerIP};Port={entity.Port};Username={entity.UserName};Password={entity.UserPass};Database={entity.DataBaseName};Pooling=true;Maximum Pool Size=5";
+                    entity.ConnectionStrings = $"Host={entity.ServerIP};Port={entity.Port};Username={entity.UserName};Password={entity.UserPass};Database={(string.IsNullOrEmpty(entity.DataBaseName) ? "postgres" : entity.DataBaseName)};Pooling=true;Maximum Pool Size=5";
                     break;
                 case FreeSql.DataType.Oracle:
                     entity.ConnectionStrings = $"user id={entity.UserName};password={entity.UserPass};data source=//{entity.ServerIP}:{entity.Port}/{entity.DataBaseName};Pooling=true;Max Pool Size=5";
