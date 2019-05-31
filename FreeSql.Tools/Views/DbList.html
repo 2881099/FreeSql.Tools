@@ -8,8 +8,9 @@
     <link href="css/style.min.css" rel="stylesheet">
     <link href="js/bootstraptable/bootstrap-table.min.css" rel="stylesheet" />
     <link href="js/easyhelper/easyhelper.min.css" rel="stylesheet" />
+    <link href="js/jconfirm/jquery-confirm.min.css" rel="stylesheet" />
     <script src="js/vue.min.js"></script>
-    <script type="text/javascript" src="js/jquery.min.js"></script>  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
@@ -39,12 +40,13 @@
     <script src="js/easyhelper/easyhelper.min.js"></script>
     <script src="js/bootstraptable/bootstrap-table.min.js"></script>
     <script src="js/bootstraptable/bootstrap-table-zh-CN.min.js"></script>
+    <script src="js/jconfirm/jquery-confirm.min.js"></script>
     <script type="text/javascript" src="js/main.min.js"></script>
 
     <script type="text/javascript">
-
+        var departments;
         $(function () {
-            var departments = $('#tb_departments').bootstrapTable({
+            departments = $('#tb_departments').bootstrapTable({
                 classes: 'table table-bordered table-hover table-striped',
                 uniqueId: 'Id',
                 idField: 'Id',             // 每行的唯一标识字段
@@ -70,14 +72,33 @@
                     title: '类型'
                 }, {
                     field: 'operate',
-                    title: '操作',
+                    title: '操作',width:100,
                     formatter: btnGroup,  // 自定义方法
                     events: {
                         'click .edit-btn': function (event, value, row, index) {
-                            editUser(row.id);
+                            $.alert({
+                                content: '不要着急,还没做完', type: 'red',
+                                typeAnimated: false
+                            });
                         },
                         'click .del-btn': function (event, value, row, index) {
-                            delUser(row.id);
+                            $.alert({
+                                title: '嗨!你确定要这样做么',
+                                content: '是否删除当前数据库配置????', type: 'orange',
+                                typeAnimated: false,
+                                buttons: {
+                                    confirm: {
+                                        text: '确认',
+                                        btnClass: 'btn-primary',
+                                        action: function () {
+                                            delDataBase(row.Id);
+                                        }
+                                    },
+                                    cancel: {
+                                        text: '取消'
+                                    }
+                                }
+                            });
                         }
                     }
                 }]

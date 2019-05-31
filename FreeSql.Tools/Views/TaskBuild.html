@@ -10,6 +10,7 @@
     <link href="js/easyhelper/easyhelper.min.css" rel="stylesheet" />
     <link href="js/ztree/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
     <link href="js/bootstraptable/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="js/jconfirm/jquery-confirm.min.css" rel="stylesheet" />
     <script src="js/vue.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -18,7 +19,7 @@
 
 <body>
     <div class="container-fluid p-t-15" id="page">
- 
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -26,7 +27,7 @@
                         <button type="button" data-toggle="modal" data-target=".bs-taskBuld-modal" info>创建任务</button>
                     </div>
                     <div class="card-body">
-                     
+
                         <table id="taskBuild"></table>
                     </div>
                 </div>
@@ -94,7 +95,8 @@
                                                         <input type="text" name="generatePath" class="form-control" placeholder="保存路径...">
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-default" style="height:38px;" type="button" open>
-                                                            <i class="mdi mdi-folder-open"></i> 选择</button>
+                                                                <i class="mdi mdi-folder-open"></i> 选择
+                                                            </button>
                                                         </span>
                                                     </div>
 
@@ -124,12 +126,13 @@
     <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
     <script src="js/ztree/jquery.ztree.all.min.js"></script>
     <script src="js/easyhelper/easyhelper.min.js"></script>
+    <script src="js/jconfirm/jquery-confirm.min.js"></script>
     <script src="js/bootstraptable/bootstrap-table.min.js"></script>
     <script src="js/bootstraptable/bootstrap-table-zh-CN.min.js"></script>
     <script type="text/javascript" src="js/main.min.js"></script>
 
     <script type="text/javascript">
-        var tableTaskBuild,ztree, setting = {
+        var tableTaskBuild, ztree, setting = {
             view: {
                 selectedMulti: true
             },
@@ -204,20 +207,17 @@
                     Helper.ui.dialogError("操作出错", res.msg);
                 }
             });
-            tableTaskBuild =$('#taskBuild').bootstrapTable({
+            tableTaskBuild = $('#taskBuild').bootstrapTable({
                 classes: 'table table-bordered table-hover table-striped',
                 uniqueId: 'Id',
-                idField: 'Id', 
+                idField: 'Id',
                 data: page.Data,
                 columns: [{
                     field: 'TaskName',
                     title: '任务名称'
                 }, {
-                    field: 'DataBaseName',
-                    title: '数据库服务器',
-                }, {
-                    field: 'ServerIP',
-                    title: '生成库',
+                    field: 'SeversName',
+                    title: '数据库节点',
                 }, {
                     field: 'NamespaceName',
                     title: '命名空间'
@@ -229,8 +229,8 @@
                     title: '保存文件'
                 }, {
                     field: 'operate',
-                        title: '操作',
-                    width:140,
+                    title: '操作',
+                    width: 140,
                     formatter: btnGroup,  // 自定义方法
                     events: {
                         'click .edit-btn': function (event, value, row, index) {
@@ -239,15 +239,32 @@
                         'click .task-make': function (event, value, row, index) {
                             Helper.ui.message.success("生成己启动,请耐心等待.");
                             CodeGenerate(row.Id);
-                        },'click .task-delete': function (event, value, row, index) {
-                            
+                        },
+                        'click .task-delete': function (event, value, row, index) {
+                            $.alert({
+                                title: '嗨!你确定要这样做么',
+                                content: '是否删除当前任务????', type: 'orange',
+                                typeAnimated: false,
+                                buttons: {
+                                    confirm: {
+                                        text: '确认',
+                                        btnClass: 'btn-primary',
+                                        action: function () {
+                                            delTaslBuild(row.Id);
+                                        }
+                                    },
+                                    cancel: {
+                                        text: '取消'
+                                    }
+                                }
+                            });
                         }
                     }
                 }]
             });
 
 
-             $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="tooltip"]').tooltip();
         });
 
 
@@ -262,8 +279,9 @@
         });
         $('.bs-taskBuld-modal').on('hide.bs.modal', function () {
             tableTaskBuild.bootstrapTable('load', page.Data);
+            $('[data-toggle="tooltip"]').tooltip();
         });
-            // 操作按钮
+        // 操作按钮
         function btnGroup() {
             return [
                 '<a type="button" class="task-edit btn btn-xs btn-default m-r-5" title="修改" data-toggle="tooltip"><i class="mdi mdi-rename-box"></i></a>',

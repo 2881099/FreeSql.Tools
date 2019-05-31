@@ -33,6 +33,21 @@ namespace FreeSqlTools.Pages
 
 
 
+        [JSFunction]
+        public async Task delDataBase(string id)
+        {
+            if (Guid.TryParse(id, out Guid gid) && gid != Guid.Empty)
+            {
+                Curd.TaskBuildInfo.Delete(a => a.DataBaseConfigId == gid);
+                Curd.DataBase.Delete(gid);
+                var _temp = Data.FirstOrDefault(a => a.Id == gid);
+                Data.Remove(_temp);
+                Data.SaveChanges();
+                InvokeJS("departments.bootstrapTable('load', page.Data);$('[data-toggle=\"tooltip\"]').tooltip();");
+                InvokeJS("Helper.ui.message.success('删除数据库信息成功');");
+                await Task.FromResult(0);
+            }
+        }
 
 
 

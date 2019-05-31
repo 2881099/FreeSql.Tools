@@ -58,13 +58,13 @@ namespace FreeSqlTools.Pages
                 if (Guid.TryParse(id, out Guid gid) && gid != Guid.Empty)
                 {
                     stateKeyValues.Add(id, true);
-                    var model = Curd.TaskBuild.Select.WhereDynamic(gid)                        
+                    var model = Curd.TaskBuild.Select.WhereDynamic(gid)
                        .LeftJoin(a => a.Templates.Id == a.TemplatesId)
-                       .IncludeMany(a=>a.TaskBuildInfos,b=>b.Include(p=>p.DataBaseConfig))
+                       .IncludeMany(a => a.TaskBuildInfos, b => b.Include(p => p.DataBaseConfig))
                        .ToOne();
                     var res = await new CodeGenerate().Setup(model);
-                    InvokeJS($"Helper.ui.message.info('[{model.TaskName}]{res}');");                   
-                    stateKeyValues.Remove(id);                    
+                    InvokeJS($"Helper.ui.message.info('[{model.TaskName}]{res}');");
+                    stateKeyValues.Remove(id);
                 }
                 else
                 {
@@ -73,7 +73,6 @@ namespace FreeSqlTools.Pages
 
             }
         }
-
 
         [JSFunction]
         public string GetDataBaseAll()
@@ -87,8 +86,6 @@ namespace FreeSqlTools.Pages
                 });
             return JsonConvert.SerializeObject(new { code = 0, data });
         }
-
-
 
         [JSFunction]
         public string GetDataBase(string id, string tableName, int level)
@@ -144,9 +141,26 @@ namespace FreeSqlTools.Pages
         {
             var data = Curd.Templates.Select
                .ToList(a => new { a.Id, a.Title });
+
             return JsonConvert.SerializeObject(new { code = 0, data });
         }
 
+
+        [JSFunction]
+        public async Task delTaslBuild(string id)
+        {
+            if (Guid.TryParse(id, out Guid gid) && gid != Guid.Empty)
+            {
+                Curd.TaskBuildInfo.Delete(a => a.TaskBuildId == gid);
+                Curd.TaskBuild.Delete(gid);
+                var _temp = Data.FirstOrDefault(a => a.Id == gid);
+                Data.Remove(_temp);
+                Data.SaveChanges();
+                InvokeJS("tableTaskBuild.bootstrapTable('load', page.Data);$('[data-toggle=\"tooltip\"]').tooltip();");
+                InvokeJS("Helper.ui.message.success('删除任务成功');");
+                await Task.FromResult(0);
+            }
+        }
 
         [JSFunction]
         public string saveTaskBuild(string res)
@@ -156,7 +170,7 @@ namespace FreeSqlTools.Pages
                 var model = JsonConvert.DeserializeObject<Models.TaskBuild>(res);
                 Curd.fsql.SetDbContextOptions(o => o.EnableAddOrUpdateNavigateList = false);
                 var entity = Curd.TaskBuild.Insert(model);
-                model.TaskBuildInfos.ToList().ForEach(a=>a.TaskBuildId = entity.Id);
+                model.TaskBuildInfos.ToList().ForEach(a => a.TaskBuildId = entity.Id);
                 Curd.TaskBuildInfo.Insert(model.TaskBuildInfos);
                 var list = Curd.TaskBuild.Select.ToList();
                 Data.Clear();
