@@ -57,6 +57,7 @@ namespace FreeSqlTools.Pages
         {
             Data.Clear();
 
+
             var entity = new DataBaseConfig
             {
                 DataBaseName = jsValue.Get("dataBaseName").ToString(),
@@ -68,23 +69,34 @@ namespace FreeSqlTools.Pages
                 DataType = (FreeSql.DataType)jsValue.Get("dataType").ToInt()
             };
 
-            #region 配置数据库连接串
-            switch (entity.DataType)
+
+
+            if(jsValue.Get("custom").ToString() != "1")
             {
-                case FreeSql.DataType.MySql:
-                    entity.ConnectionStrings = $"Data Source={entity.ServerIP};Port={entity.Port};User ID={entity.UserName};Password={entity.UserPass};Initial Catalog={(string.IsNullOrEmpty(entity.DataBaseName) ? "mysql" : entity.DataBaseName)};Charset=utf8;SslMode=none;Max pool size=5";
-                    break;
-                case FreeSql.DataType.SqlServer:
-                    entity.ConnectionStrings = $"Data Source={entity.ServerIP},{entity.Port};Initial Catalog={entity.DataBaseName};User ID={entity.UserName};Password={entity.UserPass};Pooling=true;Max Pool Size=5";
-                    break;
-                case FreeSql.DataType.PostgreSQL:
-                    entity.ConnectionStrings = $"Host={entity.ServerIP};Port={entity.Port};Username={entity.UserName};Password={entity.UserPass};Database={(string.IsNullOrEmpty(entity.DataBaseName) ? "postgres" : entity.DataBaseName)};Pooling=true;Maximum Pool Size=5";
-                    break;
-                case FreeSql.DataType.Oracle:
-                    entity.ConnectionStrings = $"user id={entity.UserName};password={entity.UserPass};data source=//{entity.ServerIP}:{entity.Port}/{entity.DataBaseName};Pooling=true;Max Pool Size=5";
-                    break;
+                #region 配置数据库连接串
+                switch (entity.DataType)
+                {
+                    case FreeSql.DataType.MySql:
+                        entity.ConnectionStrings = $"Data Source={entity.ServerIP};Port={entity.Port};User ID={entity.UserName};Password={entity.UserPass};Initial Catalog={(string.IsNullOrEmpty(entity.DataBaseName) ? "mysql" : entity.DataBaseName)};Charset=utf8;SslMode=none;Max pool size=5";
+                        break;
+                    case FreeSql.DataType.SqlServer:
+                        entity.ConnectionStrings = $"Data Source={entity.ServerIP},{entity.Port};Initial Catalog={entity.DataBaseName};User ID={entity.UserName};Password={entity.UserPass};Pooling=true;Max Pool Size=5";
+                        break;
+                    case FreeSql.DataType.PostgreSQL:
+                        entity.ConnectionStrings = $"Host={entity.ServerIP};Port={entity.Port};Username={entity.UserName};Password={entity.UserPass};Database={(string.IsNullOrEmpty(entity.DataBaseName) ? "postgres" : entity.DataBaseName)};Pooling=true;Maximum Pool Size=5";
+                        break;
+                    case FreeSql.DataType.Oracle:
+                        entity.ConnectionStrings = $"user id={entity.UserName};password={entity.UserPass};data source=//{entity.ServerIP}:{entity.Port}/{entity.DataBaseName};Pooling=true;Max Pool Size=5";
+                        break;
+                }
+                #endregion
             }
-            #endregion
+            else
+            {
+                entity.ConnectionStrings = jsValue.Get("connectionStrings").ToString();
+            }
+
+
 
             var id = jsValue.Get("id").ToString();
             if (Guid.TryParse(id, out Guid vid) && vid != Guid.Empty)

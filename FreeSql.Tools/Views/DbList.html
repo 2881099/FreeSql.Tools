@@ -72,7 +72,7 @@
                     title: '类型'
                 }, {
                     field: 'operate',
-                    title: '操作',width:100,
+                    title: '操作', width: 100,
                     formatter: btnGroup,  // 自定义方法
                     events: {
                         'click .edit-btn': function (event, value, row, index) {
@@ -105,10 +105,23 @@
             });
             $('[data-toggle="tooltip"]').tooltip();
             $('#toolbar #btn_add').on('click', function () {
+                var isCustom = false;
                 var dialog = Helper.ui.dialog({
                     title: "添加数据库连接",
-                    content: `<div class="row dialog-container"><form class="form-horizontal" action="!#" onsubmit="return false;"><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">连接名称</label><div class="col-md-8"><input class="form-control" type="text" name="name" placeholder="连接名称.."></div></div></div><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">数据库类型</label><div class="col-md-5"><select class="form-control" name="DataType" size="1"><option value="0">MySql</option><option value="2">PgSql</option><option value="1">SqlServer</option><option value="3">Oracle</option></select></div></div></div><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">服务器地址</label><div class="col-md-6"><input class="form-control" type="text" name="serverIP" placeholder="服务器地址.."></div><div class="col-md-3" style="margin-left:-20px"><input class="form-control" type="text" name="port" placeholder="端口号" style="width:71px;" /></div></div></div><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">数据库名称</label><div class="col-md-6"><input class="form-control" type="text" name="dataBaseName" placeholder="数据库名称.."></div><div class="col-md-3" style="margin-left:-20px"><label class="lyear-checkbox checkbox-inline checkbox-primary"><input type="checkbox" name="isIgnore" value="1"><span>不指定</span></label></div></div></div><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">数据库用户</label><div class="col-md-8"><input class="form-control" type="text" name="userName" placeholder="数据库用户.."></div></div></div><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">数据库密码</label><div class="col-md-8"><input class="form-control" type="text" name="userPass" placeholder="数据库密码.."></div></div></div></form></div>`,
+                    content: `<div class="row dialog-container"><form class="form-horizontal" action="!#" onsubmit="return false;"><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">连接名称</label><div class="col-md-8"><input class="form-control" type="text" name="name" placeholder="连接名称.."></div></div></div><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">数据库类型</label><div class="col-md-5"><select class="form-control" name="DataType" size="1"><option value="0">MySql</option><option value="2">PgSql</option><option value="1">SqlServer</option><option value="3">Oracle</option></select></div><div class="col-md-3" style="margin-left:-20px"><label class="lyear-checkbox checkbox-inline checkbox-primary"><input type="checkbox" id="custom" name="custom" value="1"><span>自定义串</span></label></div></div></div><div class="custom" style="display:none"><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">连接串</label><div class="col-md-9"><textarea style="height:100px" name="connectionStrings" class="form-control"></textarea></div></div></div></div><div class="delfaule"><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">服务器地址</label><div class="col-md-6"><input class="form-control" type="text" name="serverIP" placeholder="服务器地址.."></div><div class="col-md-3" style="margin-left:-20px"><input class="form-control" type="text" name="port" placeholder="端口号" style="width:71px;" /></div></div></div><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">数据库名称</label><div class="col-md-6"><input class="form-control" type="text" name="dataBaseName" placeholder="数据库名称.."></div><div class="col-md-3" style="margin-left:-20px"><label class="lyear-checkbox checkbox-inline checkbox-primary"><input type="checkbox" name="isIgnore" value="1"><span>不指定</span></label></div></div></div><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">数据库用户</label><div class="col-md-8"><input class="form-control" type="text" name="userName" placeholder="数据库用户.."></div></div></div><div class="col-md-12"><div class="form-group"><label class="col-md-3 control-label" for="example-hf-email">数据库密码</label><div class="col-md-8"><input class="form-control" type="text" name="userPass" placeholder="数据库密码.."></div></div></div></div></form></div>`,
                     buttonNoClose: [true, false],
+                    afterOpen: function () {
+                        $('input[name="custom"]').on('click', function () {
+                            isCustom = $(this).prop('checked');
+                            if (isCustom) {
+                                $('.custom').show();
+                                $('.delfaule').hide();
+                            } else {
+                                $('.custom').hide();
+                                $('.delfaule').show();
+                            }
+                        });
+                    },
                     yes: {
                         callback: function () {
                             var obj = $('.dialog-container form').formToJson();
@@ -118,36 +131,44 @@
                                 Helper.ui.message.error("连接名称不能为空", {});
                                 $('input[name="name"]').focus(); return;
                             }
-                            if (obj.serverIP === "") {
-                                Helper.ui.message.error("服务器地址不能为空", {});
-                                $('input[name="serverIP"]').focus(); return;
-                            }
-                            if (obj.port === "") {
-                                Helper.ui.message.error("端口号不能为空", {});
-                                $('input[name="port"]').focus(); return;
-                            }
-                            if (!rex.test(obj.port)) {
-                                Helper.ui.message.error("端口号只能为整数字", {});
-                                $('input[name="port"]').val('').focus();
-                                return;
-                            }
-                            if (typeof obj.isIgnore !== 'string' && obj.dataBaseName === '') {
-                                Helper.ui.message.error("数据库名称不能为空", {});
-                                $('input[name="dataBaseName"]').focus();
-                                return;
-                            }
-                            if (obj.userName === "") {
-                                Helper.ui.message.error("用户名不能为空", {});
-                                $('input[name="userName"]').focus(); return;
-                            }
-                            if (obj.userPass === "") {
-                                Helper.ui.message.error("用户密码不能为空", {});
-                                $('input[name="userPass"]').focus(); return;
+                            if (!isCustom) {
+                                if (obj.serverIP === "") {
+                                    Helper.ui.message.error("服务器地址不能为空", {});
+                                    $('input[name="serverIP"]').focus(); return;
+                                }
+                                if (obj.port === "") {
+                                    Helper.ui.message.error("端口号不能为空", {});
+                                    $('input[name="port"]').focus(); return;
+                                }
+                                if (!rex.test(obj.port)) {
+                                    Helper.ui.message.error("端口号只能为整数字", {});
+                                    $('input[name="port"]').val('').focus();
+                                    return;
+                                }
+                                if (typeof obj.isIgnore !== 'string' && obj.dataBaseName === '') {
+                                    Helper.ui.message.error("数据库名称不能为空", {});
+                                    $('input[name="dataBaseName"]').focus();
+                                    return;
+                                }
+                                if (obj.userName === "") {
+                                    Helper.ui.message.error("用户名不能为空", {});
+                                    $('input[name="userName"]').focus(); return;
+                                }
+                                if (obj.userPass === "") {
+                                    Helper.ui.message.error("用户密码不能为空", {});
+                                    $('input[name="userPass"]').focus(); return;
+                                }
+                            } else {
+
+                                if (obj.connectionStrings === "") {
+                                    Helper.ui.message.error("自定义数据库连接串不能为空");
+                                    $('textarea[name="connectionStrings"]').focus(); return;
+                                }
                             }
                             Helper.ui.loading(".helper-dialog-wrapper", { text: "请稍后...." });
                             UpdateRow(obj);
                             Helper.ui.removeLoading(".helper-dialog-wrapper");
-                            Helper.ui.message.success("增加成功", {});
+                            Helper.ui.message.success("增加成功");
                             departments.bootstrapTable('load', page.Data);
                             Helper.ui.removeDialog();
 
