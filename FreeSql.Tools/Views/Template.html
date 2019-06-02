@@ -86,15 +86,16 @@
                     title: '操作',
                     formatter: btnGroup,  // 自定义方法
                     events: {
-                        'click .temp-add': function (event, value, row, index) {
+                        'click .temp-edit': function (event, value, row, index) {
                             parent.$(parent.document).data('multitabs').create({
                                 iframe: true,
-                                title: '编辑内容',
-                                url: `editCode.html?id=${row.Id}&t=${new Date()}`
+                                title: row.Title,
+                                url: `editCode.html?id=${row.Id}`
                             }, true);
                         },
-                        'click .del-btn': function (event, value, row, index) {
-                            delUser(row.id);
+                        'click .temp-cloud': function (event, value, row, index) {
+
+                            Helper.ui.message.success("功能开发中");
                         }
                     }
                 }]
@@ -105,10 +106,9 @@
 
         // 操作按钮
         function btnGroup() {
-            return [
-                '<a type="button" class="temp-add btn btn-xs btn-default m-r-5" title="编辑代码" data-toggle="tooltip"><i class="mdi mdi-plus"></i></a>',
-                '<a type="button" class="temp-edit btn btn-xs btn-default m-r-5" title="修改" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>',
-                '<a type="button" class="temp-delete btn btn-xs btn-default" title="上传到云端" data-toggle="tooltip"><i class="mdi mdi-cloud-upload"></i></a>'
+            return [         
+                '<a type="button" class="temp-edit btn btn-xs btn-default m-r-5" title="编辑代码" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>',
+                '<a type="button" class="temp-cloud btn btn-xs btn-default" title="上传到云端" data-toggle="tooltip"><i class="mdi mdi-cloud-upload"></i></a>'
             ].join('');
         }
     </script>
