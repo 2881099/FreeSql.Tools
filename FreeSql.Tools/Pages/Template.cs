@@ -34,6 +34,8 @@ namespace FreeSqlTools.Pages
             }
         }
 
+
+
         [JSFunction]
         public async Task delTemplate(string id)
         {

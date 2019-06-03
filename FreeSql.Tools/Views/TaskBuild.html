@@ -25,6 +25,7 @@
                 <div class="card">
                     <div class="card-header">
                         <button type="button" data-toggle="modal" data-target=".bs-taskBuld-modal" info>创建任务</button>
+                        <button type="button" success>批量生成</button>
                     </div>
                     <div class="card-body">
 
@@ -163,7 +164,7 @@
                 var path = folderBrowserDialog();
                 $('input[name="generatePath"]').val(path);
             });
-            $('button[success]').on('click', function () {
+            $('.modal-footer button[success]').on('click', function () {
                 var ck = ztree.getCheckedNodes(true);
                 var infos = [];
                 if (ck.length <= 1) {
@@ -221,6 +222,8 @@
                 idField: 'Id',
                 data: page.Data,
                 columns: [{
+                    checkbox: true 
+                },{
                     field: 'TaskName',
                     title: '任务名称'
                 }, {
@@ -270,8 +273,6 @@
                     }
                 }]
             });
-
-
             $('[data-toggle="tooltip"]').tooltip();
         });
 
