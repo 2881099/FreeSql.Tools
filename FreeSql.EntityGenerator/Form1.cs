@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -290,6 +291,12 @@ namespace FreeSql.EntityGenerator {
 
 		private void buttonBuild_Click(object sender, EventArgs e) {
 
+			var dir = this.comboBoxOutputDirectory.Text.Trim();
+			if (Directory.Exists(dir) == false) {
+				MessageBox.Show("目录 " + dir + " 不存在", "FreeSql", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
 			var config = new TemplateServiceConfiguration();
 			config.EncodedStringFactory = new RawStringFactory();
 			var service = RazorEngineService.Create(config);
@@ -297,7 +304,9 @@ namespace FreeSql.EntityGenerator {
 			Engine.Razor = service;
 
 			foreach (var table in _tables) {
-				var content = Engine.Razor.RunCompile(@"@using FreeSql.DatabaseModel;@{
+				var content = Engine.Razor.RunCompile(
+				#region 模板
+					@"@using FreeSql.DatabaseModel;@{
 
 	var model = Model as RazorModel;
 
@@ -311,7 +320,7 @@ namespace FreeSql.EntityGenerator {
 		return fsql.DbFirst.GetCsType(cola3);
 	};
 
-	var tableName = string.IsNullOrEmpty(table.Schema) ? table.Schema + ""."" : """";
+	var tableName = string.IsNullOrEmpty(table.Schema) ? (table.Schema + ""."") : """";
 	tableName += table.Name;
 
 	Func<string> GetTableAttribute = () => {
@@ -381,7 +390,6 @@ switch (fsql.Ado.DataType) {
 		break;
 }
 }
-
 namespace test.Model {
 
 @if (string.IsNullOrEmpty(table.Comment) == false) {
@@ -404,13 +412,20 @@ namespace test.Model {
 @:
 	}
 	}
-}", Guid.NewGuid().ToString("N"), null, new RazorModel {
+}"
+				#endregion
+, Guid.NewGuid().ToString("N"), null, new RazorModel {
 					fsql = fsql,
 					tables = _tables.Select(a => a.Schema).ToList(),
 					GetEntityName = GetCsEntityName,
 					GetPropertyName = GetCsPropertyName,
 					table = table.Schema
 				});
+
+				var tableName = string.IsNullOrEmpty(table.Schema.Schema) ? (table.Schema.Schema + ".") : "";
+				tableName += table.Schema.Name;
+
+				File.WriteAllText($"{dir}/{GetCsEntityName(tableName)}.cs", content, System.Text.Encoding.UTF8);
 			}
 		}
 	}
