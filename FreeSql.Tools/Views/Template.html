@@ -34,23 +34,24 @@
 
 
 
- 
+
     <script type="text/javascript" src="js/bootstraptable/bootstrap-table.js"></script>
     <script type="text/javascript" src="js/bootstraptable/bootstrap-table-zh-CN.min.js"></script>
     <script src="js/easyhelper/easyhelper.min.js"></script>
     <script type="text/javascript" src="js/main.min.js"></script>
 
     <script type="text/javascript">
+        var departments;
         $(function () {
             $('button[info]').on('click', function () {
                 Helper.ui.dialog({
                     title: "添加模版", buttonNoClose: [true, false],
                     content: `<div class="form-group has-info">
-                                                              <label class="col-xs-12" for="example-text-input-info">模版名称</label>
-                                                              <div class="col-xs-12">
-                                                                <input class="form-control" type="text" name="templatesName" placeholder="模版名称..">
-                                                              </div>
-                                                            </div> `, yes: {
+                                                                  <label class="col-xs-12" for="example-text-input-info">模版名称</label>
+                                                                  <div class="col-xs-12">
+                                                                    <input class="form-control" type="text" name="templatesName" placeholder="模版名称..">
+                                                                  </div>
+                                                                </div> `, yes: {
                         callback: function () {
                             var value = $('input[name="templatesName"]').val();
                             if (value === '') {
@@ -63,11 +64,12 @@
                             Helper.ui.message.success("增加成功", {});
                             departments.bootstrapTable('load', page.Data);
                             Helper.ui.removeDialog();
+                            $('[data-toggle="tooltip"]').tooltip();
                         }
                     }
                 });
             })
-            var departments = $('#tb_departments').bootstrapTable({
+            departments = $('#tb_departments').bootstrapTable({
                 classes: 'table table-bordered table-hover table-striped',
                 uniqueId: 'Id',
                 idField: 'Id',             // 每行的唯一标识字段
@@ -83,7 +85,8 @@
                     title: '修改时间',
                 }, {
                     field: 'operate',
-                    title: '操作',
+                        title: '操作',
+                    width:220,
                     formatter: btnGroup,  // 自定义方法
                     events: {
                         'click .temp-edit': function (event, value, row, index) {
@@ -92,6 +95,9 @@
                                 title: row.Title,
                                 url: `editCode.html?id=${row.Id}`
                             }, true);
+                        },
+                        'click .temp-delete': function (event, value, row, index) {
+                            delTemplate(row.Id);
                         },
                         'click .temp-cloud': function (event, value, row, index) {
 
@@ -106,9 +112,10 @@
 
         // 操作按钮
         function btnGroup() {
-            return [         
-                '<a type="button" class="temp-edit btn btn-xs btn-default m-r-5" title="编辑代码" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>',
-                '<a type="button" class="temp-cloud btn btn-xs btn-default" title="上传到云端" data-toggle="tooltip"><i class="mdi mdi-cloud-upload"></i></a>'
+            return [
+                '<a type="button" class="temp-edit btn btn-xs btn-info m-r-5" title="编辑代码" data-toggle="tooltip"><i class="mdi mdi-pencil"></i>编辑</a>',
+                '<a type="button" class="temp-delete btn btn-xs btn-danger" title="删除" data-toggle="tooltip"><i class="mdi mdi-cloud-upload"></i>删除</a> ',
+                '<a type="button" class="temp-cloud btn btn-xs btn-primary" title="上传到云端" data-toggle="tooltip"><i class="mdi mdi-cloud-upload"></i>上传</a>'
             ].join('');
         }
     </script>
