@@ -4,7 +4,7 @@
 
 > 作者：[mypeng1985](https://github.com/mypeng1985)
 
-![image](https://user-images.githubusercontent.com/16286519/58792449-c5fbbf00-8626-11e9-9a62-9820117a2ed5.png)
+![image](https://user-images.githubusercontent.com/16286519/58793525-e0cf3300-8628-11e9-8959-d2efed685843.png)
 
 # 普通版：实体生成器
 
