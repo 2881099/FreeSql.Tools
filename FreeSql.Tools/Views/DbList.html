@@ -72,7 +72,7 @@
                     title: '类型'
                 }, {
                     field: 'operate',
-                    title: '操作', width: 100,
+                    title: '操作', width: 150,
                     formatter: btnGroup,  // 自定义方法
                     events: {
                         'click .edit-btn': function (event, value, row, index) {
@@ -171,7 +171,7 @@
                             Helper.ui.message.success("增加成功");
                             departments.bootstrapTable('load', page.Data);
                             Helper.ui.removeDialog();
-
+                            $('[data-toggle="tooltip"]').tooltip();
                         }
                     }
                 });
@@ -182,8 +182,8 @@
         // 操作按钮
         function btnGroup() {
             let html =
-                '<a href="#!" class="btn btn-xs btn-default m-r-5 edit-btn" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>' +
-                '<a href="#!" class="btn btn-xs btn-default del-btn" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>';
+                '<a href="#!" class="btn btn-xs btn-info m-r-5 edit-btn" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i>编辑</a>' +
+                '<a href="#!" class="btn btn-xs btn btn-danger del-btn" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i>删除</a>';
             return html;
         }
     </script>

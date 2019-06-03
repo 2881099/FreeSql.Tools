@@ -19,7 +19,7 @@
 
 <body>
     <div class="container-fluid p-t-15" id="page">
-       
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -181,6 +181,14 @@
                     $('input[name="taskName"]').focus();
                     return;
                 }
+
+
+                if (!jsonResult["templatesId"] ||  jsonResult["templatesId"] === '') {
+
+                    Helper.ui.message.error("请选择或添加一个有效的实体模版");
+                    return;
+                }
+
                 if (jsonResult['namespaceName'] === '') {
                     Helper.ui.message.error("命名空间不能为空");
                     $('input[name="namespaceName"]').focus();
@@ -230,7 +238,7 @@
                 }, {
                     field: 'operate',
                     title: '操作',
-                    width: 140,
+                    width: 210,
                     formatter: btnGroup,  // 自定义方法
                     events: {
                         'click .edit-btn': function (event, value, row, index) {
@@ -284,9 +292,9 @@
         // 操作按钮
         function btnGroup() {
             return [
-                '<a type="button" class="task-edit btn btn-xs btn-default m-r-5" title="修改" data-toggle="tooltip"><i class="mdi mdi-rename-box"></i></a>',
-                '<a type="button" class="task-make btn btn-xs btn-default m-r-5" title="生成" data-toggle="tooltip"><i class="mdi mdi-rocket"></i></a>',
-                '<a type="button" class="task-delete btn btn-xs btn-default" title="删除" data-toggle="tooltip"><i class="mdi mdi-bitbucket"></i></a>'
+                '<a type="button" class="task-edit btn btn-xs btn-info m-r-5" title="修改" data-toggle="tooltip"><i class="mdi mdi-rename-box"></i>修改</a>',
+                '<a type="button" class="task-make btn btn-xs btn-primary m-r-5" title="生成" data-toggle="tooltip"><i class="mdi mdi-rocket"></i>生成</a>',
+                '<a type="button" class="task-delete btn btn-xs btn-danger" title="删除" data-toggle="tooltip"><i class="mdi mdi-bitbucket"></i>删除</a>'
             ].join('');
         }
     </script>
