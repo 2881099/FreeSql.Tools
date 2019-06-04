@@ -1,6 +1,7 @@
 ﻿using DSkin.DirectUI;
 using DSkin.Forms;
 using FreeSqlTools.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,25 +54,14 @@ namespace FreeSqlTools.Pages
 
 
         [JSFunction]
-        public void UpdateRow(JsValue jsValue)
+        public void UpdateRow(string jsonStr)
         {
             Data.Clear();
 
+            var entity =JsonConvert.DeserializeObject<DataBaseConfig>(jsonStr);
+       
 
-            var entity = new DataBaseConfig
-            {
-                DataBaseName = jsValue.Get("dataBaseName").ToString(),
-                Name = jsValue.Get("name").ToString(),
-                ServerIP = jsValue.Get("serverIP").ToString(),
-                UserName = jsValue.Get("userName").ToString(),
-                UserPass = jsValue.Get("userPass").ToString(),
-                Port = jsValue.Get("port").ToInt(),
-                DataType = (FreeSql.DataType)jsValue.Get("dataType").ToInt()
-            };
-
-
-
-            if(jsValue.Get("custom").ToString() != "1")
+            if(string.IsNullOrEmpty(entity.ConnectionStrings))
             {
                 #region 配置数据库连接串
                 switch (entity.DataType)
@@ -90,19 +80,7 @@ namespace FreeSqlTools.Pages
                         break;
                 }
                 #endregion
-            }
-            else
-            {
-                entity.ConnectionStrings = jsValue.Get("connectionStrings").ToString();
-            }
-
-
-
-            var id = jsValue.Get("id").ToString();
-            if (Guid.TryParse(id, out Guid vid) && vid != Guid.Empty)
-            {
-                entity.Id = vid;
-            }
+            }      
 
             Curd.DataBase.InsertOrUpdate(entity);
             var _list = Curd.DataBase.Select.ToList();

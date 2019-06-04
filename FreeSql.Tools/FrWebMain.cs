@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace FreeSqlTools
+﻿namespace FreeSqlTools
 {
     public partial class FrWebMain : DSkin.Forms.MiniBlinkForm
     {
@@ -18,10 +8,7 @@ namespace FreeSqlTools
             InitializeComponent();
             Width = (int) (1366 * ZoomFactor);
             Height = (int) (768 * ZoomFactor);
-
             InnerDuiControl.Borders.AllWidth = 5;
-
-       
         }
 }
 }
