@@ -28,7 +28,7 @@ Func<DbForeignInfo, string> GetFkObjectNameOutside = fkx => {
 	if (fkretname.EndsWith(fkx.ReferencedColumns[0].Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(0, fkretname.Length - fkx.ReferencedColumns[0].Name.Length).TrimEnd('_');
 	if (fkretname.EndsWith(fkx.ReferencedTable.Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(0, fkretname.Length - fkx.ReferencedTable.Name.Length).TrimEnd('_');
 	if (fkretname.StartsWith(fkx.ReferencedTable.Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(fkx.ReferencedTable.Name.Length).TrimStart('_');
-	return "Obj_" + fkx.Table.Name + (string.IsNullOrEmpty(fkretname) ? "" : ("_" + fkretname));
+	return "Many" + fkx.Table.Name + (string.IsNullOrEmpty(fkretname) ? "" : ("_" + fkretname)) + "s";
 };
 }@{
 switch (gen.fsql.Ado.DataType) {
@@ -119,6 +119,37 @@ namespace @gen.NameSpace {
 @:
 		@:[Navigate("@string.Join(", ", fk.Columns.Select(a => gen.GetCsName(a.Name)))")]
 		@:public@(isLazying ? " virtual" : "") List<@gen.GetCsName(fkTableName)> @GetFkObjectNameOutside(fk) { get; set; }
+		}
+	}
+@:
+		@:#endregion
+}
+@if (isManyToMany) {
+@:
+		@:#region 外键 => 导航属性，ManyToMany
+	foreach (var ft in gen.tables) {
+		if (ft != gen.table) {
+			var ftfks = ft.Foreigns.Where(ftfk => ftfk.Columns.Where(ftfkcol => ftfkcol.IsPrimary == false).Any() == false).ToArray();
+			if (ftfks.Length == 2) {
+				var fk1 = ftfks.Where(ftfk => (ftfk.ReferencedTable.Schema + "." + ftfk.ReferencedTable.Name).Trim('.') == gen.FullTableName).ToArray();
+				if (fk1.Length == 1) {
+					var fk2 = ftfks.Where(ftfk => fk1.Contains(ftfk) == false).ToArray();
+
+					var midft = ft;
+					var leftft = gen.table;
+					DbTableInfo rightft = null;
+					if (fk2.Any()) {
+						rightft = fk2[0].ReferencedTable;
+					} else {
+						rightft = fk1[1].ReferencedTable;
+					}
+
+					var fkTableName = (rightft.Schema + "." + rightft.Name).Trim('.');
+					var csname = rightft.Name;
+@:
+		@:public@(isLazying ? " virtual" : "") List<@gen.GetCsName(fkTableName)> Obj_@gen.GetCsName(csname)s { get; set; }
+				}
+			}
 		}
 	}
 @:
