@@ -113,7 +113,7 @@ namespace FreeSqlTools.Pages
                  });
 
                 Process.Start(paths);
-                return "全部任务生成完成";
+                return "生成成功";
             }
             catch (Exception ex)
             {

@@ -184,7 +184,7 @@
                 }
 
 
-                if (!jsonResult["templatesId"] ||  jsonResult["templatesId"] === '') {
+                if (!jsonResult["templatesId"] || jsonResult["templatesId"] === '') {
 
                     Helper.ui.message.error("请选择或添加一个有效的实体模版");
                     return;
@@ -222,8 +222,8 @@
                 idField: 'Id',
                 data: page.Data,
                 columns: [{
-                    checkbox: true 
-                },{
+                    checkbox: true
+                }, {
                     field: 'TaskName',
                     title: '任务名称'
                 }, {
@@ -273,8 +273,38 @@
                     }
                 }]
             });
+
+
+            $('.card-header button[success]').on('click', function () {
+                var cks = tableTaskBuild.bootstrapTable('getSelections');
+                if (cks.length <= 0) {
+                    Helper.ui.dialogError('操作提示', '请至少选择一项任务进行生成操作.');
+                    return;
+                }
+                var ids = [];
+                $.map(cks, (v, i) => {
+                    ids.push(v.Id);
+                });
+
+                Helper.ui.dialog({
+                    title: "批量生成提示",
+                    buttonNoClose: [true, false],
+                    content: `如要开始批量操作,请点击确定按钮`, no: {
+                        text: "取消"
+                    }, yes: {
+                        callback: function () {
+                            Helper.ui.loading(".helper-dialog-wrapper", {
+                                text: "正在努力生成中....."
+                            });
+                            CodeGenerates(JSON.stringify(ids));
+                        }
+                    }
+                });
+
+            });
             $('[data-toggle="tooltip"]').tooltip();
         });
+
 
 
         $('.bs-taskBuld-modal').on('shown.bs.modal', function () {

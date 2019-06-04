@@ -74,6 +74,38 @@ namespace FreeSqlTools.Pages
             }
         }
 
+
+        [JSFunction]
+        public async Task CodeGenerates(string jsonStr)
+        {
+
+            var ids =  Newtonsoft.Json.JsonConvert.DeserializeObject<string[]>(jsonStr);       
+            foreach(var id in ids)
+            {              
+                if (Guid.TryParse(id, out Guid gid) && gid != Guid.Empty)
+                {                 
+                    var model = Curd.TaskBuild.Select.WhereDynamic(gid)
+                       .LeftJoin(a => a.Templates.Id == a.TemplatesId)
+                       .IncludeMany(a => a.TaskBuildInfos, b => b.Include(p => p.DataBaseConfig))
+                       .ToOne();
+                    InvokeJS($"$('.helper-loading-text').text('正在生成[{model.TaskName}]请稍后....')");
+                    await Task.Delay(500);
+                    var res = await new CodeGenerate().Setup(model);                                       
+                    InvokeJS($"$('.helper-loading-text').text('[{model.TaskName}]{res}')");
+                    if(res.Contains("发生异常")) await Task.Delay(3000);
+
+                }
+                else
+                {
+                    InvokeJS("Helper.ui.alert.error('生成失败','参数不是有效的.');");
+                }
+            }
+            await Task.FromResult(0);
+            InvokeJS("Helper.ui.removeDialog();");
+           
+            
+        }
+
         [JSFunction]
         public string GetDataBaseAll()
         {
@@ -144,6 +176,8 @@ namespace FreeSqlTools.Pages
 
             return JsonConvert.SerializeObject(new { code = 0, data });
         }
+
+
 
 
         [JSFunction]
