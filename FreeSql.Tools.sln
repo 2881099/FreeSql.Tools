@@ -14,6 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeSqlTools", "FreeSql.Too
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RazorTemplates", "RazorTemplates", "{E03A31B7-65EF-494A-AA6F-4C26ACE74B2F}"
 	ProjectSection(SolutionItems) = preProject
+		RazorTemplates\实体类+特性+导航属性.cshtml = RazorTemplates\实体类+特性+导航属性.cshtml
 		RazorTemplates\实体类+特性.cshtml = RazorTemplates\实体类+特性.cshtml
 	EndProjectSection
 EndProject

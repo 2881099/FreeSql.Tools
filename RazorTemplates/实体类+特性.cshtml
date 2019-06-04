@@ -46,7 +46,7 @@ namespace @gen.NameSpace {
 	[JsonObject(MemberSerialization.OptIn)@GetAttributeString(gen.GetTableAttribute())]
 	public class @gen.GetCsName(gen.FullTableName) {
 
-	@foreach (var col in gen.Columns) {
+	@foreach (var col in gen.columns) {
 
 		if (string.IsNullOrEmpty(col.Coment) == false) {
 		@:/// <summary>
@@ -57,5 +57,6 @@ namespace @gen.NameSpace {
 		@:public @gen.GetCsType(col) @gen.GetCsName(col.Name) { get; set; }
 @:
 	}
-	}@gen.GetMySqlEnumSetDefine()
+	}
+@gen.GetMySqlEnumSetDefine()
 }

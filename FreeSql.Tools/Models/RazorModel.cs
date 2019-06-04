@@ -8,16 +8,18 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 public class RazorModel {
-	public RazorModel(IFreeSql fsql, TaskBuild task, DbTableInfo table) {
+	public RazorModel(IFreeSql fsql, TaskBuild task, List<DbTableInfo> tables, DbTableInfo table) {
 		this.fsql = fsql;
 		this.task = task;
+		this.tables = tables;
 		this.table = table;
 	}
 
 	public IFreeSql fsql { get; set; }
 	public TaskBuild task { get; set; }
-	public List<DbColumnInfo> Columns => this.table.Columns;
+	public  List<DbTableInfo> tables { get; set; }
 	public DbTableInfo table { get; set; }
+	public List<DbColumnInfo> columns => this.table.Columns;
 	public string NameSpace => task.NamespaceName;
 	public string FullTableName => $"{table.Schema}.{table.Name}".TrimStart('.');
 
@@ -138,4 +140,5 @@ Unknow{1}", str2.Replace("\"", "\\\""), ++unknow_idx);
 	}
 	#endregion
 }
+
 

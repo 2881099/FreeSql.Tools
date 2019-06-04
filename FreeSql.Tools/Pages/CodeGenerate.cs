@@ -68,24 +68,28 @@ namespace FreeSqlTools.Pages
 
                              //取指定数据库信息
                              var tables = fsql.DbFirst.GetTablesByDatabase(db.Name);
+							 var outputTables = tables;
 
                              //是否有指定表
                              var uTables = task.TaskBuildInfos.Where(a => a.Level > 1).Select(a => a.Name).ToArray();
                              if (uTables.Length > 0)
-                             {
                                  //过滤不要的表
-                                 tables = tables.Where(a => uTables.Contains(a.Name)).ToList();
-                             }
+                                 outputTables = outputTables.Where(a => uTables.Contains(a.Name)).ToList();
+
                              //根据用户设置组装生成路径并验证目录是否存在
                              path = $"{task.GeneratePath}\\{db.Name}";
                              if (!Directory.Exists(path))
                                  Directory.CreateDirectory(path);
 
+							 var razorId = Guid.NewGuid().ToString("N");
+							 Engine.Razor.Compile(task.Templates.Code, razorId);
                              //开始生成操作
-                             foreach (var table in tables)
+                             foreach (var table in outputTables)
                              {
-								 var model = new RazorModel(fsql, task, table);
-								 var resHtml = Engine.Razor.RunCompile(task.Templates.Code, Guid.NewGuid().ToString("N"), null, model);
+								 var sw = new StringWriter();
+								 var model = new RazorModel(fsql, task, tables, table);
+								 Engine.Razor.Run(razorId, sw, null, model);
+								 var resHtml = sw.ToString();
 
                                  StringBuilder plus = new StringBuilder();
                                  plus.AppendLine("//------------------------------------------------------------------------------");
