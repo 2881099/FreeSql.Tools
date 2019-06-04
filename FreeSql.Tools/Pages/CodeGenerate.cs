@@ -89,7 +89,7 @@ namespace FreeSqlTools.Pages
 								 var sw = new StringWriter();
 								 var model = new RazorModel(fsql, task, tables, table);
 								 Engine.Razor.Run(razorId, sw, null, model);
-								 var resHtml = sw.ToString();
+ 
 
                                  StringBuilder plus = new StringBuilder();
                                  plus.AppendLine("//------------------------------------------------------------------------------");
@@ -102,9 +102,10 @@ namespace FreeSqlTools.Pages
                                  plus.AppendLine("// </auto-generated>");
                                  plus.AppendLine("//------------------------------------------------------------------------------");
 
-                                 plus.Append(resHtml);
+                                 plus.Append(sw.ToString());
+
                                  plus.AppendLine();
-                                 File.WriteAllText($"{path}\\{task.FileName.Replace("{name}", table.Name)}", plus.ToString());
+                                 File.WriteAllText($"{path}\\{task.FileName.Replace("{name}", model.GetCsName(table.Name))}", plus.ToString());
                              }
                          }
                      }
