@@ -12,6 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{09E97C40-C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeSqlTools", "FreeSql.Tools\FreeSqlTools.csproj", "{1F2D5708-0C4C-4C8F-94D4-455C5A81031B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RazorTemplates", "RazorTemplates", "{E03A31B7-65EF-494A-AA6F-4C26ACE74B2F}"
+	ProjectSection(SolutionItems) = preProject
+		实体类+特性.cshtml = 实体类+特性.cshtml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

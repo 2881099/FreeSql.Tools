@@ -6,6 +6,7 @@ using RazorEngine.Configuration;
 using RazorEngine.Templating;
 using RazorEngine.Text;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -78,23 +79,13 @@ namespace FreeSqlTools.Pages
                              //根据用户设置组装生成路径并验证目录是否存在
                              path = $"{task.GeneratePath}\\{db.Name}";
                              if (!Directory.Exists(path))
-                             {
                                  Directory.CreateDirectory(path);
-                             }
-
 
                              //开始生成操作
                              foreach (var table in tables)
                              {
-                                 var resHtml = Engine.Razor.RunCompile(task.Templates.Code, Guid.NewGuid().ToString("N"), null,
-                                     new RazorModel
-                                     {
-                                         fsql = fsql,
-                                         Columns = table.Columns,
-                                         //GetEntityName = GetCsEntityName,
-                                         Namespace = task.NamespaceName,
-                                         table = table
-                                     });
+								 var model = new RazorModel(fsql, task, table);
+								 var resHtml = Engine.Razor.RunCompile(task.Templates.Code, Guid.NewGuid().ToString("N"), null, model);
 
                                  StringBuilder plus = new StringBuilder();
                                  plus.AppendLine("//------------------------------------------------------------------------------");
@@ -126,38 +117,7 @@ namespace FreeSqlTools.Pages
 
 
         }
-
-
-
-
-
-
-
-
-        protected string UFString(string text)
-        {
-            text = Regex.Replace(text, @"[^\w]", "_");
-            if (text.Length <= 1) return text.ToUpper();
-            else return text.Substring(0, 1).ToUpper() + text.Substring(1, text.Length - 1);
-        }
-        protected string LFString(string text)
-        {
-            if (text.Length <= 1) return text.ToLower();
-            else return text.Substring(0, 1).ToLower() + text.Substring(1, text.Length - 1);
-        }
-
-
-
-        public string GetCsEntityName(Models.TaskBuild task, string dbname)
-        {
-            var name = Regex.Replace(dbname.TrimStart('@', '.'), @"[^\w]", "_");
-            name = char.IsLetter(name, 0) ? name : string.Concat("_", name);
-            if (task.OptionsEntity01) name = UFString(name);
-            if (task.OptionsEntity02) name = UFString(name.ToLower());
-            if (task.OptionsEntity03) name = name.ToLower();
-            if (task.OptionsEntity04) name = string.Join("", name.Split('_').Select(a => UFString(a)));
-            return name;
-        }
+		
 
     }
 }
