@@ -5,6 +5,10 @@ Func<string, string> GetAttributeString = attr => {
 	if (string.IsNullOrEmpty(attr)) return null;
 	return string.Concat(", ", attr.Trim('[', ']'));
 };
+Func<DbColumnInfo, string> GetDefaultValue = col => {
+    if (col.CsType == typeof(string)) return " = string.Empty;";
+    return "";
+};
 }@{
 switch (gen.fsql.Ado.DataType) {
 	case FreeSql.DataType.PostgreSQL:
@@ -54,7 +58,7 @@ namespace @gen.NameSpace {
 		@:/// </summary>
 		}
 		@:@("[JsonProperty" + GetAttributeString(gen.GetColumnAttribute(col)) + "]")
-		@:public @gen.GetCsType(col) @gen.GetCsName(col.Name) { get; set; }
+		@:public @gen.GetCsType(col) @gen.GetCsName(col.Name) { get; set; }@GetDefaultValue(col)
 @:
 	}
 	}
