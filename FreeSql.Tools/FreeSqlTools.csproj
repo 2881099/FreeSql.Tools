@@ -47,29 +47,29 @@
     <Reference Include="DSkin.Design">
       <HintPath>..\dll.ref\DSkin.Design.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.0.6.3\lib\net45\FreeSql.dll</HintPath>
+    <Reference Include="FreeSql, Version=0.6.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.0.6.9\lib\net45\FreeSql.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.DbContext, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.DbContext.0.6.3\lib\net45\FreeSql.DbContext.dll</HintPath>
+    <Reference Include="FreeSql.DbContext, Version=0.6.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.DbContext.0.6.9\lib\net45\FreeSql.DbContext.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.MySql, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.MySql.0.6.3\lib\net452\FreeSql.Provider.MySql.dll</HintPath>
+    <Reference Include="FreeSql.Provider.MySql, Version=0.6.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.MySql.0.6.9\lib\net452\FreeSql.Provider.MySql.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Oracle, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Oracle.0.6.3\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Oracle, Version=0.6.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Oracle.0.6.9\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.PostgreSQL, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.0.6.3\lib\net45\FreeSql.Provider.PostgreSQL.dll</HintPath>
+    <Reference Include="FreeSql.Provider.PostgreSQL, Version=0.6.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.0.6.9\lib\net45\FreeSql.Provider.PostgreSQL.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Sqlite, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Sqlite.0.6.3\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Sqlite, Version=0.6.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Sqlite.0.6.9\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.SqlServer, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.SqlServer.0.6.3\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
+    <Reference Include="FreeSql.Provider.SqlServer, Version=0.6.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.SqlServer.0.6.9\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Repository, Version=0.6.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Repository.0.6.3\lib\net45\FreeSql.Repository.dll</HintPath>
+    <Reference Include="FreeSql.Repository, Version=0.6.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Repository.0.6.9\lib\net45\FreeSql.Repository.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.8.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.8.0\lib\net45\Google.Protobuf.dll</HintPath>
