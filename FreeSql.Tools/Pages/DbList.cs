@@ -3,17 +3,14 @@ using DSkin.Forms;
 using FreeSqlTools.Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using JsValue = DSkin.DirectUI.MiniblinkPInvoke.JsValue;
 
 namespace FreeSqlTools.Pages
 {
     public class DbList : DSkin.Forms.MiniBlinkPage
     {
-        MiniBlinkCollection<DataBaseConfig> data;
+        private MiniBlinkCollection<DataBaseConfig> data;
         public MiniBlinkCollection<DataBaseConfig> Data
         {
             get
@@ -32,7 +29,38 @@ namespace FreeSqlTools.Pages
             Data.AddRange(_list);
         }
 
+        [JSFunction]
+        public async Task TestDbconnection(string id)
+        {
+            await Task.Run(() =>
+            {
 
+                if (Guid.TryParse(id, out Guid gid) && gid != Guid.Empty)
+                {
+                    var entity = Curd.DataBase.Select.WhereDynamic(gid).ToOne();
+                    try
+                    {
+                        using (var fsql = new FreeSql.FreeSqlBuilder()
+                        .UseConnectionString(entity.DataType, entity.ConnectionStrings).Build())
+                        {
+                            this.Invoke((Action)delegate {
+                                InvokeJS("Helper.ui.removeDialog();");
+                                InvokeJS($"Helper.ui.dialogSuccess('提示','数据库连接成功');");
+                            });
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        
+
+                        this.Invoke((Action)delegate {
+                            InvokeJS("Helper.ui.removeDialog();");
+                            InvokeJS($"Helper.ui.dialogError('连接失败','{e.Message}');");
+                        });
+                    }
+                }
+            });
+        }
 
         [JSFunction]
         public async Task delDataBase(string id)
@@ -58,10 +86,10 @@ namespace FreeSqlTools.Pages
         {
             Data.Clear();
 
-            var entity =JsonConvert.DeserializeObject<DataBaseConfig>(jsonStr);
-       
+            var entity = JsonConvert.DeserializeObject<DataBaseConfig>(jsonStr);
 
-            if(string.IsNullOrEmpty(entity.ConnectionStrings))
+
+            if (string.IsNullOrEmpty(entity.ConnectionStrings))
             {
                 #region 配置数据库连接串
                 switch (entity.DataType)
@@ -80,7 +108,7 @@ namespace FreeSqlTools.Pages
                         break;
                 }
                 #endregion
-            }      
+            }
 
             Curd.DataBase.InsertOrUpdate(entity);
             var _list = Curd.DataBase.Select.ToList();

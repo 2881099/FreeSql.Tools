@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ooopic_1559637063.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -181,6 +184,8 @@
     <EmbeddedResource Include="Views\Template.html" />
     <EmbeddedResource Include="Views\noPage.html" />
     <EmbeddedResource Include="Views\js\ztree\bootstrapStyle\bootstrapStyle.css" />
+    <Content Include="ooopic_1559636706.ico" />
+    <Content Include="ooopic_1559637063.ico" />
     <Content Include="Views\Historical.html" />
     <EmbeddedResource Include="Views\js\bootstrap.min.js" />
     <EmbeddedResource Include="Views\js\popper.min.js" />

@@ -78,10 +78,24 @@
                             Helper.ui.dialog({
                                 title: "数据库连接串",
                                 content: row.ConnectionStrings,
-                                no: { show: false  }
+                                yesText: '关闭1',
+                                noText: '测试1',
+                                buttonNoClose: [false, true],
+                                yes: {
+                                    callback: function () {
+                                        alert('c')
+                                    }
+                                },
+                                no :{
+                                    callback: function () {
+                                        Helper.ui.loading(".helper-dialog-wrapper", {
+                                            text: "请稍后,正在测试中....."
+                                        });
+                                        TestDbconnection(row.Id);
+                                    },
+                                    text: '测试'
+                                },
                             });
-
-
                         },
                         'click .del-btn': function (event, value, row, index) {
                             $.alert({
@@ -124,7 +138,7 @@
                             }
                         });
 
-                        $('select[name="DataType"]').on('change', function () {
+                        $('select[name="dataType"]').on('change', function () {
 
                             var port = 3306, ck = $(this).val();
                             console.log(ck);
