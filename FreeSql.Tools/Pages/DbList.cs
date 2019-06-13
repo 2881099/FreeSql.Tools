@@ -43,7 +43,8 @@ namespace FreeSqlTools.Pages
                         using (var fsql = new FreeSql.FreeSqlBuilder()
                         .UseConnectionString(entity.DataType, entity.ConnectionStrings).Build())
                         {
-                            this.Invoke((Action)delegate {
+                            Invoke(() =>
+                            {
                                 InvokeJS("Helper.ui.removeDialog();");
                                 InvokeJS($"Helper.ui.dialogSuccess('提示','数据库连接成功');");
                             });
@@ -51,9 +52,8 @@ namespace FreeSqlTools.Pages
                     }
                     catch (Exception e)
                     {
-                        
-
-                        this.Invoke((Action)delegate {
+                        Invoke(() =>
+                        {
                             InvokeJS("Helper.ui.removeDialog();");
                             InvokeJS($"Helper.ui.dialogError('连接失败','{e.Message}');");
                         });
