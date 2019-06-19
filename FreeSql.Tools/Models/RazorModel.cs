@@ -69,9 +69,7 @@ public class RazorModel {
 		var dbinfo = fsql.CodeFirst.GetDbInfo(col.CsType);
 		if (dbinfo != null && dbinfo.Value.dbtypeFull.Replace("NOT NULL", "").Trim() != col.DbTypeTextFull)
 			sb.Add("DbType = \"" + col.DbTypeTextFull + "\"");
-		if (col.IsPrimary && string.Compare(col.Name, "id", true) != 0 && col.IsIdentity == false)
-			sb.Add("IsPrimary = true");
-		if (col.IsIdentity)
+		if (col.IsPrimary)
 			sb.Add("IsPrimary = true");
 		if (dbinfo != null && dbinfo.Value.isnullable != col.IsNullable) {
 			if (col.IsNullable && fsql.DbFirst.GetCsType(col).Contains("?") == false && col.CsType.IsValueType)
