@@ -71,6 +71,9 @@ public class RazorModel {
 			sb.Add("DbType = \"" + col.DbTypeTextFull + "\"");
 		if (col.IsPrimary)
 			sb.Add("IsPrimary = true");
+		if (col.IsIdentity)
+			sb.Add("IsIdentity = true");
+
 		if (dbinfo != null && dbinfo.Value.isnullable != col.IsNullable) {
 			if (col.IsNullable && fsql.DbFirst.GetCsType(col).Contains("?") == false && col.CsType.IsValueType)
 				sb.Add("IsNullable = true");
