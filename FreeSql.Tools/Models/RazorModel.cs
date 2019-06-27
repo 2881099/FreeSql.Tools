@@ -21,7 +21,7 @@ public class RazorModel {
 	public DbTableInfo table { get; set; }
 	public List<DbColumnInfo> columns => this.table.Columns;
 	public string NameSpace => task.NamespaceName;
-	public string FullTableName => $"{table.Schema}.{table.Name}".TrimStart('.');
+    public string FullTableName => $"{(new[] { "public", "dbo" }.Contains(table.Schema) ? "" : table.Schema)}.{table.Name}".TrimStart('.');
 
 	public string GetCsName(string name) {
 		name = Regex.Replace(name.TrimStart('@', '.'), @"[^\w]", "_");
