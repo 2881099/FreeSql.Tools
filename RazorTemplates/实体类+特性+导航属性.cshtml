@@ -101,6 +101,10 @@ namespace @gen.NameSpace {
 		@:#region 外键 => 导航属性，ManyToOne/OneToOne
 		foreach (var fk in fks) {
 			var fkTableName = (fk.ReferencedTable.Schema + "." + fk.ReferencedTable.Name).Trim('.');
+            if (fk.ReferencedTable.Schema == "public" || fk.ReferencedTable.Schema == "dbo")
+            {
+                fkTableName = fkTableName.Replace(fk.ReferencedTable.Schema + ".", "");
+            }
 @:
 		@:[Navigate("@string.Join(", ", fk.Columns.Select(a => gen.GetCsName(a.Name)))")]
 		@:public@(isLazying ? " virtual" : "") @gen.GetCsName(fkTableName) @GetFkObjectName(fk) { get; set; }
@@ -112,10 +116,14 @@ namespace @gen.NameSpace {
 @:
 		@:#region 外键 => 导航属性，OneToMany
 	foreach (var ft in gen.tables) {
-		var ftfks = ft.Foreigns.Where(ftfk => (ftfk.ReferencedTable.Schema + "." + ftfk.ReferencedTable.Name).Trim('.') == gen.FullTableName).ToArray();
+        var ftfks = ft.Foreigns.Where(ftfk => (ftfk.ReferencedTable.Schema + "." + ftfk.ReferencedTable.Name).Trim('.') == gen.FullTableName).ToArray();
 
-		foreach (var fk in ftfks) {
-			var fkTableName = (ft.Schema + "." + ft.Name).Trim('.');
+        foreach (var fk in ftfks) {
+            var fkTableName = (ft.Schema + "." + ft.Name).Trim('.');
+            if (ft.Schema == "public" || ft.Schema == "dbo")
+            {
+                fkTableName = fkTableName.Replace(ft.Schema + ".", "");
+            }
 @:
 		@:[Navigate("@string.Join(", ", fk.Columns.Select(a => gen.GetCsName(a.Name)))")]
 		@:public@(isLazying ? " virtual" : "") List<@gen.GetCsName(fkTableName)> @GetFkObjectNameOutside(fk) { get; set; }
@@ -128,24 +136,28 @@ namespace @gen.NameSpace {
 @:
 		@:#region 外键 => 导航属性，ManyToMany
 	foreach (var ft in gen.tables) {
-		if (ft != gen.table) {
-			var ftfks = ft.Foreigns.Where(ftfk => ftfk.Columns.Where(ftfkcol => ftfkcol.IsPrimary == false).Any() == false).ToArray();
-			if (ftfks.Length == 2) {
-				var fk1 = ftfks.Where(ftfk => (ftfk.ReferencedTable.Schema + "." + ftfk.ReferencedTable.Name).Trim('.') == gen.FullTableName).ToArray();
-				if (fk1.Length == 1) {
-					var fk2 = ftfks.Where(ftfk => fk1.Contains(ftfk) == false).ToArray();
+        if (ft != gen.table) {
+            var ftfks = ft.Foreigns.Where(ftfk => ftfk.Columns.Where(ftfkcol => ftfkcol.IsPrimary == false).Any() == false).ToArray();
+            if (ftfks.Length == 2) {
+                var fk1 = ftfks.Where(ftfk => (ftfk.ReferencedTable.Schema + "." + ftfk.ReferencedTable.Name).Trim('.') == gen.FullTableName).ToArray();
+                if (fk1.Length == 1) {
+                    var fk2 = ftfks.Where(ftfk => fk1.Contains(ftfk) == false).ToArray();
 
-					var midft = ft;
-					var leftft = gen.table;
-					DbTableInfo rightft = null;
-					if (fk2.Any()) {
-						rightft = fk2[0].ReferencedTable;
-					} else {
-						rightft = fk1[1].ReferencedTable;
-					}
+                    var midft = ft;
+                    var leftft = gen.table;
+                    DbTableInfo rightft = null;
+                    if (fk2.Any()) {
+                        rightft = fk2[0].ReferencedTable;
+                    } else {
+                        rightft = fk1[1].ReferencedTable;
+                    }
 
-					var fkTableName = (rightft.Schema + "." + rightft.Name).Trim('.');
-					var csname = rightft.Name;
+                    var fkTableName = (rightft.Schema + "." + rightft.Name).Trim('.');
+                    if (rightft.Schema == "public" || rightft.Schema == "dbo")
+                    {
+                        fkTableName = fkTableName.Replace(rightft.Schema + ".", "");
+                    }
+                    var csname = rightft.Name;
 @:
 		@:public@(isLazying ? " virtual" : "") List<@gen.GetCsName(fkTableName)> Obj_@gen.GetCsName(csname)s { get; set; }
 				}
