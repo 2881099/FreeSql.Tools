@@ -48,7 +48,7 @@ namespace @gen.NameSpace {
 	@:/// </summary>
 }
 	[JsonObject(MemberSerialization.OptIn)@GetAttributeString(gen.GetTableAttribute())]
-	public class @gen.GetCsName(gen.FullTableName) {
+	public partial class @gen.GetCsName(gen.FullTableName) {
 
 	@foreach (var col in gen.columns) {
 

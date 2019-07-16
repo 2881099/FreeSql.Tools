@@ -14,31 +14,27 @@ Func<string, string> GetAttributeString = attr => {
 
 Func<DbForeignInfo, string> GetFkObjectName = fkx => {
 	var eqfks = fks.Where(fk22a => fk22a.ReferencedTable.Name == fkx.ReferencedTable.Name);
-	if (eqfks.Count() == 1) return "Obj_" + fkx.ReferencedTable.Name;
+	if (eqfks.Count() == 1) return fkx.ReferencedTable.Name;
 	var fkretname = fkx.Columns[0].Name;
 	if (fkretname.EndsWith(fkx.ReferencedColumns[0].Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(0, fkretname.Length - fkx.ReferencedColumns[0].Name.Length).TrimEnd('_');
 	if (fkretname.EndsWith(fkx.ReferencedTable.Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(0, fkretname.Length - fkx.ReferencedTable.Name.Length).TrimEnd('_');
 	if (fkretname.StartsWith(fkx.ReferencedTable.Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(fkx.ReferencedTable.Name.Length).TrimStart('_');
-	return "Obj_" + fkx.ReferencedTable.Name + (string.IsNullOrEmpty(fkretname) ? "" : ("_" + fkretname));
+	return fkx.ReferencedTable.Name + (string.IsNullOrEmpty(fkretname) ? "" : ("_" + fkretname));
 };
 Func<DbForeignInfo, string> GetFkObjectNameOutside = fkx => {
 	var eqfks = fkx.Table.Foreigns.Where(fk22a => fk22a.ReferencedTable.Name == fkx.ReferencedTable.Name);
-	if (eqfks.Count() == 1) return "Obj_" + fkx.Table.Name;
+	if (eqfks.Count() == 1) return fkx.Table.Name;
 	var fkretname = fkx.Columns[0].Name;
 	if (fkretname.EndsWith(fkx.ReferencedColumns[0].Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(0, fkretname.Length - fkx.ReferencedColumns[0].Name.Length).TrimEnd('_');
 	if (fkretname.EndsWith(fkx.ReferencedTable.Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(0, fkretname.Length - fkx.ReferencedTable.Name.Length).TrimEnd('_');
 	if (fkretname.StartsWith(fkx.ReferencedTable.Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(fkx.ReferencedTable.Name.Length).TrimStart('_');
-	return "Many" + fkx.Table.Name + (string.IsNullOrEmpty(fkretname) ? "" : ("_" + fkretname)) + "s";
+	return fkx.Table.Name + "s";
 };
 }@{
 switch (gen.fsql.Ado.DataType) {
 	case FreeSql.DataType.PostgreSQL:
 @:using System;
-@:using System.Collections;
 @:using System.Collections.Generic;
-@:using System.Linq;
-@:using System.Reflection;
-@:using System.Threading.Tasks;
 @:using Newtonsoft.Json;
 @:using FreeSql.DataAnnotations;
 @:using System.Net;
@@ -51,11 +47,7 @@ switch (gen.fsql.Ado.DataType) {
 	case FreeSql.DataType.MySql:
 	default:
 @:using System;
-@:using System.Collections;
 @:using System.Collections.Generic;
-@:using System.Linq;
-@:using System.Reflection;
-@:using System.Threading.Tasks;
 @:using Newtonsoft.Json;
 @:using FreeSql.DataAnnotations;
 		break;
@@ -69,7 +61,7 @@ namespace @gen.NameSpace {
 	@:/// </summary>
 }
 	[JsonObject(MemberSerialization.OptIn)@GetAttributeString(gen.GetTableAttribute())]
-	public class @gen.GetCsName(gen.FullTableName) {
+	public partial class @gen.GetCsName(gen.FullTableName) {
 
 	@foreach (var col in gen.columns) {
 
@@ -112,12 +104,11 @@ namespace @gen.NameSpace {
 @:
 		@:#endregion
 }
-@if (isOneToMany && gen.tables.Where(tmpft => tmpft.Foreigns.Where(tmpftfk => (tmpftfk.ReferencedTable.Schema + "." + tmpftfk.ReferencedTable.Name).Trim('.') == gen.FullTableName).Any()).Any()) {
+@if (isOneToMany && gen.tables.Where(tmpft => tmpft.Foreigns.Where(tmpftfk => tmpftfk.ReferencedTable.Schema == gen.table.Schema && tmpftfk.ReferencedTable.Name == gen.table.Name && tmpftfk.Columns.Where(tmpcol => tmpcol.IsPrimary).Count() != tmpftfk.Columns.Count).Any()).Any()) {
 @:
 		@:#region 外键 => 导航属性，OneToMany
 	foreach (var ft in gen.tables) {
-        var ftfks = ft.Foreigns.Where(ftfk => (ftfk.ReferencedTable.Schema + "." + ftfk.ReferencedTable.Name).Trim('.') == gen.FullTableName).ToArray();
-
+        var ftfks = ft.Foreigns.Where(ftfk => ftfk.ReferencedTable.Schema == gen.table.Schema && ftfk.ReferencedTable.Name == gen.table.Name && ftfk.Columns.Where(tmpcol => tmpcol.IsPrimary).Count() != ftfk.Columns.Count).ToArray();
         foreach (var fk in ftfks) {
             var fkTableName = (ft.Schema + "." + ft.Name).Trim('.');
             if (ft.Schema == "public" || ft.Schema == "dbo")
@@ -126,7 +117,7 @@ namespace @gen.NameSpace {
             }
 @:
 		@:[Navigate("@string.Join(", ", fk.Columns.Select(a => gen.GetCsName(a.Name)))")]
-		@:public@(isLazying ? " virtual" : "") List<@gen.GetCsName(fkTableName)> @GetFkObjectNameOutside(fk) { get; set; }
+		@:public@(isLazying ? " virtual" : "") List<@gen.GetCsName(fkTableName)> @GetFkObjectNameOutside(fk)s { get; set; }
 		}
 	}
 @:
@@ -159,7 +150,7 @@ namespace @gen.NameSpace {
                     }
                     var csname = rightft.Name;
 @:
-		@:public@(isLazying ? " virtual" : "") List<@gen.GetCsName(fkTableName)> Obj_@gen.GetCsName(csname)s { get; set; }
+		@:public@(isLazying ? " virtual" : "") List<@gen.GetCsName(fkTableName)> @gen.GetCsName(csname)s { get; set; }
 				}
 			}
 		}
