@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Wpf.FreeSqlTools.View.DatabaseDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"           
+             xmlns:local="clr-namespace:Wpf.FreeSqlTools.View"    
+             mc:Ignorable="d" Background="White">
+
+    <GroupBox Header="xx" FontSize="20" Width="500" Height="450">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Margin="0,0,0,20">
+                <TextBox wpf:HintAssist.Hint="连接名称"
+                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                 Margin="0 8 0 0" Text="{Binding Name}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <ComboBox wpf:HintAssist.Hint="数据库类型"  Width="150"
+                 Margin="0, 8, 10, 0" Text="{Binding DataType}" >
+                    <ComboBoxItem Content="MySql" />
+                    <ComboBoxItem Content="SqlServer" />
+                    <ComboBoxItem Content="PostgreSQL" />
+                    <ComboBoxItem Content="Oracle" />
+                    <ComboBoxItem Content="Sqlite" />
+                </ComboBox>
+                <TextBox  wpf:HintAssist.Hint="服务器地址" Width="200"
+                          Text="{Binding ServeAddress}" Margin="10,0,0,0"
+                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox  wpf:HintAssist.Hint="端口号" Width="100"
+                         Text="{Binding Port}" Margin="10,0,0,0"
+                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
+            </StackPanel>
+
+
+            <DockPanel>
+                <Button Content="取消" IsCancel="True" Margin="0,0,15,0"
+                        Style="{DynamicResource MaterialDesignRaisedLightButton}"
+                        Command="{x:Static wpf:DialogHost.CloseDialogCommand}" >
+                    <Button.CommandParameter>
+                        <system:Boolean>False</system:Boolean>
+                    </Button.CommandParameter>
+                </Button>
+                <Button IsDefault="True" Margin="0,0,15,0"
+                            HorizontalAlignment="Right"
+                        Style="{DynamicResource MaterialDesignRaisedLightButton}"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}">
+                    <Button.CommandParameter>
+                        <system:Boolean>True</system:Boolean>
+                    </Button.CommandParameter>
+                    保存
+                </Button>
+            </DockPanel>
+        </StackPanel>
+    </GroupBox>
+</UserControl>
