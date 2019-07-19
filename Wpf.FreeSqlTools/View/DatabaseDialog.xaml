@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Wpf.FreeSqlTools.View"    
              mc:Ignorable="d" Background="White">
 
-    <GroupBox Header="xx" FontSize="20" Width="500" Height="450">
+    <GroupBox Header="xx" FontSize="20" Width="550" Height="500">
         <StackPanel Orientation="Vertical">
             <StackPanel Margin="0,0,0,20">
                 <TextBox wpf:HintAssist.Hint="连接名称"
@@ -25,14 +25,41 @@
                     <ComboBoxItem Content="Sqlite" />
                 </ComboBox>
                 <TextBox  wpf:HintAssist.Hint="服务器地址" Width="200"
+                          IsEnabled="{Binding IsEnabled}"
                           Text="{Binding ServeAddress}" Margin="10,0,0,0"
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
                 <TextBox  wpf:HintAssist.Hint="端口号" Width="100"
-                         Text="{Binding Port}" Margin="10,0,0,0"
+                         Text="{Binding Port}" Margin="10,0,0,0"  IsEnabled="{Binding IsEnabled}"
                          Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
             </StackPanel>
-
-
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">             
+                <TextBox  wpf:HintAssist.Hint="用户名" Width="220"
+                          IsEnabled="{Binding IsEnabled}"
+                          Text="{Binding UserName}" Margin="0,0,10,0"
+                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox  wpf:HintAssist.Hint="密码" Width="220"
+                         Text="{Binding Password}" Margin="10,0,0,0"  IsEnabled="{Binding IsEnabled}"
+                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>
+            </StackPanel>
+            <StackPanel Margin="0,0,0,20">
+                <TextBox  wpf:HintAssist.Hint="初始数据库" 
+                          IsEnabled="{Binding IsEnabled}"
+                          Text="{Binding InitDatabaseName}"  
+                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}"/>            
+            </StackPanel>            
+            <StackPanel Margin="0,0,0,0">
+                <CheckBox Content="自定义连接串" IsChecked="{Binding IsCustom}" FontSize="16" />
+            </StackPanel>
+            <StackPanel Margin="0,0,0,20">
+                <TextBox   TextWrapping="Wrap"
+                           VerticalAlignment="Stretch"
+                           Height="80" 
+                           AcceptsReturn="True"
+                           VerticalScrollBarVisibility="Auto"
+                           SpellCheck.IsEnabled="True"
+                         Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                         Text="{Binding Connection}"/>
+            </StackPanel>
             <DockPanel>
                 <Button Content="取消" IsCancel="True" Margin="0,0,15,0"
                         Style="{DynamicResource MaterialDesignRaisedLightButton}"
