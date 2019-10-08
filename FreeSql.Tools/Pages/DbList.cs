@@ -4,6 +4,7 @@ using FreeSqlTools.Models;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FreeSqlTools.Pages
@@ -108,6 +109,39 @@ namespace FreeSqlTools.Pages
                         break;
                 }
                 #endregion
+            }
+            else if (string.IsNullOrEmpty(entity.DataBaseName))
+            {
+                switch(entity.DataType)
+                {
+                    case FreeSql.DataType.Oracle:
+                        entity.DataBaseName = Regex.Match(entity.ConnectionStrings, @"user id=([^;]+)", RegexOptions.IgnoreCase).Groups[1].Value;
+                        break;
+                    case FreeSql.DataType.MySql:
+                        using (var conn = new MySql.Data.MySqlClient.MySqlConnection(entity.ConnectionStrings))
+                        {
+                            conn.Open();
+                            entity.DataBaseName = conn.Database;
+                            conn.Close();
+                        }
+                        break;
+                    case FreeSql.DataType.SqlServer:
+                        using (var conn = new System.Data.SqlClient.SqlConnection(entity.ConnectionStrings))
+                        {
+                            conn.Open();
+                            entity.DataBaseName = conn.Database;
+                            conn.Close();
+                        }
+                        break;
+                    case FreeSql.DataType.PostgreSQL:
+                        using (var conn = new Npgsql.NpgsqlConnection(entity.ConnectionStrings))
+                        {
+                            conn.Open();
+                            entity.DataBaseName = conn.Database;
+                            conn.Close();
+                        }
+                        break;
+                }
             }
 
             Curd.DataBase.InsertOrUpdate(entity);
