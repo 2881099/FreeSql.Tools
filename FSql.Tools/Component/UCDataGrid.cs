@@ -11,6 +11,7 @@ using DevComponents.AdvTree;
 using ICSharpCode.TextEditor.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit;
+using System.Diagnostics;
 
 namespace FreeSqlTools.Component
 {
@@ -36,7 +37,7 @@ namespace FreeSqlTools.Component
             //将editor作为elemetnHost的组件
             elementHost1.Child = editor;
             _node = node;
-            dataBaseInfo = (DataBaseInfo)(node.Level == 3 ? node.Parent.Parent.Tag:
+            dataBaseInfo = (DataBaseInfo)(node.Level == 3 ? node.Parent.Parent.Tag :
                  node.Parent.Tag);
             if (dataBaseInfo.DataType == FreeSql.DataType.SqlServer)
             {
@@ -53,7 +54,7 @@ namespace FreeSqlTools.Component
             switch (dataBaseInfo.DataType)
             {
                 case FreeSql.DataType.SqlServer:
-                    sqlString = $"SELECT top 100 * FROM {_node.Text}";break;
+                    sqlString = $"SELECT top 100 * FROM {_node.Text}"; break;
                 case FreeSql.DataType.Oracle:
                     sqlString = $"SELECT * FROM {_node.Text} WHERE ROWNUM <=100"; break;
                 case FreeSql.DataType.MySql:
@@ -70,9 +71,14 @@ namespace FreeSqlTools.Component
             this.BeginInvoke(QueryBindDataGridView, sqlString);
         }
 
-        Action<string> QueryBindDataGridView => (sqlString) => {
+        Action<string> QueryBindDataGridView => (sqlString) =>
+        {
 
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             dataGridViewX1.DataSource = fsql.Value.Ado.ExecuteDataTable(CommandType.Text, sqlString);
+            stopwatch.Stop();
+            labelItem1.Text = $"查询耗时：{stopwatch.ElapsedMilliseconds} 毫秒";
         };
 
         private void buttonItem1_Click(object sender, EventArgs e)

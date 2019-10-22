@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bar1 = new DevComponents.DotNetBar.Bar();
             this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
@@ -36,7 +36,6 @@
             this.bar2 = new DevComponents.DotNetBar.Bar();
             this.labelItem1 = new DevComponents.DotNetBar.LabelItem();
             this.labelItem2 = new DevComponents.DotNetBar.LabelItem();
-            this.customizeItem1 = new DevComponents.DotNetBar.CustomizeItem();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
@@ -83,17 +82,20 @@
             // 
             // bar2
             // 
+            this.bar2.AccessibleDescription = "bar2 (bar2)";
+            this.bar2.AccessibleName = "bar2";
+            this.bar2.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
             this.bar2.AntiAlias = true;
             this.bar2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bar2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.bar2.DoubleClickBehavior = DevComponents.DotNetBar.eDoubleClickBarBehavior.None;
+            this.bar2.Font = new System.Drawing.Font("宋体", 12F);
             this.bar2.IsMaximized = false;
             this.bar2.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItem1,
-            this.labelItem2,
-            this.customizeItem1});
-            this.bar2.Location = new System.Drawing.Point(0, 665);
+            this.labelItem2});
+            this.bar2.Location = new System.Drawing.Point(0, 669);
             this.bar2.Name = "bar2";
-            this.bar2.Size = new System.Drawing.Size(1359, 25);
+            this.bar2.Size = new System.Drawing.Size(1359, 21);
             this.bar2.Stretch = true;
             this.bar2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.bar2.TabIndex = 3;
@@ -110,12 +112,6 @@
             this.labelItem2.Name = "labelItem2";
             this.labelItem2.Text = "labelItem2";
             // 
-            // customizeItem1
-            // 
-            this.customizeItem1.Name = "customizeItem1";
-            this.customizeItem1.Text = "添加或删除按钮(&A)";
-            this.customizeItem1.Tooltip = "工具栏选项";
-            // 
             // elementHost1
             // 
             this.elementHost1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -131,21 +127,21 @@
             this.dataGridViewX1.AllowUserToAddRows = false;
             this.dataGridViewX1.AllowUserToDeleteRows = false;
             this.dataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewX1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+            this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(0, 221);
             this.dataGridViewX1.Name = "dataGridViewX1";
             this.dataGridViewX1.ReadOnly = true;
             this.dataGridViewX1.RowTemplate.Height = 23;
-            this.dataGridViewX1.Size = new System.Drawing.Size(1359, 444);
+            this.dataGridViewX1.Size = new System.Drawing.Size(1359, 448);
             this.dataGridViewX1.TabIndex = 6;
             // 
             // UCDataGrid
@@ -174,7 +170,6 @@
         private DevComponents.DotNetBar.Bar bar2;
         private DevComponents.DotNetBar.LabelItem labelItem1;
         private DevComponents.DotNetBar.LabelItem labelItem2;
-        private DevComponents.DotNetBar.CustomizeItem customizeItem1;
         private System.Windows.Forms.Integration.ElementHost elementHost1;
         private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
     }

@@ -39,15 +39,24 @@ namespace FreeSqlTools
                        dataBase.Port, dataBase.ValidatorType);
                 Lazy<IFreeSql> fsql = new Lazy<IFreeSql>(() =>
                 {
-                    return new FreeSql.FreeSqlBuilder()
+                    var _fsql = new FreeSql.FreeSqlBuilder()
                           .UseConnectionString(dataBase.DataType, connectionString)
                           .UseLazyLoading(true) //开启延时加载功能
-                                                //.UseAutoSyncStructure(true) //自动同步实体结构到数据库              
+                          //.UseAutoSyncStructure(true) //自动同步实体结构到数据库              
                           .UseMonitorCommand(
                               cmd => Trace.WriteLine(cmd.CommandText), //监听SQL命令对象，在执行前
                               (cmd, traceLog) => Console.WriteLine(traceLog))
                           .UseLazyLoading(true)
                           .Build();
+                    _fsql.Aop.CurdAfter = (s, e) =>
+                    {                        
+                        if (e.ElapsedMilliseconds > 200)
+                        {
+                            //记录日志
+                            //发送短信给负责人
+                        }
+                    };
+                    return _fsql;
                 });
                 DataBase.Add(key, fsql);
             }
@@ -82,7 +91,7 @@ namespace FreeSqlTools
                  return new FreeSql.FreeSqlBuilder()
                        .UseConnectionString(dataBase.DataType, connectionString)
                        .UseLazyLoading(true) //开启延时加载功能
-                       //.UseAutoSyncStructure(true) //自动同步实体结构到数据库              
+                                             //.UseAutoSyncStructure(true) //自动同步实体结构到数据库              
                        .UseMonitorCommand(
                            cmd => Trace.WriteLine(cmd.CommandText), //监听SQL命令对象，在执行前
                            (cmd, traceLog) => Console.WriteLine(traceLog))
