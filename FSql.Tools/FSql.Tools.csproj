@@ -39,26 +39,26 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.25, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
-    <Reference Include="FreeSql, Version=0.10.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.0.10.13\lib\net45\FreeSql.dll</HintPath>
+    <Reference Include="FreeSql, Version=0.10.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.0.10.15\lib\net45\FreeSql.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Extensions.LazyLoading, Version=0.10.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Extensions.LazyLoading.0.10.13\lib\net45\FreeSql.Extensions.LazyLoading.dll</HintPath>
+    <Reference Include="FreeSql.Extensions.LazyLoading, Version=0.10.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Extensions.LazyLoading.0.10.15\lib\net45\FreeSql.Extensions.LazyLoading.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.MySqlConnector, Version=0.10.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.MySqlConnector.0.10.13\lib\net45\FreeSql.Provider.MySqlConnector.dll</HintPath>
+    <Reference Include="FreeSql.Provider.MySqlConnector, Version=0.10.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.MySqlConnector.0.10.15\lib\net45\FreeSql.Provider.MySqlConnector.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Oracle, Version=0.10.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Oracle.0.10.13\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Oracle, Version=0.10.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Oracle.0.10.15\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.PostgreSQL, Version=0.10.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.0.10.13\lib\net45\FreeSql.Provider.PostgreSQL.dll</HintPath>
+    <Reference Include="FreeSql.Provider.PostgreSQL, Version=0.10.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.0.10.15\lib\net461\FreeSql.Provider.PostgreSQL.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Sqlite, Version=0.10.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Sqlite.0.10.13\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Sqlite, Version=0.10.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Sqlite.0.10.15\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.SqlServer, Version=0.10.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.SqlServer.0.10.13\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
+    <Reference Include="FreeSql.Provider.SqlServer, Version=0.10.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.SqlServer.0.10.15\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.6.0.0\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -69,8 +69,8 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="MySqlConnector, Version=0.59.2.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySqlConnector.0.59.2\lib\net461\MySqlConnector.dll</HintPath>
+    <Reference Include="MySqlConnector, Version=0.60.2.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySqlConnector.0.60.2\lib\net461\MySqlConnector.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -82,15 +82,15 @@
       <HintPath>..\packages\Npgsql.LegacyPostgis.4.1.1\lib\net461\Npgsql.LegacyPostgis.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <HintPath>..\packages\Oracle.ManagedDataAccess.19.3.1\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <HintPath>..\packages\Oracle.ManagedDataAccess.19.5.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
-    <Reference Include="SafeObjectPool, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SafeObjectPool.2.1.1\lib\net45\SafeObjectPool.dll</HintPath>
+    <Reference Include="SafeObjectPool, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SafeObjectPool.2.1.2\lib\net45\SafeObjectPool.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -130,7 +130,7 @@
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
