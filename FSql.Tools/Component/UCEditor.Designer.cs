@@ -29,30 +29,30 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.textEditorControl1 = new ICSharpCode.TextEditor.TextEditorControl();
             this.command_save = new DevComponents.DotNetBar.Command(this.components);
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.SuspendLayout();
-            // 
-            // textEditorControl1
-            // 
-            this.textEditorControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEditorControl1.IsReadOnly = false;
-            this.textEditorControl1.Location = new System.Drawing.Point(0, 0);
-            this.textEditorControl1.Name = "textEditorControl1";
-            this.textEditorControl1.Size = new System.Drawing.Size(1291, 691);
-            this.textEditorControl1.TabIndex = 0;
-            this.textEditorControl1.Text = "textEditorControl1";
             // 
             // command_save
             // 
             this.command_save.Name = "command_save";
             this.command_save.Executed += new System.EventHandler(this.command_save_Executed);
             // 
+            // elementHost1
+            // 
+            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elementHost1.Location = new System.Drawing.Point(0, 0);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(1291, 691);
+            this.elementHost1.TabIndex = 0;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = null;
+            // 
             // UCEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textEditorControl1);
+            this.Controls.Add(this.elementHost1);
             this.Name = "UCEditor";
             this.Size = new System.Drawing.Size(1291, 691);
             this.ResumeLayout(false);
@@ -60,8 +60,7 @@
         }
 
         #endregion
-
-        private ICSharpCode.TextEditor.TextEditorControl textEditorControl1;
         public DevComponents.DotNetBar.Command command_save;
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
     }
 }

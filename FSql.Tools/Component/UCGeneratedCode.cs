@@ -2,6 +2,8 @@
 using DevComponents.DotNetBar;
 using FreeSql.DatabaseModel;
 using FreeSqlTools.Common;
+using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.TextEditor.Document;
 using System;
 using System.Collections.Generic;
@@ -16,19 +18,29 @@ namespace FreeSqlTools.Component
     {
 
         Node _node;
+        private readonly TextEditor editorTemplates = new TextEditor();
+        private readonly TextEditor editorCode = new TextEditor();
         public UCGeneratedCode(Node node)
         {
-            InitializeComponent();
-
-            textEditorControl1.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy("C#");
-            textEditorControl1.Font = new Font("Consolas", 15);
-            textEditorControl1.Encoding = System.Text.Encoding.Default;
-
-            textEditorControl2.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy("C#");
-            textEditorControl2.Font = new Font("Consolas", 15);
-            textEditorControl2.Encoding = System.Text.Encoding.Default;
+            InitializeComponent();                   
             InitTemplates();
             _node = node;
+            var typeConverter = new HighlightingDefinitionTypeConverter();
+            //展示行号
+            editorTemplates.ShowLineNumbers = true;
+            editorCode.ShowLineNumbers = true;
+            //字体
+            editorTemplates.FontFamily = new System.Windows.Media.FontFamily("Consolas");
+            editorTemplates.FontSize = 22;
+            editorCode.FontFamily = new System.Windows.Media.FontFamily("Consolas");
+            editorCode.FontSize = 22;
+            //C#语法高亮          
+            var csSyntaxHighlighter = (IHighlightingDefinition)typeConverter.ConvertFrom("C#");
+            editorTemplates.SyntaxHighlighting = csSyntaxHighlighter;
+            editorCode.SyntaxHighlighting = csSyntaxHighlighter;
+            //将editor作为elemetnHost的组件
+            elementHost1.Child = editorTemplates;          
+            elementHost2.Child = editorCode;
             InitTableInfo();
         }
 
@@ -50,14 +62,16 @@ namespace FreeSqlTools.Component
             {
                 comboBoxEx1.DataSource = lst.Select(a => a.Name).ToArray();
                 comboBoxEx1.SelectedIndex = 0;
-                textEditorControl1.Text = File.ReadAllText(lst.FirstOrDefault().FullName);
+                editorTemplates.Load(lst.FirstOrDefault().FullName);
             }
         }
         List<DbTableInfo> dbTableInfos = new List<DbTableInfo>();
         DbTableInfo dbTableInfo = null;
         void InitTableInfo()
         {
-            dbTableInfos = G.GetTablesByDatabase(_node.Parent.DataKey, _node.Parent.Text);
+            dbTableInfos = _node.Parent.Nodes.Cast<Node>()
+                .Select(a => a.Tag as DbTableInfo).ToList();
+            //G.GetTablesByDatabase(_node.Parent.DataKey, _node.Parent.Text);
             dbTableInfo = dbTableInfos.FirstOrDefault(a => a.Name == _node.Text);
             dataGridViewX1.DataSource = dbTableInfo?.Columns;
         }
@@ -67,7 +81,7 @@ namespace FreeSqlTools.Component
             var fileInfo = lst.Where(a => a.Name == comboBoxEx1.Text).FirstOrDefault();
             if (fileInfo != null)
             {
-                textEditorControl1.Text = File.ReadAllText(fileInfo.FullName);
+                editorTemplates.Load(fileInfo.FullName);
             }
         }
 
@@ -96,7 +110,7 @@ namespace FreeSqlTools.Component
                     OptionsEntity04 = checkBoxX4.Checked
                 };
 
-                textEditorControl2.Text = await codeGenerate.Setup(taskBuild, textEditorControl1.Text, dbTableInfos, dbTableInfo);
+                editorCode.Text = await codeGenerate.Setup(taskBuild, editorTemplates.Text, dbTableInfos, dbTableInfo);
             }
         }
     }

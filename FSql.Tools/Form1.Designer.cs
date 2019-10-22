@@ -159,6 +159,7 @@
             this.itemContainer36 = new DevComponents.DotNetBar.ItemContainer();
             this.galleryContainer17 = new DevComponents.DotNetBar.GalleryContainer();
             this.labelItem17 = new DevComponents.DotNetBar.LabelItem();
+            this.buttonItem28 = new DevComponents.DotNetBar.ButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.advTree1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
@@ -849,7 +850,8 @@
             this.buttonItem23.AutoExpandOnClick = true;
             this.buttonItem23.Name = "buttonItem23";
             this.buttonItem23.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem32});
+            this.buttonItem32,
+            this.buttonItem28});
             this.buttonItem23.Text = "buttonItem23";
             // 
             // buttonItem32
@@ -2029,6 +2031,12 @@
             this.labelItem17.ForeColor = System.Drawing.SystemColors.ControlText;
             this.labelItem17.Name = "labelItem17";
             // 
+            // buttonItem28
+            // 
+            this.buttonItem28.Name = "buttonItem28";
+            this.buttonItem28.Text = "显示前100条";
+            this.buttonItem28.Click += new System.EventHandler(this.buttonItem28_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2184,6 +2192,7 @@
         private DevComponents.DotNetBar.ItemContainer itemContainer36;
         private DevComponents.DotNetBar.GalleryContainer galleryContainer17;
         private DevComponents.DotNetBar.LabelItem labelItem17;
+        private DevComponents.DotNetBar.ButtonItem buttonItem28;
     }
 }
 

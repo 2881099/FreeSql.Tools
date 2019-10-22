@@ -19,17 +19,28 @@ namespace FreeSqlTools
     public partial class FrmBatch : DevComponents.DotNetBar.Office2007Form
     {
         Node _node;
+        FrmLoading frmLoading = null;
         public FrmBatch(Node node)
         {
             this.EnableGlass = false;
             InitializeComponent();
-            _node = node;
-            labelX3.Text = node.Parent.Text;
-            labelX4.Text = node.Text;
+            _node = node;                  
+            Load += FrmBatch_Load;   
+        }
+        private void FrmBatch_Load(object sender, EventArgs e)
+        {
+            ThreadPool.QueueUserWorkItem(x => {
+                frmLoading = new FrmLoading();
+                frmLoading.ShowDialog();
+            });
+            labelX3.Text = _node.Parent.Text;
+            labelX4.Text = _node.Text;
             LoadTableList();
             loadTemplates();
             Properties.Settings.Default.Reload();
+            this.Invoke((Action)delegate { frmLoading.Close(); });
         }
+
         List<FileInfo> lst = new List<FileInfo>();
         List<DbTableInfo> dbTableInfos = new List<DbTableInfo>();
         void loadTemplates()

@@ -59,18 +59,19 @@ namespace FreeSqlTools
             List<Node> nodes = new List<Node>();
             foreach (var m in baseInfo.GetDataBaseInfos())
             {
-                var connectionString = m.IsString ? m.ConnectionString
-                    : G.GetConnectionString(m.DataType, m.UserId, m.Pwd, m.Host, m.DbName,
-                       m.Port, m.ValidatorType);
+                //var connectionString = m.IsString ? m.ConnectionString
+                //    : G.GetConnectionString(m.DataType, m.UserId, m.Pwd, m.Host, m.DbName,
+                //       m.Port, m.ValidatorType);
                 var node = new Node($"{m.Name}({m.DataType.ToString()})")
                 {
                     Image = Properties.Resources.monitor,
                     Name = m.Id.ToString(),
-                    TagString = connectionString,
+                    Tag = m,
+                    //TagString = connectionString,
                     DataKey = $"{m.DataType.ToString()}_{m.Id.ToString("N")}"
                 };
                 node.ContextMenu = buttonItem21;
-                G.AddFreeSql(node.DataKey, node.TagString, m.DataType);
+                G.AddFreeSql(node.DataKey,m);
                 nodes.Add(node);
             }
             advTree1.Nodes[0].Nodes.AddRange(nodes.ToArray());
@@ -130,54 +131,46 @@ namespace FreeSqlTools
         {
             ThreadPool.QueueUserWorkItem(new WaitCallback(a =>
             {
-                this.Invoke((Action)delegate ()
-                {
-                    frmLoading = new FrmLoading();
-                    if (node.Level <= 1)
-                        frmLoading.ShowDialog();
-                });
+                frmLoading = new FrmLoading();
+                frmLoading.ShowDialog();
             }));
-            var result = await Task.Run(() =>
-            {
-                if (node.Level == 1)
-                {
-                    if (node.Nodes.Count >= 1) return 0;
-                    Task.Delay(1000);
-                    node.Nodes.Clear();
-                    var list = G.GetDatabases(node.DataKey, node.TagString);
-                    var nodes = list.Select(a => new Node(a)
-                    {
-                        Image = Properties.Resources._base,
-                        DataKey = node.DataKey,
-                        ContextMenu = buttonItem22
-                    }).ToArray();
-                    node.Nodes.AddRange(nodes);
-                    return 0;
-                }
-                else if (node.Level == 2)
-                {
-                    node.Nodes.Clear();
-                    Task.Delay(1000);
-                    var list = G.GetTablesByDatabase(node.DataKey, node.Text);
-                    var nodes = list.Select(a => new Node(a.Name)
-                    {
-                        Image = Properties.Resources.application,
+            var res = await Task.Run(() =>
+             {
+
+                 if (node.Level == 1)
+                 {
+                     if (node.Nodes.Count >= 1) return 0;
+                     node.Nodes.Clear();
+                     var list = G.GetDatabases(node.DataKey, node.TagString);
+                     var nodes = list.Select(a => new Node(a)
+                     {
+                         Image = Properties.Resources._base,
+                         DataKey = node.DataKey,
+                         ContextMenu = buttonItem22
+                     }).ToArray();
+                     node.Nodes.AddRange(nodes);
+                 }
+                 else if (node.Level == 2)
+                 {
+                     node.Nodes.Clear();
+                     Task.Delay(1000);
+                     var list = G.GetTablesByDatabase(node.DataKey, node.Text);
+                     var nodes = list.Select(a => new Node(a.Name)
+                     {
+                         Image = Properties.Resources.application,
                         // CheckBoxVisible = true,
                         // CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.CheckBox,
-                        //  CheckState = CheckState.Unchecked,
-                        DataKey = node.DataKey,
-                        ContextMenu = buttonItem23
-                    }).ToArray();
-                    node.Nodes.AddRange(nodes);
-                    return 0;
-                }
-                return 1;
-            });
+                        // CheckState = CheckState.Unchecked,
+                         Tag = a,
+                         DataKey = node.DataKey,
+                         ContextMenu = buttonItem23
+                     }).ToArray();
+                     node.Nodes.AddRange(nodes);
+                 }
+                 return 0;
+             });
+            node.Expanded = true;
             this.Invoke((Action)delegate () { frmLoading.Close(); });
-            if (result == 1)
-            {
-                MessageBox.Show(" 没有了");
-            }
         }
         /// <summary>
         /// 连接
@@ -305,5 +298,14 @@ namespace FreeSqlTools
             superTabControl1.SelectedPanel.Controls.Add(ucEditor);
         }
 
+        private void buttonItem28_Click(object sender, EventArgs e)
+        {
+            var node = advTree1.SelectedNode;
+            var superItem = superTabControl1.CreateTab($"({node.Parent.Text })-{node.Text} 查询");
+            var ucEditor = new UCDataGrid(node);
+            superTabControl1.SelectedTab = superItem;
+            ucEditor.Dock = DockStyle.Fill;
+            superTabControl1.SelectedPanel.Controls.Add(ucEditor);
+        }
     }
 }

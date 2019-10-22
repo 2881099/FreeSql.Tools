@@ -30,6 +30,28 @@ namespace FreeSqlTools
             connString = string.Format(connString, uid, pwd, host, port, dataName);
             return connString;
         }
+        public static void AddFreeSql(object key, DataBaseInfo dataBase)
+        {
+            if (!DataBase.ContainsKey(key))
+            {
+                var connectionString = dataBase.IsString ? dataBase.ConnectionString
+                    : GetConnectionString(dataBase.DataType, dataBase.UserId, dataBase.Pwd, dataBase.Host, dataBase.DbName,
+                       dataBase.Port, dataBase.ValidatorType);
+                Lazy<IFreeSql> fsql = new Lazy<IFreeSql>(() =>
+                {
+                    return new FreeSql.FreeSqlBuilder()
+                          .UseConnectionString(dataBase.DataType, connectionString)
+                          .UseLazyLoading(true) //开启延时加载功能
+                                                //.UseAutoSyncStructure(true) //自动同步实体结构到数据库              
+                          .UseMonitorCommand(
+                              cmd => Trace.WriteLine(cmd.CommandText), //监听SQL命令对象，在执行前
+                              (cmd, traceLog) => Console.WriteLine(traceLog))
+                          .UseLazyLoading(true)
+                          .Build();
+                });
+                DataBase.Add(key, fsql);
+            }
+        }
         public static void AddFreeSql(object key, string connectionString, FreeSql.DataType dataType)
         {
             if (!DataBase.ContainsKey(key))
@@ -48,15 +70,34 @@ namespace FreeSqlTools
                 });
                 DataBase.Add(key, fsql);
             }
-        }      
+        }
 
+        public static Lazy<IFreeSql> GetNewFreeSql(DataBaseInfo dataBase)
+        {
+            var connectionString = dataBase.IsString ? dataBase.ConnectionString
+                    : GetConnectionString(dataBase.DataType, dataBase.UserId, dataBase.Pwd, dataBase.Host, dataBase.DbName,
+                       dataBase.Port, dataBase.ValidatorType);
+            return new Lazy<IFreeSql>(() =>
+             {
+                 return new FreeSql.FreeSqlBuilder()
+                       .UseConnectionString(dataBase.DataType, connectionString)
+                       .UseLazyLoading(true) //开启延时加载功能
+                       //.UseAutoSyncStructure(true) //自动同步实体结构到数据库              
+                       .UseMonitorCommand(
+                           cmd => Trace.WriteLine(cmd.CommandText), //监听SQL命令对象，在执行前
+                           (cmd, traceLog) => Console.WriteLine(traceLog))
+                       .UseLazyLoading(true)
+                       .Build();
+             });
+            throw new AccessViolationException("FreeSql 连接为空");
+        }
         public static IFreeSql GetFreeSql(object key)
-        {           
+        {
             if (DataBase.TryGetValue(key, out Lazy<IFreeSql> fsql))
             {
                 return fsql.Value;
             }
-            throw new AccessViolationException("FreeSql 连接为空");       
+            throw new AccessViolationException("FreeSql 连接为空");
         }
 
         public static List<string> GetDatabases(object key, string connectionString)
