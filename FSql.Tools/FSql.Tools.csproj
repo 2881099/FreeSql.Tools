@@ -38,7 +38,9 @@
     <ApplicationIcon>1.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.25, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.25, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <HintPath>..\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
     <Reference Include="FreeSql, Version=0.11.21.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FreeSql.0.11.21\lib\net45\FreeSql.dll</HintPath>
     </Reference>
