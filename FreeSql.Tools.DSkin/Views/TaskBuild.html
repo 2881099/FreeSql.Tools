@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <link href="js/easyhelper/easyhelper.min.css" rel="stylesheet" />
+    <link href="js/ztree/bootstrapStyle/bootstrapStyle.css" rel="stylesheet" />
+    <link href="js/bootstraptable/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="js/jconfirm/jquery-confirm.min.css" rel="stylesheet" />
+    <script src="js/vue.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid p-t-15" id="page">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <button type="button" data-toggle="modal" data-target=".bs-taskBuld-modal" info>创建任务</button>
+                        <button type="button" success>批量生成</button>
+                    </div>
+                    <div class="card-body">
+
+                        <table id="taskBuild"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-taskBuld-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body" style="background-color:#f5f6fa;padding:0">
+                    <form class="form-horizontal taskBuild" onsubmit="return false;">
+                        <div class="card" style="margin-bottom:5px">
+                            <div class="card-body" style="padding:15px 15px">
+                                <div class="form-group" style="margin-bottom:0">
+                                    <label class="col-md-3 control-label" for="example-hf-email">任务名称</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control" type="text" name="taskName" placeholder="请输入任务名称..">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" style="padding-right:5px">
+                                <div class="card" style="margin-bottom:5px">
+                                    <div class="card-header">数据库选择</div>
+                                    <div class="card-body ztree-load" style="padding:0;height:429px;overflow-y: auto">
+                                        <div id="treeview" class="ztree"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="padding-right:5px;padding-left:0;">
+                                <div class="card" style="margin-bottom:5px">
+                                    <div class="card-header">模板选择</div>
+                                    <div class="card-body" id="template" style="padding:0 10px 0 15px;height:429px;overflow-y: auto">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="padding-left:0;">
+                                <div class="card" style="margin-bottom:5px">
+                                    <div class="card-header">生成配置</div>
+                                    <div class="card-body">
+                                        <label class="lyear-checkbox checkbox-info m-t-10">
+                                            <input type="checkbox" name="optionsEntity01" value="true"><span>首字母大写</span>
+                                        </label>
+                                        <label class="lyear-checkbox checkbox-info m-t-10">
+                                            <input type="checkbox" name="optionsEntity02" value="true"><span>首字母大写,其他小写</span>
+                                        </label>
+                                        <label class="lyear-checkbox checkbox-info m-t-10">
+                                            <input type="checkbox" name="optionsEntity03" value="true"><span>全部小写</span>
+                                        </label>
+                                        <label class="lyear-checkbox checkbox-info m-t-10">
+                                            <input type="checkbox" name="optionsEntity04" value="true"><span>下划线转驼峰</span>
+                                        </label>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="example-nf-email">默认命名空间</label>
+                                                    <input class="form-control" type="text" name="namespaceName" placeholder="默认命名空间">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="example-nf-email">保存路径</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="generatePath" class="form-control" placeholder="保存路径...">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-default" style="height:38px;" type="button" open>
+                                                                <i class="mdi mdi-folder-open"></i> 选择
+                                                            </button>
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="example-nf-email">默认保存文件名</label>
+                                                    <input class="form-control" type="text" name="fileName" value="{name}.cs" placeholder="{name}.cs">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button success>点击保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
+    <script src="js/ztree/jquery.ztree.all.min.js"></script>
+    <script src="js/easyhelper/easyhelper.min.js"></script>
+    <script src="js/jconfirm/jquery-confirm.min.js"></script>
+    <script src="js/bootstraptable/bootstrap-table.min.js"></script>
+    <script src="js/bootstraptable/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="js/main.min.js"></script>
+
+    <script type="text/javascript">
+        var tableTaskBuild, ztree, setting = {
+            view: {
+                selectedMulti: true
+            },
+            check: {
+                enable: true,
+                chkStyle: "checkbox",
+                chkboxType: { "Y": "p", "N": "ps" }
+            },
+            callback: {
+                beforeExpand: function (treeId, treeNode) {
+                    // Helper.ui.loading(".card-body.ztree-load", { text: "加载中...." });
+                    if (!treeNode.children || treeNode.children.length <= 0) {
+                        var res = JSON.parse(GetDataBase(treeNode.id, treeNode.name, treeNode.level));
+                        if (res.code == 0) {
+                            treeNode.children = res.data;
+                            ztree.refresh();
+                        } else {
+                            Helper.ui.dialogError("加载数据库失败", res.msg);
+                        }
+                        //Helper.ui.removeLoading(".card-body.ztree-load");
+                    }
+                }
+            }
+        };
+
+        $(function () {
+            $('button[open]').on('click', function () {
+                var path = folderBrowserDialog();
+                $('input[name="generatePath"]').val(path);
+            });
+            $('.modal-footer button[success]').on('click', function () {
+                var ck = ztree.getCheckedNodes(true);
+                var infos = [];
+                if (ck.length <= 1) {
+                    Helper.ui.dialogError("操作出错", "请至少选择一个数据库");
+                    return;
+                } else {
+                    $.map(ck, (v, i) => {
+                        infos.push({ dataBaseConfigId: v.id, name: v.name, level: v.level })
+                    });
+                }
+                var jsonResult = $('.form-horizontal.taskBuild').formToJson();
+                jsonResult.TaskBuildInfos = infos;
+                if (jsonResult['taskName'] === '') {
+                    Helper.ui.message.error("任务名称不能为空");
+                    $('input[name="taskName"]').focus();
+                    return;
+                }
+
+
+                if (!jsonResult["templatesId"] || jsonResult["templatesId"] === '') {
+
+                    Helper.ui.message.error("请选择或添加一个有效的实体模版");
+                    return;
+                }
+
+                if (jsonResult['namespaceName'] === '') {
+                    Helper.ui.message.error("命名空间不能为空");
+                    $('input[name="namespaceName"]').focus();
+                    return;
+                }
+                if (jsonResult['generatePath'] === '') {
+                    Helper.ui.message.error("保存路径不能为空");
+                    $('input[name="generatePath"]').focus();
+                    return;
+                }
+                if (jsonResult['fileName'] === '') {
+                    Helper.ui.message.error("保存文件名不能为空");
+                    $('input[name="fileName"]').focus();
+                    return;
+                }
+                Helper.ui.loading(".modal-content", { text: "请稍后...." });
+                res = JSON.parse(saveTaskBuild(JSON.stringify(jsonResult)));
+                Helper.ui.removeLoading(".modal-content");
+                if (res.code === 0) {
+                    $('.form-horizontal.taskBuild')[0].reset();
+                    $('.bs-taskBuld-modal').modal('hide');
+                    Helper.ui.message.success(res.msg);
+                } else {
+                    Helper.ui.dialogError("操作出错", res.msg);
+                }
+            });
+            tableTaskBuild = $('#taskBuild').bootstrapTable({
+                classes: 'table table-bordered table-hover table-striped',
+                uniqueId: 'Id',
+                idField: 'Id',
+                data: page.Data,
+                columns: [{
+                    checkbox: true
+                }, {
+                    field: 'TaskName',
+                    title: '任务名称'
+                }, {
+                    field: 'SeversName',
+                    title: '数据库节点',
+                }, {
+                    field: 'NamespaceName',
+                    title: '命名空间'
+                }, {
+                    field: 'GeneratePath',
+                    title: '保存路径'
+                }, {
+                    field: 'FileName',
+                    title: '保存文件'
+                }, {
+                    field: 'operate',
+                    title: '操作',
+                    width: 210,
+                    formatter: btnGroup,  // 自定义方法
+                    events: {
+                        'click .edit-btn': function (event, value, row, index) {
+
+                        },
+                        'click .task-make': function (event, value, row, index) {
+                            Helper.ui.message.success("生成己启动,请耐心等待.");
+                            CodeGenerate(row.Id);
+                        },
+                        'click .task-delete': function (event, value, row, index) {
+                            $.alert({
+                                title: '嗨!你确定要这样做么',
+                                content: '是否删除当前任务????', type: 'orange',
+                                typeAnimated: false,
+                                buttons: {
+                                    confirm: {
+                                        text: '确认',
+                                        btnClass: 'btn-primary',
+                                        action: function () {
+                                            delTaslBuild(row.Id);
+                                        }
+                                    },
+                                    cancel: {
+                                        text: '取消'
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }]
+            });
+
+
+            $('.card-header button[success]').on('click', function () {
+                var cks = tableTaskBuild.bootstrapTable('getSelections');
+                if (cks.length <= 0) {
+                    Helper.ui.dialogError('操作提示', '请至少选择一项任务进行生成操作.');
+                    return;
+                }
+                var ids = [];
+                $.map(cks, (v, i) => {
+                    ids.push(v.Id);
+                });
+
+                Helper.ui.dialog({
+                    title: "批量生成提示",
+                    buttonNoClose: [true, false],
+                    content: `如要开始批量操作,请点击确定按钮`, no: {
+                        text: "取消"
+                    }, yes: {
+                        callback: function () {
+                            Helper.ui.loading(".helper-dialog-wrapper", {
+                                text: "正在努力生成中....."
+                            });
+                            CodeGenerates(JSON.stringify(ids));
+                        }
+                    }
+                });
+
+            });
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+
+
+        $('.bs-taskBuld-modal').on('shown.bs.modal', function () {
+            var res = JSON.parse(GetDataBaseAll());
+            ztree = $.fn.zTree.init($("#treeview"), setting, res.data);
+            res = JSON.parse(GetTemplate());
+            $('#template').empty();
+            $.map(res.data, (v, i) => {
+                $('#template').append(`<label class="lyear-radio radio-primary m-t-10"><input type="radio" ${i === 0 ? "checked" : ""} name="templatesId" value="${v.Id}"><span>${v.Title}</span></label>`);
+            });
+        });
+        $('.bs-taskBuld-modal').on('hide.bs.modal', function () {
+            tableTaskBuild.bootstrapTable('load', page.Data);
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        // 操作按钮
+        function btnGroup() {
+            return [
+                '<a type="button" class="task-edit btn btn-xs btn-info m-r-5" title="修改" data-toggle="tooltip"><i class="mdi mdi-rename-box"></i>修改</a>',
+                '<a type="button" class="task-make btn btn-xs btn-primary m-r-5" title="生成" data-toggle="tooltip"><i class="mdi mdi-rocket"></i>生成</a>',
+                '<a type="button" class="task-delete btn btn-xs btn-danger" title="删除" data-toggle="tooltip"><i class="mdi mdi-bitbucket"></i>删除</a>'
+            ].join('');
+        }
+    </script>
+
+
+
+
+</body>
+</html>

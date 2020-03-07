@@ -41,26 +41,26 @@
     <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.25, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
       <HintPath>..\DevComponents.DotNetBar2.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql, Version=1.2.0.0, Culture=neutral, PublicKeyToken=a33928e5d4a4b39c, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.1.2.0-preview5\lib\net45\FreeSql.dll</HintPath>
+    <Reference Include="FreeSql, Version=1.2.1.0, Culture=neutral, PublicKeyToken=a33928e5d4a4b39c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.1.2.1\lib\net45\FreeSql.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Extensions.LazyLoading, Version=1.2.0.0, Culture=neutral, PublicKeyToken=352d00f0daaee6de, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Extensions.LazyLoading.1.2.0-preview5\lib\net45\FreeSql.Extensions.LazyLoading.dll</HintPath>
+    <Reference Include="FreeSql.Extensions.LazyLoading, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Extensions.LazyLoading.1.2.1\lib\net45\FreeSql.Extensions.LazyLoading.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.MySqlConnector, Version=1.2.0.0, Culture=neutral, PublicKeyToken=f3f7c55e5773bac5, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.MySqlConnector.1.2.0-preview5\lib\net45\FreeSql.Provider.MySqlConnector.dll</HintPath>
+    <Reference Include="FreeSql.Provider.MySqlConnector, Version=1.2.1.0, Culture=neutral, PublicKeyToken=f3f7c55e5773bac5, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.MySqlConnector.1.2.1\lib\net45\FreeSql.Provider.MySqlConnector.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Oracle, Version=1.2.0.0, Culture=neutral, PublicKeyToken=33336f3a4140cb89, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Oracle.1.2.0-preview5\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Oracle, Version=1.2.1.0, Culture=neutral, PublicKeyToken=33336f3a4140cb89, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Oracle.1.2.1\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.PostgreSQL, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7721fab3640808fe, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.1.2.0-preview5\lib\net461\FreeSql.Provider.PostgreSQL.dll</HintPath>
+    <Reference Include="FreeSql.Provider.PostgreSQL, Version=1.2.1.0, Culture=neutral, PublicKeyToken=7721fab3640808fe, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.1.2.1\lib\net461\FreeSql.Provider.PostgreSQL.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Sqlite, Version=1.2.0.0, Culture=neutral, PublicKeyToken=5800863e689c9dd8, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Sqlite.1.2.0-preview5\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Sqlite, Version=1.2.1.0, Culture=neutral, PublicKeyToken=5800863e689c9dd8, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Sqlite.1.2.1\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.SqlServer, Version=1.2.0.0, Culture=neutral, PublicKeyToken=d313b98af285bd88, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.SqlServer.1.2.0-preview5\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
+    <Reference Include="FreeSql.Provider.SqlServer, Version=1.2.1.0, Culture=neutral, PublicKeyToken=d313b98af285bd88, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.SqlServer.1.2.1\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.6.0.0\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -299,6 +299,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="freesql.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

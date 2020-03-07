@@ -69,35 +69,36 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="DSkin">
-      <HintPath>..\dll.ref\DSkin.dll</HintPath>
+    <Reference Include="DSkin, Version=16.6.3.19, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\FreeSql.Tools.DSkin.dll.ref\DSkin.dll</HintPath>
     </Reference>
     <Reference Include="DSkin.Design">
-      <HintPath>..\dll.ref\DSkin.Design.dll</HintPath>
+      <HintPath>..\FreeSql.Tools.DSkin.dll.ref\DSkin.Design.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.1.1.0\lib\net45\FreeSql.dll</HintPath>
+    <Reference Include="FreeSql, Version=1.2.1.0, Culture=neutral, PublicKeyToken=a33928e5d4a4b39c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.1.2.1\lib\net45\FreeSql.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.DbContext, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.DbContext.1.1.0\lib\net45\FreeSql.DbContext.dll</HintPath>
+    <Reference Include="FreeSql.DbContext, Version=1.2.1.0, Culture=neutral, PublicKeyToken=d6971b25f8f033dc, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.DbContext.1.2.1\lib\net45\FreeSql.DbContext.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.MySql, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.MySql.1.1.0\lib\net452\FreeSql.Provider.MySql.dll</HintPath>
+    <Reference Include="FreeSql.Provider.MySql, Version=1.2.1.0, Culture=neutral, PublicKeyToken=09c4767ab6141ff5, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.MySql.1.2.1\lib\net452\FreeSql.Provider.MySql.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Oracle, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Oracle.1.1.0\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Oracle, Version=1.2.1.0, Culture=neutral, PublicKeyToken=33336f3a4140cb89, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Oracle.1.2.1\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.PostgreSQL, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.1.1.0\lib\net452\FreeSql.Provider.PostgreSQL.dll</HintPath>
+    <Reference Include="FreeSql.Provider.PostgreSQL, Version=1.2.1.0, Culture=neutral, PublicKeyToken=7721fab3640808fe, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.1.2.1\lib\net452\FreeSql.Provider.PostgreSQL.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Sqlite, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Sqlite.1.1.0\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Sqlite, Version=1.2.1.0, Culture=neutral, PublicKeyToken=5800863e689c9dd8, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Sqlite.1.2.1\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.SqlServer, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.SqlServer.1.1.0\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
+    <Reference Include="FreeSql.Provider.SqlServer, Version=1.2.1.0, Culture=neutral, PublicKeyToken=d313b98af285bd88, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.SqlServer.1.2.1\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Repository, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Repository.1.1.0\lib\net45\FreeSql.Repository.dll</HintPath>
+    <Reference Include="FreeSql.Repository, Version=1.2.1.0, Culture=neutral, PublicKeyToken=e2c05379863de526, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Repository.1.2.1\lib\net45\FreeSql.Repository.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.9.2.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.9.2\lib\net45\Google.Protobuf.dll</HintPath>
@@ -124,8 +125,8 @@
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
-    <Reference Include="SafeObjectPool, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SafeObjectPool.2.2.1\lib\net45\SafeObjectPool.dll</HintPath>
+    <Reference Include="SafeObjectPool, Version=2.3.1.0, Culture=neutral, PublicKeyToken=2979badd66b9f481, processorArchitecture=MSIL">
+      <HintPath>..\packages\SafeObjectPool.2.3.1\lib\net45\SafeObjectPool.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
@@ -198,6 +199,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="freesql.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

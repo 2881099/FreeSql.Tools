@@ -49,7 +49,7 @@ namespace FreeSqlTools
                               (cmd, traceLog) => Console.WriteLine(traceLog))
                           .UseLazyLoading(true)
                           .Build();
-                    _fsql.Aop.CurdAfter = (s, e) =>
+                    _fsql.Aop.CurdAfter += (s, e) =>
                     {                        
                         if (e.ElapsedMilliseconds > 200)
                         {
