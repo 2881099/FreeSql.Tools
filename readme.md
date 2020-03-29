@@ -14,7 +14,9 @@
 
 ## WPF 版本
 
-[下载编译好的程序](https://github.com/2881099/FreeSql.Tools/files/4301668/FreeSql.Tools.Wpf.zip)
+[下载编译好的程序](https://github.com/2881099/FreeSql.Tools/files/4399244/FreeSql.Tools-winform-1.3.2.zip)
+
+> 支持 MySql/PostgreSQL/SqlServer/Oracle/Sqlite 数据库生成
 
 ![image](https://user-images.githubusercontent.com/16286519/76141354-4790e980-609e-11ea-869b-bb2c6980d98f.png)
 
@@ -23,6 +25,8 @@
 运行源码请将 FreeSql.Tools.DSkin.dll.ref/* 复制到 bin 目录下
 
 [下载编译好的程序](https://github.com/2881099/FreeSql.Tools/files/4238808/FreeSql.Tools-1.0.0.zip)
+
+> 支持 MySql/PostgreSQL/SqlServer/Oracle 数据库生成，不支持 Sqlite
 
 ![image](https://user-images.githubusercontent.com/16286519/58793525-e0cf3300-8628-11e9-8959-d2efed685843.png)
 
