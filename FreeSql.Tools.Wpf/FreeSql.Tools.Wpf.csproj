@@ -14,6 +14,21 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -41,26 +56,26 @@
     <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.25, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
       <HintPath>..\DevComponents.DotNetBar2.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql, Version=1.2.1.0, Culture=neutral, PublicKeyToken=a33928e5d4a4b39c, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.1.2.1\lib\net45\FreeSql.dll</HintPath>
+    <Reference Include="FreeSql, Version=1.3.2.0, Culture=neutral, PublicKeyToken=a33928e5d4a4b39c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.1.3.2\lib\net45\FreeSql.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Extensions.LazyLoading, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Extensions.LazyLoading.1.2.1\lib\net45\FreeSql.Extensions.LazyLoading.dll</HintPath>
+    <Reference Include="FreeSql.Extensions.LazyLoading, Version=1.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Extensions.LazyLoading.1.3.2\lib\net45\FreeSql.Extensions.LazyLoading.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.MySqlConnector, Version=1.2.1.0, Culture=neutral, PublicKeyToken=f3f7c55e5773bac5, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.MySqlConnector.1.2.1\lib\net45\FreeSql.Provider.MySqlConnector.dll</HintPath>
+    <Reference Include="FreeSql.Provider.MySqlConnector, Version=1.3.2.0, Culture=neutral, PublicKeyToken=f3f7c55e5773bac5, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.MySqlConnector.1.3.2\lib\net45\FreeSql.Provider.MySqlConnector.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Oracle, Version=1.2.1.0, Culture=neutral, PublicKeyToken=33336f3a4140cb89, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Oracle.1.2.1\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Oracle, Version=1.3.2.0, Culture=neutral, PublicKeyToken=33336f3a4140cb89, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Oracle.1.3.2\lib\net45\FreeSql.Provider.Oracle.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.PostgreSQL, Version=1.2.1.0, Culture=neutral, PublicKeyToken=7721fab3640808fe, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.1.2.1\lib\net461\FreeSql.Provider.PostgreSQL.dll</HintPath>
+    <Reference Include="FreeSql.Provider.PostgreSQL, Version=1.3.2.0, Culture=neutral, PublicKeyToken=7721fab3640808fe, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.PostgreSQL.1.3.2\lib\net461\FreeSql.Provider.PostgreSQL.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.Sqlite, Version=1.2.1.0, Culture=neutral, PublicKeyToken=5800863e689c9dd8, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.Sqlite.1.2.1\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
+    <Reference Include="FreeSql.Provider.Sqlite, Version=1.3.2.0, Culture=neutral, PublicKeyToken=5800863e689c9dd8, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.Sqlite.1.3.2\lib\net45\FreeSql.Provider.Sqlite.dll</HintPath>
     </Reference>
-    <Reference Include="FreeSql.Provider.SqlServer, Version=1.2.1.0, Culture=neutral, PublicKeyToken=d313b98af285bd88, processorArchitecture=MSIL">
-      <HintPath>..\packages\FreeSql.Provider.SqlServer.1.2.1\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
+    <Reference Include="FreeSql.Provider.SqlServer, Version=1.3.2.0, Culture=neutral, PublicKeyToken=d313b98af285bd88, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSql.Provider.SqlServer.1.3.2\lib\net451\FreeSql.Provider.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.6.0.0\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -72,7 +87,7 @@
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="MySqlConnector, Version=0.62.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySqlConnector.0.62.0-beta7\lib\net461\MySqlConnector.dll</HintPath>
+      <HintPath>..\packages\MySqlConnector.0.62.0\lib\net461\MySqlConnector.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -102,8 +117,8 @@
     <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SqlClient, Version=4.6.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SqlClient.4.8.0\lib\net461\System.Data.SqlClient.dll</HintPath>
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.1\lib\net461\System.Data.SqlClient.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SQLite, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.112.0\lib\net46\System.Data.SQLite.dll</HintPath>
@@ -357,6 +372,18 @@
     <None Include="Resources\22.png" />
     <None Include="Resources\9g.png" />
     <None Include="Resources\4g.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />

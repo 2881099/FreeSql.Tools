@@ -75,14 +75,14 @@ public class RazorModel
             sb.Add("Name = \"" + col.Name + "\"");
 
         var dbinfo = fsql.CodeFirst.GetDbInfo(col.CsType);
-        if (dbinfo != null && dbinfo.Value.dbtypeFull.Replace("NOT NULL", "").Trim() != col.DbTypeTextFull)
+        if (dbinfo != null && string.Compare(dbinfo.dbtypeFull.Replace("NOT NULL", "").Trim(), col.DbTypeTextFull, true) != 0)
             sb.Add("DbType = \"" + col.DbTypeTextFull + "\"");
         if (col.IsPrimary)
             sb.Add("IsPrimary = true");
         if (col.IsIdentity)
             sb.Add("IsIdentity = true");
 
-        if (dbinfo != null && dbinfo.Value.isnullable != col.IsNullable)
+        if (dbinfo != null && dbinfo.isnullable != col.IsNullable)
         {
             if (col.IsNullable && fsql.DbFirst.GetCsType(col).Contains("?") == false && col.CsType.IsValueType)
                 sb.Add("IsNullable = true");
