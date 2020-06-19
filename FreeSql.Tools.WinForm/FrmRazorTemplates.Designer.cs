@@ -32,6 +32,7 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.comboBoxEx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonX1
@@ -80,6 +81,7 @@
             this.comboBoxEx1.DisplayMember = "Text";
             this.comboBoxEx1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxEx1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEx1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxEx1.FormattingEnabled = true;
             this.comboBoxEx1.ItemHeight = 28;
             this.comboBoxEx1.Location = new System.Drawing.Point(119, 92);
@@ -88,11 +90,21 @@
             this.comboBoxEx1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.comboBoxEx1.TabIndex = 3;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(114, 140);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(237, 25);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "当前目录/Templates/*.tpl";
+            // 
             // FrmRazorTemplates
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 255);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxEx1);
             this.Controls.Add(this.textBoxX1);
             this.Controls.Add(this.labelX1);
@@ -106,6 +118,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "创建模板";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -115,5 +128,6 @@
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
         private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx1;
+        private System.Windows.Forms.Label label1;
     }
 }

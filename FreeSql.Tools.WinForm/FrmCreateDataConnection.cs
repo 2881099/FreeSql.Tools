@@ -28,6 +28,7 @@ namespace FreeSqlTools
             {
                 userControl?.SaveDataConnection();
                 MessageBoxEx.Show("保存成功", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else

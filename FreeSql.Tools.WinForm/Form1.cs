@@ -45,7 +45,9 @@ namespace FreeSqlTools
         private void Command_createDataConnection_Executed(object sender, EventArgs e)
         {
             var frm = new FrmCreateDataConnection();
-            frm.ShowDialog();
+            var frmResult = frm.ShowDialog();
+            if (frmResult == DialogResult.OK)
+                LoadDataTreeList();
         }
         private void buttonItem16_Click(object sender, EventArgs e)
         {
@@ -170,7 +172,7 @@ namespace FreeSqlTools
                  return 0;
              });
             node.Expanded = true;
-            this.Invoke((Action)delegate () { frmLoading.Close(); });
+            this.Invoke((Action)delegate () { Thread.CurrentThread.Join(500); frmLoading.Close(); });
         }
         /// <summary>
         /// 连接
@@ -213,7 +215,9 @@ namespace FreeSqlTools
         private void buttonItem25_Click(object sender, EventArgs e)
         {
             var frm = new FrmCreateDataConnection();
-            frm.ShowDialog();
+            var frmResult = frm.ShowDialog();
+            if (frmResult == DialogResult.OK)
+                LoadDataTreeList();
         }
 
         /// <summary>
