@@ -8,8 +8,12 @@ var gen = Model as RazorModel;
 var fks = gen.table.Foreigns;
 
 Func<string, string> GetAttributeString = attr => {
-	if (string.IsNullOrEmpty(attr)) return null;
+	if (string.IsNullOrEmpty(attr)) return "";
 	return string.Concat(", ", attr.Trim('[', ']'));
+};
+Func<string, string> GetDefaultValue = defval => {
+    if (string.IsNullOrEmpty(defval)) return "";
+    return " = " + defval + ";";
 };
 
 Func<DbForeignInfo, string> GetFkObjectName = fkx => {
@@ -28,7 +32,7 @@ Func<DbForeignInfo, string> GetFkObjectNameOutside = fkx => {
 	if (fkretname.EndsWith(fkx.ReferencedColumns[0].Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(0, fkretname.Length - fkx.ReferencedColumns[0].Name.Length).TrimEnd('_');
 	if (fkretname.EndsWith(fkx.ReferencedTable.Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(0, fkretname.Length - fkx.ReferencedTable.Name.Length).TrimEnd('_');
 	if (fkretname.StartsWith(fkx.ReferencedTable.Name, StringComparison.CurrentCultureIgnoreCase)) fkretname = fkretname.Substring(fkx.ReferencedTable.Name.Length).TrimStart('_');
-	return fkx.Table.Name + "s";
+	return fkx.Table.Name + (string.IsNullOrEmpty(fkretname) ? "" : ("_" + fkretname));
 };
 }@{
 switch (gen.fsql.Ado.DataType) {
@@ -53,6 +57,7 @@ switch (gen.fsql.Ado.DataType) {
 		break;
 }
 }
+
 namespace @gen.NameSpace {
 
 @if (string.IsNullOrEmpty(gen.table.Comment) == false) {
@@ -73,18 +78,18 @@ namespace @gen.NameSpace {
 		@:/// @col.Coment.Replace("\r\n", "\n").Replace("\n", "\r\n		/// ")
 		@:/// </summary>
 		}
-		@:@("[JsonProperty" + GetAttributeString(gen.GetColumnAttribute(col)) + "]")
+		@:@("[JsonProperty" + GetAttributeString(gen.GetColumnAttribute(col, true)) + "]")
 		if (findfks.Any() == false) {
-		@:public @gen.GetCsType(col) @csname { get; set; }
+		@:public @gen.GetCsType(col) @csname { get; set; }@GetDefaultValue(gen.GetColumnDefaultValue(col, false))
 		} else {
 		@:public @gen.GetCsType(col) @csname { get => _@csname; set {
 			@:if (_@csname == value) return;
 			@:_@csname = value;
 			foreach (var fkcok2 in findfks) {
-			@:@GetFkObjectName(fkcok2) = null;
+			@:@gen.GetCsName(GetFkObjectName(fkcok2)) = null;
 			}
 		@:} }
-		@:private @gen.GetCsType(col) _@csname;
+		@:private @gen.GetCsType(col) _@csname@GetDefaultValue(gen.GetColumnDefaultValue(col, false)).TrimEnd(';');
 		}
 @:
 	}
@@ -99,7 +104,7 @@ namespace @gen.NameSpace {
             }
 @:
 		@:[Navigate("@string.Join(", ", fk.Columns.Select(a => gen.GetCsName(a.Name)))")]
-		@:public@(isLazying ? " virtual" : "") @gen.GetCsName(fkTableName) @GetFkObjectName(fk) { get; set; }
+		@:public@(isLazying ? " virtual" : "") @gen.GetCsName(fkTableName) @gen.GetCsName(GetFkObjectName(fk)) { get; set; }
 		}
 @:
 		@:#endregion
@@ -117,14 +122,14 @@ namespace @gen.NameSpace {
             }
 @:
 		@:[Navigate("@string.Join(", ", fk.Columns.Select(a => gen.GetCsName(a.Name)))")]
-		@:public@(isLazying ? " virtual" : "") List<@gen.GetCsName(fkTableName)> @GetFkObjectNameOutside(fk)s { get; set; }
+		@:public@(isLazying ? " virtual" : "") List<@gen.GetCsName(fkTableName)> @gen.GetCsName(GetFkObjectNameOutside(fk))s { get; set; }
 		}
 	}
 @:
 		@:#endregion
 }
 @if (isManyToMany) {
-    var manyAny = false;
+	var manyAny = false;
 	foreach (var ft in gen.tables) {
         if (ft != gen.table) {
             var ftfks = ft.Foreigns.Where(ftfk => ftfk.Columns.Where(ftfkcol => ftfkcol.IsPrimary == false).Any() == false).ToArray();
@@ -170,8 +175,8 @@ namespace @gen.NameSpace {
     {
 @:
 		@:#endregion
+    }
 }
-	}
 	}
 @gen.GetMySqlEnumSetDefine()
 }

@@ -43,10 +43,10 @@ namespace FreeSqlTools.Component
             textBoxX5.Text, textBoxX2.Text, string.Empty, textBoxX3.Text);
             try
             {
-                var fsql = new FreeSql.FreeSqlBuilder()
+                using (var fsql = new FreeSql.FreeSqlBuilder()
                    .UseConnectionString(FreeSql.DataType.MySql,
-                   connString).Build();
-                fsql.DbFirst.GetDatabases();
+                   connString).Build())
+                    fsql.DbFirst.GetDatabases();
                 MessageBoxEx.Show("数据库连接成功", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)

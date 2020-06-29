@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FreeSqlTools.Common
 {
@@ -73,10 +74,9 @@ namespace FreeSqlTools.Common
             }
             catch (Exception ex)
             {
-                return "生成时发生异常,请检查模版代码.";
+                MessageBox.Show($"生成时发生异常,请检查模版代码: {ex.Message}.");
+                return $"生成时发生异常,请检查模版代码: {ex.Message}.";
             }
-
-
         }
 
         public async Task<string> Setup(TaskBuild taskBuild, string code, List<DbTableInfo> dbTables, DbTableInfo dbTableInfo)

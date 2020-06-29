@@ -1,13 +1,13 @@
-@using FreeSql.DatabaseModel;@{
+using FreeSql.DatabaseModel;@{
 var gen = Model as RazorModel;
 
 Func<string, string> GetAttributeString = attr => {
-	if (string.IsNullOrEmpty(attr)) return null;
+	if (string.IsNullOrEmpty(attr)) return "";
 	return string.Concat(", ", attr.Trim('[', ']'));
 };
-Func<DbColumnInfo, string> GetDefaultValue = col => {
-    if (col.CsType == typeof(string)) return " = string.Empty;";
-    return "";
+Func<string, string> GetDefaultValue = defval => {
+    if (string.IsNullOrEmpty(defval)) return "";
+    return " = " + defval + ";";
 };
 }@{
 switch (gen.fsql.Ado.DataType) {
@@ -40,6 +40,7 @@ switch (gen.fsql.Ado.DataType) {
 		break;
 }
 }
+
 namespace @gen.NameSpace {
 
 @if (string.IsNullOrEmpty(gen.table.Comment) == false) {
@@ -57,8 +58,8 @@ namespace @gen.NameSpace {
 		@:/// @col.Coment.Replace("\r\n", "\n").Replace("\n", "\r\n		/// ")
 		@:/// </summary>
 		}
-		@:@("[JsonProperty" + GetAttributeString(gen.GetColumnAttribute(col)) + "]")
-		@:public @gen.GetCsType(col) @gen.GetCsName(col.Name) { get; set; }@GetDefaultValue(col)
+		@:@("[JsonProperty" + GetAttributeString(gen.GetColumnAttribute(col, true)) + "]")
+		@:public @gen.GetCsType(col) @gen.GetCsName(col.Name) { get; set; }@GetDefaultValue(gen.GetColumnDefaultValue(col, false))
 @:
 	}
 	}

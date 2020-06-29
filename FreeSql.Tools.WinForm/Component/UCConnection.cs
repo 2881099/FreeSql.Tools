@@ -55,10 +55,10 @@ namespace FreeSqlTools.Component
             {
 
                 var dataType = GetDataType();
-                var fsql = new FreeSql.FreeSqlBuilder()
+                using (var fsql = new FreeSql.FreeSqlBuilder()
                    .UseConnectionString(dataType,
-                   connString).Build();
-                fsql.DbFirst.GetDatabases();
+                   connString).Build())
+                    fsql.DbFirst.GetDatabases();
                 MessageBoxEx.Show("数据库连接成功", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception e)

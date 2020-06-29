@@ -84,6 +84,7 @@
             this.buttonItem31 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem23 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem32 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem28 = new DevComponents.DotNetBar.ButtonItem();
             this.node1 = new DevComponents.AdvTree.Node();
             this.nodeConnector1 = new DevComponents.AdvTree.NodeConnector();
             this.elementStyle1 = new DevComponents.DotNetBar.ElementStyle();
@@ -159,7 +160,6 @@
             this.itemContainer36 = new DevComponents.DotNetBar.ItemContainer();
             this.galleryContainer17 = new DevComponents.DotNetBar.GalleryContainer();
             this.labelItem17 = new DevComponents.DotNetBar.LabelItem();
-            this.buttonItem28 = new DevComponents.DotNetBar.ButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.advTree1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
@@ -762,6 +762,7 @@
             this.contextMenuBar1.TabIndex = 0;
             this.contextMenuBar1.TabStop = false;
             this.contextMenuBar1.Text = "contextMenuBar1";
+            this.contextMenuBar1.WrapItemsDock = true;
             // 
             // buttonItem20
             // 
@@ -860,13 +861,19 @@
             this.buttonItem32.Text = "生成代码";
             this.buttonItem32.Click += new System.EventHandler(this.buttonItem32_Click);
             // 
+            // buttonItem28
+            // 
+            this.buttonItem28.Name = "buttonItem28";
+            this.buttonItem28.Text = "显示前100条";
+            this.buttonItem28.Click += new System.EventHandler(this.buttonItem28_Click);
+            // 
             // node1
             // 
             this.node1.ContextMenu = this.buttonItem20;
             this.node1.Expanded = true;
             this.node1.Image = global::FreeSqlTools.Properties.Resources.monitor;
             this.node1.Name = "node1";
-            this.node1.Text = "服务器";
+            this.node1.Text = "服务器(右击操作)";
             // 
             // nodeConnector1
             // 
@@ -1064,7 +1071,7 @@
             this.superTabControl1.Name = "superTabControl1";
             this.superTabControl1.ReorderTabsEnabled = true;
             this.superTabControl1.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
-            this.superTabControl1.SelectedTabIndex = -1;
+            this.superTabControl1.SelectedTabIndex = 0;
             this.superTabControl1.Size = new System.Drawing.Size(986, 612);
             this.superTabControl1.TabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.superTabControl1.TabIndex = 2;
@@ -1731,6 +1738,7 @@
             // 
             this.ribbonPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonPanel1.TabIndex = 1;
+            this.ribbonPanel1.Visible = true;
             // 
             // ribbonBar3
             // 
@@ -2031,12 +2039,6 @@
             this.labelItem17.ForeColor = System.Drawing.SystemColors.ControlText;
             this.labelItem17.Name = "labelItem17";
             // 
-            // buttonItem28
-            // 
-            this.buttonItem28.Name = "buttonItem28";
-            this.buttonItem28.Text = "显示前100条";
-            this.buttonItem28.Click += new System.EventHandler(this.buttonItem28_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2048,7 +2050,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "FreeSql 实体类生成器";
             ((System.ComponentModel.ISupportInitialize)(this.advTree1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).EndInit();

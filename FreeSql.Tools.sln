@@ -14,8 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RazorTemplates", "RazorTemp
 		RazorTemplates\实体类+特性.cshtml = RazorTemplates\实体类+特性.cshtml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeSql.Tools.DSkin", "FreeSql.Tools.DSkin\FreeSql.Tools.DSkin.csproj", "{1F2D5708-0C4C-4C8F-94D4-455C5A81031B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeSql.Tools.WinForm", "FreeSql.Tools.WinForm\FreeSql.Tools.WinForm.csproj", "{10F7D342-FEFB-46E4-B6D4-8B781E4E045C}"
 EndProject
 Global
@@ -24,10 +22,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1F2D5708-0C4C-4C8F-94D4-455C5A81031B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F2D5708-0C4C-4C8F-94D4-455C5A81031B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F2D5708-0C4C-4C8F-94D4-455C5A81031B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F2D5708-0C4C-4C8F-94D4-455C5A81031B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10F7D342-FEFB-46E4-B6D4-8B781E4E045C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10F7D342-FEFB-46E4-B6D4-8B781E4E045C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10F7D342-FEFB-46E4-B6D4-8B781E4E045C}.Release|Any CPU.ActiveCfg = Release|Any CPU
